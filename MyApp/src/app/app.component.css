@@ -1,0 +1,152 @@
+@import "https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Italianno&display=swap";
+
+.recipe-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.recipe-search{
+  background-color:#e76f51;
+}
+
+.header{
+  color: white;
+  margin:0;
+  box-shadow: 0px 1px 8px 10px rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 75px;
+  min-height: 60px;
+  padding: 1px;
+  display: flex;
+
+}
+
+.header h2{
+  font-weight: bold;
+  margin: 0;
+
+}
+.header p{
+  font-family: 'Dancing Script', cursive;
+  margin: 0;
+  font-size: 20px;
+  margin-left:30px;
+}
+
+.search-bar input{
+  border-radius: 5px ;
+  border:none;
+  margin: 38px;
+  margin-left: 100px;
+  height: 30px;
+  width: 400px;
+  max-width: 400px;
+  background-color: #f5f5f5;
+  border-right: white 40px solid;
+
+}
+
+.search-bar input:focus{
+  outline: none;
+  box-shadow: 0px 2px 1px 2px rgba(243, 117, 67, 0.836)
+  
+}
+
+.fa-search{
+  color: black;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.search-button{
+  border: none;
+  background: transparent;
+  position: relative;
+  transform: translateX(-70px);
+  cursor: pointer;
+
+}
+
+.footer{
+  box-shadow:  0px 2px 8px 5px rgba(0, 0, 0, 0.2);
+  background-color: black;
+  text-align: center;
+  color: white;
+  height: 5vh;
+  margin:0;
+  padding: 6px;
+  margin-top: auto;
+}
+
+.recipe-cards-container {
+  display: flex;           
+  flex-wrap: wrap;          
+  justify-content: flex-start;
+  gap: 20px;                
+  padding: 20px;
+}
+  
+.recipe-card{
+  width:280px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px 5px rgba(0, 0, 0, 0.2);
+  margin-top: 50px;
+  margin-left:20px;
+  background-color: #e93305;
+}
+.recipe-card img{
+  height: 280px;
+  width:280px;
+  padding: 0px 0px 0px 0px;
+  border-top-left-radius: 5px; 
+  border-top-right-radius: 5px;
+}
+
+.dish_name{
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+
+}
+
+.dish_description{
+  color: white;
+  font-size: 15px;
+  font-style: italic;
+  padding: 0px;
+  margin-left: 3px;
+}
+
+.recipe-button{
+  background-color: white;
+  color: black;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 4px;
+  padding: 2px 2px 1px 1px;
+  margin-right: 8px;
+  margin-left:50px;
+  margin-top:8px;
+
+}
+
+.recipe_details{
+  display: flex;
+  background-color: black;
+}
+
+.rating{
+  color: white;
+  padding:2px;
+  margin-top:8px
+}
+
+.fa-star{
+cursor: pointer;
+}
+
