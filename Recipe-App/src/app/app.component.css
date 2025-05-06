@@ -7,7 +7,7 @@
 }
 
 .recipe-search{
-  background-color: #A63A2D
+  background-color:#1A1A1A 
 }
 
 .header{
@@ -94,7 +94,7 @@
   box-shadow: 0px 2px 8px 5px rgba(0, 0, 0, 0.2);
   margin-top: 50px;
   margin-left:20px;
-  background-color: #A66A2D
+  background-color: #1E1E1E
 }
 .recipe-card img{
   height: 280px;

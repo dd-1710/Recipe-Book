@@ -1,0 +1,6 @@
+create database recipe_book;
+
+CREATE TABLE recipe (id INT AUTO_INCREMENT PRIMARY KEY , recipe_name VARCHAR(255) , recipe_desc TEXT);
+
+INSERT INTO recipe(recipe_name,recipe_desc) VALUES ('tomato_soup','A warm and comforting tomato soup, perfect for chilly days'),
+('Vegetable Salad','A fresh and vibrant salad, perfect for a healthy meal.');
