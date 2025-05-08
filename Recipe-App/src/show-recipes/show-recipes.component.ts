@@ -10,7 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './show-recipes.component.css'
 })
 export class ShowRecipesComponent {
+
 public recipeList:any[] = []
+public imgUrl = "http://localhost:4200/assets/images/"
+
 constructor(private recipeservice:RecipeService){
 
 }
@@ -23,7 +26,9 @@ ngOnInit(){
 showRecipes(){
   this.recipeservice.getRecipes().subscribe((res)=>{
     this.recipeList = res;
+
     console.log("The data",this.recipeList)
+    console.log(this.imgUrl + this.recipeList[0].imag_path)
   })
 }
 }
