@@ -14,3 +14,31 @@ INSERT INTO recipe (recipe_name,recipe_desc,img_path) VALUES ('Chocolate Cake', 
 INSERT INTO recipe(recipe_name, recipe_desc, img_path)
 VALUES 
 ('Dosa', 'Crispy and golden, a timeless favorite on every plate.', 'dosa.png');
+
+INSERT INTO recipe (recipe_name, recipe_desc, img_path) 
+VALUES 
+('Tomato Soup', 'A warm and comforting tomato soup, perfect for chilly days', 'tomato.png'),
+('Vegetable Salad', 'A fresh and vibrant salad, perfect for a healthy meal.', 'vegsalad.png'),
+('Chocolate Cake', 'A rich and moist chocolate cake, perfect for dessert lovers.', 'chocolatecake.png'),
+('Paneer Butter Masala', 'A smooth and flavorful curry with paneer and butter.', 'paneer.png'),
+('Veg Sandwich', 'A quick and healthy sandwich with fresh vegetables.', 'sandwich.png'),
+('Sambar', 'A lentil-based stew with vegetables and aromatic spices.', 'sambar.png'),
+('Puri and Chole', 'Fluffy puris served with spicy chickpea curry.', 'puri_chole.png'),
+('Chocolate Ice Cream', 'Creamy chocolate ice cream, a perfect treat.', 'choc_icecream.png'),
+('Brownie', 'A soft and chewy chocolate brownie, rich and indulgent.', 'brownie.png'),
+('Veg Noodles', 'Stir-fried noodles with colorful vegetables and soy sauce.', 'noodles.png'),
+('Wheat Pizza', 'Healthy whole wheat pizza topped with veggies and cheese.', 'wheat_pizza.png'),
+('Wheat Burger', 'A healthy burger with a whole wheat bun and veggie patty.', 'wheat_burger.png'),
+('Rajma Chawal', 'Red kidney beans curry served with steamed rice.', 'rajma_chawal.png'),
+('Paneer', 'Tender paneer in a buttery tomato-based sauce.', 'paneer.png'),
+('Aloo Paratha', 'Stuffed flatbread with spiced mashed potatoes.', 'aloo_paratha.png'),
+('Kadhi Pakora', 'Yogurt-based curry with fried gram flour dumplings.', 'kadhi_pakora.png'),
+('Idli', 'Soft steamed rice cakes served with chutney and stew.', 'idli.png'),
+('Medu Vada', 'Crispy lentil fritters shaped like doughnuts.', 'medu_vada.png'),
+('Uttapam', 'Savory rice pancakes topped with chopped vegetables.', 'uttapam.png'),
+('Lemon Rice', 'Fragrant rice flavored with lemon juice and mild spices.', 'lemon_rice.png'),
+('Coconut Chutney', 'A creamy blend of coconut and spices, often served as a side.', 'coconut_chutney.png'),
+('Tamarind Rice', 'Tangy rice flavored with tamarind and tempered spices.', 'tamarind_rice.png'),
+('Rasam', 'A tangy and spiced soup, often served with rice.', 'rasam.png'),
+('Curd Rice', 'Creamy rice mixed with yogurt and mild seasonings.', 'curd_rice.png');
+

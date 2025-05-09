@@ -18,10 +18,11 @@
           <span>
             <img [src]="imgUrl +recipe.img_path"> 
           </span> 
-           <span class="dish_name"> 
-            {{recipe.recipe_name}}  
-            <i class="fa-solid fa-bookmark"></i> 
-           </span>
+          <span class="dish_container">
+            <span class="dish_name">{{recipe.recipe_name}}</span>
+            <i class="fa-solid fa-bookmark"></i>
+        </span>
+        
            <span class="dish_description">
             {{recipe.recipe_desc}}
            </span>
