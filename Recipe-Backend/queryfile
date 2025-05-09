@@ -17,7 +17,7 @@ VALUES
 
 INSERT INTO recipe (recipe_name, recipe_desc, img_path) 
 VALUES 
-('Tomato Soup', 'A warm and comforting tomato soup, perfect for chilly days', 'tomato.png'),
+('Tomato Soup', 'A warm and comforting tomato soup, perfect for chilly days', 'tomatosoup.png'),
 ('Vegetable Salad', 'A fresh and vibrant salad, perfect for a healthy meal.', 'vegsalad.png'),
 ('Chocolate Cake', 'A rich and moist chocolate cake, perfect for dessert lovers.', 'chocolatecake.png'),
 ('Paneer Butter Masala', 'A smooth and flavorful curry with paneer and butter.', 'paneer.png'),
