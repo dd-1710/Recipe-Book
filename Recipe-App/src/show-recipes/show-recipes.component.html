@@ -1,85 +1,55 @@
-
-<div class="recipe-app" >
-    <div class="recipe-search">
-        <div class="header">
-            <div>
-                <h2>Tummy-Yummy</h2>
-                <p>Treat Your Taste Buds 🍴</p>
-            </div>
-            <div class="search-bar" style="display: flex;" >
-                <input  type="text" placeholder="Search for recipes"/>
-                <button class="search-button"><i class="fa fa-search"></i></button>               
-            </div>         
-        </div>
+<div class="recipe-app">
+  <div class="recipe-search">
+    <div class="header">
+      <div>
+        <h2>Tummy-Yummy</h2>
+        <p>Treat Your Taste Buds 🍴</p>
+      </div>
+      <div class="search-bar" style="display: flex">
+        <input
+          type="text"
+          placeholder="Search for recipes"
+          [(ngModel)]="searchRecipeName"
+          [value]="searchRecipeName"
+          (input)="searchRecipe($event)"
+        />
+        <button class="search-button"><i class="fa fa-search"></i></button>
+      </div>
     </div>
-    <div class="recipe-cards-container">
-
-        <div class="recipe-card" *ngFor="let recipe of recipeList">
-          <span>
-            <img [src]="imgUrl +recipe.img_path"> 
-          </span> 
-          <span class="dish_container">
-            <span class="dish_name">{{recipe.recipe_name}}</span>
-            <i class="fa-solid fa-bookmark"></i>
+  </div>
+  <div class="recipe-cards-container">
+    <div class="recipe-card" *ngFor="let recipe of recipesToShow">
+      <span>
+        <img [src]="imgUrl + recipe.img_path" />
+      </span>
+      <span class="dish_container">
+        <span class="dish_name">
+          {{ recipe.recipe_name }}
         </span>
-        
-           <span class="dish_description">
-            {{recipe.recipe_desc}}
-           </span>
-           <span>
-            <div class="recipe_details">
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <button class="recipe-button" (click)="viewRecipe(id)">View Recipe</button>
-              </div>
-            
+        <i class="fa-solid fa-bookmark"></i>
+      </span>
 
-           </span>
-
+      <span class="dish_description">
+        {{ recipe.recipe_desc }}
+      </span>
+      <span>
+        <div class="recipe_details">
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <button class="recipe-button" (click)="viewRecipe(recipe.id)">
+            View Recipe
+          </button>
         </div>
-        <!-- <div class="recipe-card">
-            <img src="../assets/tomatosoup.png">
-            <p class="dish_name">Tomato Soup</p>
-            <p class="dish_description">A warm and comforting tomato soup, perfect for chilly days.</p>
-            <div class="recipe_details">     
-                <p class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </p>
-                <button class="recipe-button">View Recipe</button>
-            </div> -->
-        <!-- </div> -->
-        
-            
-        <!-- <div class="recipe-card">
-            <img src="../assets/vegsalad.png">
-            <p class="dish_name">Vegetable Salad</p>
-            <p class="dish_description">A fresh and vibrant salad, perfect for a healthy meal.</p>
-            <div class="recipe_details">     
-                <p class="rating">Rating
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </p>
-                <button class="recipe-button">View Recipe</button>
-            </div>
-        </div>        -->
-           
-       
+      </span>
+    </div>
+  </div>
 
-    </div>
-   
-    <div class="footer">
-        <p>Copyright &copy; 2025 Tummy-Yummy. All rights reserved.</p>
-    </div>
+  <div class="footer">
+    <p>Copyright &copy; 2025 Tummy-Yummy. All rights reserved.</p>
+  </div>
 </div>

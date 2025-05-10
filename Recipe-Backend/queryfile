@@ -1,4 +1,10 @@
 create database recipe_book;
+juice - 4 -done
+breakfast - salad,dosa,uttapam,
+snacks- brownie,vegno,burger,pizza,tomoto
+lunch-paneer
+beverage- masalachai,greentea,coffee
+smoothie-berry,banana
 
 CREATE TABLE recipe (id INT AUTO_INCREMENT PRIMARY KEY , recipe_name VARCHAR(255) , recipe_desc TEXT);
 ALTER TABLE recipe_book.recipe ADD img_path TEXT
@@ -42,3 +48,25 @@ VALUES
 ('Rasam', 'A tangy and spiced soup, often served with rice.', 'rasam.png'),
 ('Curd Rice', 'Creamy rice mixed with yogurt and mild seasonings.', 'curd_rice.png');
 
+INSERT INTO recipe (recipe_name, recipe_desc, img_path)
+VALUES
+('Tomato Soup', 'A warm and comforting tomato soup, perfect for chilly days', 'tomatosoup.png'),
+('Masala Dosa', 'Crispy and golden, a timeless favorite on every plate.', 'dosa.png'),
+('Idli and Sambar', 'Soft, fluffy idlis served with spicy, flavorful sambar', 'idli_with_sambar.png'),
+('Vegetable Salad', 'A fresh and vibrant salad, perfect for a healthy meal.', 'vegsalad.png'),
+('Chocolate Cake', 'A rich and moist chocolate cake, perfect for dessert lovers.', 'chocolatecake.png'),
+('Coffee', 'A rich, bold coffee brewed for the perfect pick-me-up', 'coffee.png'),
+('Orange Juice', 'A refreshing, tangy juice packed with vitamin C', 'orange_juice.png'),
+('Paneer Butter Masala', 'A smooth and flavorful curry with paneer and butter.', 'paneer.png'),
+('Masala Chai', 'A spiced, aromatic tea with a perfect blend of Indian spices', 'masala_chai.png'),
+('Uttapam', 'Savory rice pancakes topped with chopped vegetables.', 'uttapam.png'),
+('Banana Smoothie', 'A creamy and sweet smoothie made with ripe bananas and a touch of honey', 'banana_smoothie.png'),
+('Beetroot Juice', 'A vibrant, healthy juice with the earthy taste of beetroot', 'beetroot_juice.png'),
+('Lemon and Mint Juice', 'A cool, zesty blend of lemon and fresh mint', 'lemon_mint_juice.png'),
+('Wheat Pizza', 'Healthy whole wheat pizza topped with veggies and cheese.', 'wheat_pizza.png'),
+('Berry Smoothie', 'A refreshing smoothie made with mixed berries and yogurt', 'berry_smoothie.png'),
+('Wheat Burger', 'A healthy burger with a whole wheat bun and veggie patty.', 'wheat_burger.png'),
+('Mango Juice', 'A smooth, tropical juice made from ripe mangoes', 'mango_juice.png'),
+('Brownie', 'A soft and chewy chocolate brownie, rich and indulgent.', 'brownie.png'),
+('Veg Noodles', 'Stir-fried noodles with colorful vegetables and soy sauce.', 'noodles.png'),
+('Green Tea', 'A light, soothing tea packed with antioxidants', 'green_tea.png')
