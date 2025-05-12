@@ -1,52 +1,9 @@
 create database recipe_book;
-juice - 4 -done
-breakfast - salad,dosa,uttapam,
-snacks- brownie,vegno,burger,pizza,tomoto
-lunch-paneer
-beverage- masalachai,greentea,coffee
-smoothie-berry,banana
 
-CREATE TABLE recipe (id INT AUTO_INCREMENT PRIMARY KEY , recipe_name VARCHAR(255) , recipe_desc TEXT);
-ALTER TABLE recipe_book.recipe ADD img_path TEXT
+
+CREATE TABLE recipe_list (id INT AUTO_INCREMENT PRIMARY KEY , recipe_name VARCHAR(255) , recipe_desc TEXT);
+ALTER TABLE recipe_book.recipe_list ADD img_path TEXT
 value (tomato.png)
-
-
-INSERT INTO recipe(recipe_name,recipe_desc) 
-VALUES ('Tomato Soup','A warm and comforting tomato soup, perfect for chilly days','tomato.png'),
-('Vegetable Salad','A fresh and vibrant salad, perfect for a healthy meal.','vegsalad.png');
-
-INSERT INTO recipe (recipe_name,recipe_desc,img_path) VALUES ('Chocolate Cake', 'A rich and moist chocolate cake, perfect for dessert lovers.', 'chocolatecake.png');
-
-INSERT INTO recipe(recipe_name, recipe_desc, img_path)
-VALUES 
-('Dosa', 'Crispy and golden, a timeless favorite on every plate.', 'dosa.png');
-
-INSERT INTO recipe (recipe_name, recipe_desc, img_path) 
-VALUES 
-('Tomato Soup', 'A warm and comforting tomato soup, perfect for chilly days', 'tomatosoup.png'),
-('Vegetable Salad', 'A fresh and vibrant salad, perfect for a healthy meal.', 'vegsalad.png'),
-('Chocolate Cake', 'A rich and moist chocolate cake, perfect for dessert lovers.', 'chocolatecake.png'),
-('Paneer Butter Masala', 'A smooth and flavorful curry with paneer and butter.', 'paneer.png'),
-('Veg Sandwich', 'A quick and healthy sandwich with fresh vegetables.', 'sandwich.png'),
-('Sambar', 'A lentil-based stew with vegetables and aromatic spices.', 'sambar.png'),
-('Puri and Chole', 'Fluffy puris served with spicy chickpea curry.', 'puri_chole.png'),
-('Chocolate Ice Cream', 'Creamy chocolate ice cream, a perfect treat.', 'choc_icecream.png'),
-('Brownie', 'A soft and chewy chocolate brownie, rich and indulgent.', 'brownie.png'),
-('Veg Noodles', 'Stir-fried noodles with colorful vegetables and soy sauce.', 'noodles.png'),
-('Wheat Pizza', 'Healthy whole wheat pizza topped with veggies and cheese.', 'wheat_pizza.png'),
-('Wheat Burger', 'A healthy burger with a whole wheat bun and veggie patty.', 'wheat_burger.png'),
-('Rajma Chawal', 'Red kidney beans curry served with steamed rice.', 'rajma_chawal.png'),
-('Paneer', 'Tender paneer in a buttery tomato-based sauce.', 'paneer.png'),
-('Aloo Paratha', 'Stuffed flatbread with spiced mashed potatoes.', 'aloo_paratha.png'),
-('Kadhi Pakora', 'Yogurt-based curry with fried gram flour dumplings.', 'kadhi_pakora.png'),
-('Idli', 'Soft steamed rice cakes served with chutney and stew.', 'idli.png'),
-('Medu Vada', 'Crispy lentil fritters shaped like doughnuts.', 'medu_vada.png'),
-('Uttapam', 'Savory rice pancakes topped with chopped vegetables.', 'uttapam.png'),
-('Lemon Rice', 'Fragrant rice flavored with lemon juice and mild spices.', 'lemon_rice.png'),
-('Coconut Chutney', 'A creamy blend of coconut and spices, often served as a side.', 'coconut_chutney.png'),
-('Tamarind Rice', 'Tangy rice flavored with tamarind and tempered spices.', 'tamarind_rice.png'),
-('Rasam', 'A tangy and spiced soup, often served with rice.', 'rasam.png'),
-('Curd Rice', 'Creamy rice mixed with yogurt and mild seasonings.', 'curd_rice.png');
 
 INSERT INTO recipe (recipe_name, recipe_desc, img_path)
 VALUES
@@ -70,3 +27,26 @@ VALUES
 ('Brownie', 'A soft and chewy chocolate brownie, rich and indulgent.', 'brownie.png'),
 ('Veg Noodles', 'Stir-fried noodles with colorful vegetables and soy sauce.', 'noodles.png'),
 ('Green Tea', 'A light, soothing tea packed with antioxidants', 'green_tea.png')
+
+
+CREATE TABLE view_recipe (
+id INT PRIMARY KEY AUTO_INCREMENT,
+preparation_time VARCHAR(10),
+cooking_time VARCHAR(10),
+ingredients TEXT,
+recipe_procedure TEXT
+)
+
+Tomatoes, Onion, Garlic, Ginger, Butter, Black pepper, Salt, Sugar, Water, Coriander leaves, Fresh cream
+
+INSERT INTO view_recipe (
+    preparation_time,
+    cooking_time,
+    ingredients,
+    recipe_procedure
+) VALUES (
+    '10 mins',
+    '20 mins',
+    '4 medium ripe tomatoes\n1 small onion (finely chopped)\n2 garlic cloves (crushed)\n1-inch piece of ginger (grated)\n1 tsp butter or ghee\n1/4 tsp black pepper powder\nSalt as per taste\n1/2 tsp sugar (optional)\n2 cups water\nFresh coriander leaves (for garnish)\n2 tbsp fresh cream (optional)',
+    '1. Wash and roughly chop the tomatoes.\n2. Heat butter or ghee in a pan. Add chopped onion, garlic, and ginger. Sauté till translucent.\n3. Add chopped tomatoes and cook for 5–7 minutes till soft.\n4. Pour in 2 cups of water, add salt, sugar, and black pepper. Let it simmer for 10 minutes.\n5. Cool slightly, then blend the mixture into a smooth puree using a mixer or hand blender.\n6. Strain the puree to remove seeds and peels.\n7. Reheat the strained soup, check seasoning. Add cream if using.\n8. Serve hot, garnished with coriander leaves or croutons.'
+);

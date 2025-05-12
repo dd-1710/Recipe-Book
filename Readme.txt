@@ -34,3 +34,12 @@ and added few more images
 --> to the many array applied filter method in which checked condition useing includes property where the recipe element includes recipe which user is searching 
 
 --> finally looped the duplicate array in html without disturbing the orginal array.
+
+
+<------------------------------- DATE 12-MAY-2025-------------------->
+
+--> Created an get API which fetches the data based on individual recipe id 
+
+--> added separate file uniqedata.ts for getting single recipe detail
+
+--> Created a sample UI to show this data

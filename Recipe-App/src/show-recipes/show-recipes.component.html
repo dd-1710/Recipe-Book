@@ -35,11 +35,7 @@
       <span>
         <div class="recipe_details">
           <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+            <i class="fa fa-star"  *ngFor="let star of [1,2,3,4,5]"></i>
           </div>
           <button class="recipe-button" (click)="viewRecipe(recipe.id)">
             View Recipe

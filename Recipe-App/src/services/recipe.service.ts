@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environment';
 import { catchError, Observable, throwError } from 'rxjs';
+import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,13 @@ getRecipes():Observable<any>{
     return throwError(()=>err)
   }))
 }
+
+fetchEachRecipeDetail(id:any):Observable<any>{
+  return this.https.get(environment.apiUrl+`/api/viewRecipe/${id}`).pipe(catchError(err=>{
+    console.error("Error",err);
+    return throwError(()=>err);
+  }))
+}
+
 
 }
