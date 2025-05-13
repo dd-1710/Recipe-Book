@@ -43,3 +43,8 @@ and added few more images
 --> added separate file uniqedata.ts for getting single recipe detail
 
 --> Created a sample UI to show this data
+
+
+--------------------------------DATE 13-MAY-2025--------------------------
+
+Just made css and html changes to view recipe

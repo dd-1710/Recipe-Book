@@ -27,17 +27,10 @@ font-style: italic;
 .recipe_img{
     box-shadow: 0 2px 2px rgb(0,0,0,0.2);
     border-radius: 10px;
-    width: 400px;
-    height: 400px;
-    position: absolute;
-    right: 0;
-    top:0;
+    width: 300px;
+    height: 300px;
+    float: right;
 }
-
-
-
-
-
 
 .recipe_img:hover {
     transform: scale(1.03);
@@ -68,4 +61,25 @@ font-style: italic;
 
 .ingredients_item:hover{
     background-color:#F5F5DC;
+}
+
+
+.step{
+    box-shadow: 0px 2px 6px rgba(0, 0, 0,0.1);
+    background-color: #fafafa;
+    padding: 14px;
+    border:  1px solid brown;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+    line-height: 1.5;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.step:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+.step_number{
+ color: #9E2A2F;;
 }

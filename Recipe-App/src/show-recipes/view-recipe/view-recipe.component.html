@@ -1,32 +1,36 @@
 <div class="view_recipe" *ngIf="singleRecipeData">
-   <div>
-      <h4 id="heading">Recipe Name: 
-        <span>
-           {{singleRecipeData.recipe_name}}
-         </span>
-      </h4> 
-   </div>
-   <div class="show_recipe">
-      <div class="recipe_main">
-         <div class="ingredients_section">
-              <p class="title">Ingredients:</p>
-            <div class="ingredients_list">
-              <p class="ingredients_item" *ngFor="let list of ingredients_list">{{list}}</p>
-            </div>
-         </div>
-         <div>
-            <img class="recipe_img" [src]="imgUrl+singleRecipeData.img_path" [alt]='singleRecipeData.img_path'>
-         </div>        
-     </div>
-     <div class="recipe_steps">
-          <p class="title">
-             Procedure:
+  <div>
+    <h4 id="heading">
+      Recipe Name:
+      <span>
+        {{ singleRecipeData.recipe_name }}
+      </span>
+    </h4>
+  </div>
+  <div class="show_recipe">
+    <div class="recipe_main">
+      <div class="ingredients_section">
+        <p class="title">Ingredients:</p>
+        <div class="ingredients_list">
+          <p class="ingredients_item" *ngFor="let list of ingredients_list">
+            {{ list }}
           </p>
-          <p>{{final_steps}}</p>
-     </div>
+        </div>
+      </div>
+      <div style="margin-left: 400px">
+        <img class="recipe_img" [src]="imgUrl+singleRecipeData.img_path" [alt]='singleRecipeData.img_path'>
+      </div>
+    </div>
+    <div>
+      <p class="title">Procedure:</p>
+       <div  class="recipe_steps">
+         <span class="step" *ngFor="let step of recipe_procedure; let i = index">
+            <strong class="step_number">STEP: {{ i + 1 }}</strong>
+            {{ step }}
+         </span>
 
-    
+       </div>
      
-   </div>
-</div> 
-
+    </div>
+  </div>
+</div>

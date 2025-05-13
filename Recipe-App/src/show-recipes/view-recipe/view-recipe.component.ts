@@ -5,6 +5,7 @@ import { viewRecipeJson } from './uniqueRecipeData';
 import { uniqueRecipeData } from './uniqueRecipeData';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../environment';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,10 +19,10 @@ export class ViewRecipeComponent {
   public singleRecipeData!:uniqueRecipeData;
   public imgUrl = environment.imgUrl;
   public ingredients_list:string[] = [];
-  public recipe_steps:string = '';
-  public final_steps:string[] = [];
+  public recipe_procedure:string[]  = []
+
  
-  constructor(private recipeService:RecipeService,private activatedRoute:ActivatedRoute){
+  constructor(private recipeService:RecipeService,private activatedRoute:ActivatedRoute,private sanitizer: DomSanitizer){
     
   }
 
@@ -39,14 +40,11 @@ export class ViewRecipeComponent {
   }
 
   getEachRecipeDetail(id:number){
-    this.recipeService.fetchEachRecipeDetail(id).subscribe((data:viewRecipeJson)=>{
+      this.recipeService.fetchEachRecipeDetail(id).subscribe((data:viewRecipeJson)=>{
       this.singleRecipeData = new uniqueRecipeData(data);
       this.ingredients_list = this.singleRecipeData.ingredients.split(',');
-      this.recipe_steps = this.singleRecipeData.recipe_procedure.replace(/\n/g,'<br>');
-      this.final_steps = this.singleRecipeData.recipe_procedure.split('\n');
-
-      console.log(this.final_steps);
-     
+      this.recipe_procedure = this.singleRecipeData.recipe_procedure.split('\n').map(item=>item.replace(/\d+\.\s*/,''));
+      console.log("REC",this.recipe_procedure)
     })
   }
   
