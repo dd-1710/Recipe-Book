@@ -2,7 +2,7 @@
   <div>
     <h4 id="heading">
       Recipe Name:
-      <span>
+      <span class="recipe_name">
         {{ singleRecipeData.recipe_name }}
       </span>
     </h4>
@@ -10,27 +10,48 @@
   <div class="show_recipe">
     <div class="recipe_main">
       <div class="ingredients_section">
-        <p class="title">Ingredients:</p>
-        <div class="ingredients_list">
-          <p class="ingredients_item" *ngFor="let list of ingredients_list">
-            {{ list }}
-          </p>
+        <div>
+          <p class="title">Ingredients:</p>
+          <div class="ingredients_list">
+            <ul type="disc">
+              <li *ngFor="let list of ingredients_list">
+                {{ list }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="recipe_main_data">
+          <p class="title">Details:</p>
+          <div class="recipe_data" >
+            🕒 <p>Preparation Time: </p>&nbsp;{{ singleRecipeData.preparation_time }}
+          </div>
+          <div class="recipe_data">
+            🔥 <p>Cooking Time: </p>&nbsp;
+            {{ singleRecipeData.cooking_time }}
+          </div>
+          <div class="recipe_data">
+            🍽️ <p>Serves: </p>&nbsp;
+            {{ singleRecipeData.serve }}
+          </div>
+        </div>
+        
+        <div>
+          <img
+            class="recipe_img"
+            [src]="imgUrl + singleRecipeData.img_path"
+            [alt]="singleRecipeData.img_path"
+          />
         </div>
       </div>
-      <div style="margin-left: 400px">
-        <img class="recipe_img" [src]="imgUrl+singleRecipeData.img_path" [alt]='singleRecipeData.img_path'>
-      </div>
     </div>
-    <div>
+    <div class="recipe_procedure">
       <p class="title">Procedure:</p>
-       <div  class="recipe_steps">
-         <span class="step" *ngFor="let step of recipe_procedure; let i = index">
-            <strong class="step_number">STEP: {{ i + 1 }}</strong>
-            {{ step }}
-         </span>
-
-       </div>
-     
+      <div class="recipe_steps">
+        <span class="step" *ngFor="let step of recipe_procedure; let i = index">
+          <strong class="step_number">STEP: {{ i + 1 }}</strong>
+          {{ step }}
+        </span>
+      </div>
     </div>
   </div>
 </div>

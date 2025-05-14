@@ -7,6 +7,7 @@ export interface viewRecipeJson{
     ingredients:string;
     img_path:string,
     recipe_procedure:string;
+    serve:string;
 }
 
 export class uniqueRecipeData{
@@ -17,6 +18,7 @@ export class uniqueRecipeData{
     ingredients:string = '';
     img_path:string = '';
     recipe_procedure:string = '';
+    serve:string = '';
 
     constructor(json:viewRecipeJson){
         this.id = json.id;
@@ -26,6 +28,6 @@ export class uniqueRecipeData{
         this.ingredients = json.ingredients;
         this.img_path = json.img_path;
         this.recipe_procedure = json.recipe_procedure;
-
+        this.serve = json.serve;
 }
 }
