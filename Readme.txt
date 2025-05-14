@@ -48,3 +48,10 @@ and added few more images
 --------------------------------DATE 13-MAY-2025--------------------------
 
 Just made css and html changes to view recipe
+
+
+
+--------------------------------DATE 14-MAY-2025--------------------------
+
+
+ADDED CSS FOR VIEW RECIPE AND ADDED RECIPE DATA IN DB
