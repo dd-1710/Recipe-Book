@@ -55,3 +55,16 @@ Just made css and html changes to view recipe
 
 
 ADDED CSS FOR VIEW RECIPE AND ADDED RECIPE DATA IN DB
+
+
+----------------------DATE 15-MAY-2025---------------------------------
+
+create a separate pages folder and placed all compts inside it
+
+created a header component and moved header & footer code from show-recipe component
+
+Fixed header before data was flowing above the header added z-index 
+
+added nav bar and used routerLink in <a> anchor tag and imported routermodule from @angular/router
+
+implementing form for add recipe STILL IN PROGRESS......................

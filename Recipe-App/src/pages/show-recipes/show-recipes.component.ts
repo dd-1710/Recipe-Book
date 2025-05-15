@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RecipeService } from '../services/recipe.service';
+import { RecipeService } from '../../services/recipe.service';
 import { CommonModule } from '@angular/common';
 import { Router} from '@angular/router';
 import {FormsModule} from '@angular/forms'
 import { recipeData } from './showrecipeData';
-import { environment } from '../environment';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-show-recipes',

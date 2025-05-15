@@ -1,23 +1,17 @@
 <div class="recipe-app">
-  <div class="recipe-search">
-    <div class="header">
-      <div>
-        <h2>Tummy-Yummy</h2>
-        <p>Treat Your Taste Buds 🍴</p>
-      </div>
-      <div class="search-bar" style="display: flex">
-        <input
-          type="text"
-          placeholder="Search for recipes"
-          [(ngModel)]="searchRecipeName"
-          [value]="searchRecipeName"
-          (input)="searchRecipe($event)"
-        />
-        <button class="search-button"><i class="fa fa-search"></i></button>
-      </div>
-    </div>
+  
+  <div class="search-bar">
+     <!-- <input
+        type="text" 
+        placeholder="Search for recipes"
+        [(ngModel)]="searchRecipeName"
+        [value]="searchRecipeName"
+        (input)="searchRecipe($event)" 
+      />
+      <button class="search-button"><i class="fa fa-search"></i></button> -->
   </div>
-  <div class="recipe-cards-container">
+ 
+  <div class="recipe-cards-container">  
     <div class="recipe-card" *ngFor="let recipe of recipesToShow">
       <span>
         <img [src]="imgUrl + recipe.img_path" />
@@ -43,9 +37,5 @@
         </div>
       </span>
     </div>
-  </div>
-
-  <div class="footer">
-    <p>Copyright &copy; 2025 Tummy-Yummy. All rights reserved.</p>
   </div>
 </div>

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ShowRecipesComponent } from '../show-recipes/show-recipes.component';
+import { ShowRecipesComponent } from '../pages/show-recipes/show-recipes.component';
+import { HeaderComponent } from "../pages/header/header.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ShowRecipesComponent,RouterModule],
+  imports: [ShowRecipesComponent, RouterModule, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

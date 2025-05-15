@@ -10,75 +10,56 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh; 
-  // background: rgba(245,245,220);
-  background-size:auto;
   height: 100vh;
   width: 100vw;
+  padding-top: 8vh;
+  background-color: #f4f4f4;
 }
 
-.recipe-search{
+// .recipe-search{
   // background-color:	#006D77;
   // background-color: #9E2A2F;
-  background-color: rgb(115 64 96 );
+  // background-color: rgb(115 64 96 );
   // rgb(115 64 96/var(--tw-bg-opacity,1))
-}
+// }
 
-.header{
-  color: white;
-  margin:0;
-  box-shadow: 0px 1px 8px 10px rgba(0, 0, 0, 0.2);
-  width: 100vw;
-  height: 12vh;
-  min-height: 60px;
-  padding: 1px;
-  display: flex;
-
-}
-
-.header h2{
-  font-weight: bold;
-  margin: 0;
-
-}
-.header p{
-  font-family: 'Dancing Script', cursive;
-  margin: 0;
-  font-size: 20px;
-  margin-left:30px;
+.recipe-search{
+  // margin-top: 70px;
 }
 
 .search-bar input{
-  border-radius: 5px ;
+
+  border-radius: 5px;
   border:none;
-  margin: 38px;
-  margin-left: 100px;
+  margin: 80px 16px 16px 100px;
   height: 30px;
   width: 400px;
   max-width: 400px;
   background-color: #f5f5f5;
-  border-right: white 40px solid;
+  border-right: black solid 30px;
 
 }
 
 .search-bar input:focus{
   outline: none;
-  /* box-shadow: 0px 2px 1px 2px rgba(243, 117, 67, 0.836) */
   box-shadow: 0px 2px 1px 2px white;
   
 }
 
 .fa-search{
-  color: black;
-  padding: 0;
-  margin-top: 30px;
+  color: palevioletred;
+  padding: 24px;
+  margin: 0;
 }
 
 .search-button{
   border: none;
-  background: transparent;
+  height: 30px;
   position: relative;
   transform: translateX(-70px);
   cursor: pointer;
+  background: none;
+
 
 }
 
@@ -94,11 +75,13 @@
 }
 
 .recipe-cards-container {
+  margin: 0;
   display: flex;           
   flex-wrap: wrap;          
   justify-content: flex-start;
   gap: 20px;                
   padding: 20px;
+
 }
   
 .recipe-card{
@@ -106,7 +89,7 @@
   height: 300px;
   border-radius: 5px;
   box-shadow: 0px 2px 8px 5px rgba(0, 0, 0, 0.2);
-  margin-top: 50px;
+  
   margin-left:20px;
   background-color: white;
 }

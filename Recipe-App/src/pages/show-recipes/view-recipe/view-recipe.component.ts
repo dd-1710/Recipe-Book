@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RecipeService } from '../../services/recipe.service';
+import { RecipeService } from '../../../../src/services/recipe.service';
 import { viewRecipeJson } from './uniqueRecipeData';
 import { uniqueRecipeData } from './uniqueRecipeData';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../environment';
+import { environment } from '../../../environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 
