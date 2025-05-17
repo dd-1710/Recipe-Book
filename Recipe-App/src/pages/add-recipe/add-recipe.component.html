@@ -1,26 +1,32 @@
 <div class="recipe_form">
-  <form [formGroup]="recipeForm">
+  <form [formGroup]="recipeForm" style="display: flex;">
     <div>
       <div class="add_recipe_name">
         <label for="name" id="name"> Recipe Name </label>
-        <input
-          type="text"
-          formControlName="recipeName"
-          placeholder="Enter Recipe Name"
-        />
+        <input type="text" formControlName="recipeName" placeholder="Enter Recipe Name" />
       </div>
       <div class="add_desc">
         <label for="description">Description</label>
-        <input
-          type="text"
-          placeholder="Enter Recipe Description"
-          formControlName="description"
-        />
+        <input type="text" placeholder="Enter Recipe Description" formControlName="description" />
       </div>
-      <div class="add_ingredients">
+      <div style="display:inline-flex;">
         <label for="Ingredients">Ingredients</label>
+        <div class="add_ingredients" formArrayName="ingredients">
+
+          <div *ngFor="let list of ingredient.controls;let i=index" [formGroupName]="i" class="ingredient_input">
+            <input type="text" placeholder="Enter Ingredient" formControlName="ingredients">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="display: block;">
+      <label for="procedure">Procedure</label>
+      <div class="add_procedure">
+        <input type="text" formControlName="procedure" placeholder="Enter procedure here...">
 
       </div>
     </div>
+
   </form>
 </div>
