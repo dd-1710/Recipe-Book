@@ -1,11 +1,26 @@
 <div class="recipe_form">
   <form [formGroup]="recipeForm">
-    <div class="add_recipe_name">
-       <label for="name" id="name">
-           Recipe Name
-       </label>
-       <input type="text" formControlName="recipeName"/>
-    </div>
+    <div>
+      <div class="add_recipe_name">
+        <label for="name" id="name"> Recipe Name </label>
+        <input
+          type="text"
+          formControlName="recipeName"
+          placeholder="Enter Recipe Name"
+        />
+      </div>
+      <div class="add_desc">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          placeholder="Enter Recipe Description"
+          formControlName="description"
+        />
+      </div>
+      <div class="add_ingredients">
+        <label for="Ingredients">Ingredients</label>
 
+      </div>
+    </div>
   </form>
 </div>
