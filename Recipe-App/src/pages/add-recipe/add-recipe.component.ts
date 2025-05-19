@@ -1,44 +1,72 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule,FormBuilder,FormControlName,FormGroup, Validators, FormArray } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-recipe',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-recipe.component.html',
-  styleUrl: './add-recipe.component.scss'
+  styleUrl: './add-recipe.component.scss',
 })
 export class AddRecipeComponent {
+  public recipeForm!: FormGroup;
 
-public recipeForm!:FormGroup;
+  constructor(private FormBuidler: FormBuilder) {}
 
-constructor(private formBuidler:FormBuilder){
+  ngOnInit() {
+    this.recipeForm = this.FormBuidler.group({
+      recipeName: ['', Validators.required],
+      description: ['', Validators.required],
+      ingredients: this.FormBuidler.array(
+        Array.from({ length: 4 }, () => this.createInput())
+      ),
+      procedure: this.FormBuidler.array(Array.from({length:5},()=>this.createInput()))
+    });
+    console.log(this.ingredient.length);
+  }
 
-}
+  get ingredient() {
+    return this.recipeForm.get('ingredients') as FormArray;
+  }
 
-ngOnInit(){
+  get procedure() {
+    return this.recipeForm.get('procedure') as FormArray;
+  }
 
-  this.recipeForm = this.formBuidler.group({
-    recipeName: ['',Validators.required],
-    description : ['',Validators.required],
-    ingredients:this.formBuidler.array(Array.from({length:4},()=>this.createInput())),
-  })
-  console.log(this.recipeForm.value.recipeName)
-}
+  createInput() {
+    return this.FormBuidler.group({
+      input: [''],
+    });
+  }
 
-get ingredient(){
-  return this. recipeForm.get('ingredients') as FormArray;
-}
+  addInput(input: 'ingredient' | 'procedure') {
+    if (input === 'ingredient') {
+       this.ingredient.push(this.createInput());
+    }
+    if ((input === 'procedure')) {
+       this.procedure.push(this.createInput());
+    }
+  }
 
-createInput(){
-  return this.formBuidler.group({
-    ingredients:[''],
-  })
-}
+  deleteInput(i:number,input:'ingredient' | 'procedure'){
 
-addInput(){
-  return this.ingredient.push(this.createInput())
-}
-
+    if(input == 'ingredient'){
+      console.log("type",input,i)
+      this.ingredient.removeAt(i)
+    }
+    
+    if(input == 'procedure'){
+      console.log("type",input,i)
+      this.procedure.removeAt(i)
+    }
+    
+  }
+  
 }

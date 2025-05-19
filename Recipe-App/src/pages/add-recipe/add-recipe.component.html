@@ -1,32 +1,92 @@
 <div class="recipe_form">
-  <form [formGroup]="recipeForm" style="display: flex;">
+  <form [formGroup]="recipeForm" style="display: flex">
     <div>
       <div class="add_recipe_name">
         <label for="name" id="name"> Recipe Name </label>
-        <input type="text" formControlName="recipeName" placeholder="Enter Recipe Name" />
+        <input
+          type="text"
+          formControlName="recipeName"
+          placeholder="Enter Recipe Name"
+        />
       </div>
       <div class="add_desc">
         <label for="description">Description</label>
-        <input type="text" placeholder="Enter Recipe Description" formControlName="description" />
+        <input
+          type="text"
+          placeholder="Enter Recipe Description"
+          formControlName="description"
+        />
       </div>
-      <div style="display:inline-flex;">
+      <div style="display: inline-flex">
         <label for="Ingredients">Ingredients</label>
-        <div class="add_ingredients" formArrayName="ingredients">
-
-          <div *ngFor="let list of ingredient.controls;let i=index" [formGroupName]="i" class="ingredient_input">
-            <input type="text" placeholder="Enter Ingredient" formControlName="ingredients">
+        <div
+          class="add_ingredients"
+          formArrayName="ingredients"
+          style="overflow: auto"
+        >
+          <div
+            *ngFor="let list of ingredient.controls; let i = index"
+            [formGroupName]="i"
+            class="ingredient_input"
+          >
+            <input
+              type="text"
+              placeholder="Enter Ingredient"
+              formControlName="input"
+            />
+            <span [class.disabled]="!(list.get('input')?.value)">
+              <i
+              *ngIf=" ingredient?.length && i === ingredient.length - 1 "
+              class="fa-solid fa-plus"
+              (click)="addInput('ingredient')"
+            ></i>
+            <i
+              *ngIf="ingredient.length > 1"
+              class="fa-solid fa-minus"
+              (click)="deleteInput(i, 'ingredient')"
+            ></i>
+            </span>
+           
           </div>
         </div>
       </div>
-
     </div>
     <div style="display: block;">
-      <label for="procedure">Procedure</label>
-      <div class="add_procedure">
-        <input type="text" formControlName="procedure" placeholder="Enter procedure here...">
+    
+        <label for="procedure">Procedure</label>
+        <div style="overflow: auto;"
+          class="add_procedure"
+          formArrayName="procedure"
+          
+        >
+          <div
+            *ngFor="let list of procedure.controls; let i = index" 
+            [formGroupName]="i"
+            class="procedure_input"
+          >
+            <input
+              type="text"
+              placeholder="Enter Procedure"
+              formControlName="input"
+            />
+            <span [style.cursor]="list.get('input')?.value ? 'pointer' : 'default'" [class.disabled]="!(list.get('input')?.value)">
+              <i
+              *ngIf="procedure?.length  && i === procedure.length - 1"
+              class="fa-solid fa-plus"
+              (click)="addInput('procedure')"
+            ></i>
+            <i
+              *ngIf="procedure.length > 1"
+              class="fa-solid fa-minus"
+              (click)="deleteInput(i, 'procedure')" 
+            ></i>
 
-      </div>
+            </span>
+           
+          </div>
+        </div>
+    
+      
     </div>
-
   </form>
 </div>
