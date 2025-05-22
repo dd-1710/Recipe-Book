@@ -17,6 +17,10 @@ import { CommonModule } from '@angular/common';
 })
 export class AddRecipeComponent {
   public recipeForm!: FormGroup;
+  imageUrl: any;
+  previewImg: string | null = null;
+  selectedFile: File | null = null;
+
 
   constructor(private FormBuidler: FormBuilder) {}
 
@@ -25,9 +29,12 @@ export class AddRecipeComponent {
       recipeName: ['', Validators.required],
       description: ['', Validators.required],
       ingredients: this.FormBuidler.array(
-        Array.from({ length: 4 }, () => this.createInput())
+        Array.from({ length: 3 }, () => this.createInput())
       ),
-      procedure: this.FormBuidler.array(Array.from({length:5},()=>this.createInput()))
+      procedure: this.FormBuidler.array(Array.from({length:3},()=>this.createInput())),
+      preptime : ['',Validators.required],
+      cooktime: ['',Validators.required],
+      serves: ['',Validators.required]
     });
     console.log(this.ingredient.length);
   }
@@ -67,6 +74,18 @@ export class AddRecipeComponent {
       this.procedure.removeAt(i)
     }
     
+  }
+
+  onImageSelected(e:any){
+   const file = e.target.files[0]
+   if(file){
+    this.selectedFile = file;
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      this.previewImg = reader.result as string;
+    };
+    reader.readAsDataURL(file)
+   }
   }
   
 }

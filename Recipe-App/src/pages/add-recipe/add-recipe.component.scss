@@ -1,43 +1,60 @@
 .recipe_form {
-  //   background-color: #f4f4f4;
-  padding: 10px;
+  padding: 20px;
   margin: 20px;
   border-radius: 5px;
   background-color: #f4f4f4;
-  max-height: 40rem;
+  max-height: auto;
 }
 
 .add_recipe_name input {
   border-radius: 5px;
   outline: none;
   border: none;
-  padding: 5px;
-  margin: 20px;
+  margin: 0px 20px 20px 20px;
+  padding : 10px;
+  width: 20rem;
+  max-height: 2rem;
   background-color: rgb(243, 236, 236);
 }
 
-.recipe_form input:focus {
-  // box-shadow: 0px 2px 2px 2px rgb(115 64 96);
-}
-.add_desc input {
+.add_recipe_detail input{
   border-radius: 5px;
   outline: none;
   border: none;
-  padding: 5px;
-  margin: 20px 20px 20px 30px;
+  padding: 10px;
+  margin: 0px 20px 20px 20px;
+  width: 10rem;
+  max-height: 2rem;
   background-color: rgb(243, 236, 236);
 }
-// .add_ingredients {
-//   display: inline-block;
-// }
+
+.add_desc textarea {
+  border-radius: 5px;
+  width: 20rem;
+  height: 4rem;
+  outline: none;
+  border: none;
+  padding: 5px;
+  margin: 0px 20px 20px 36px;
+  background-color: rgb(243, 236, 236);
+  max-height: 8rem;
+}
+
+.ingredient1{
+  display: inline-flex;
+  padding-left: 50px;
+}
+
 
 .add_ingredients  {
   border-radius: 5px;
-  width: 25rem;
-  max-height: 20rem;
-  min-height: auto;
-  background-color: #f0ede6;
+  width: 20rem;
+  min-height: 16rem;
+  background-color: #f4f4f4;
   margin-left: 30px;
+  min-height: 16rem;
+  max-height: 16rem;     /* 👈 Add this */
+  overflow-y: auto; 
 }
 .ingredient_input input{
   border-radius: 5px;
@@ -45,33 +62,37 @@
   border: none;
   padding: 5px;
   margin: 10px;
-  background-color: rgb(194, 183, 157,0.2);
-  width: 20rem;
+  background-color: rgb(243, 236, 236);
+  width: 16rem;
   height: 4rem;
 }
 
-.add_ingredients::-webkit-scrollbar{
+.add_ingredients::-webkit-scrollbar,.add_procedure::-webkit-scrollbar,.add_desc textarea::-webkit-scrollbar {
  width: 4px;
 }
 
-.add_ingredients::-webkit-scrollbar-thumb{
-  background-color: #c2b79d;
+.add_ingredients::-webkit-scrollbar-thumb,.add_procedure::-webkit-scrollbar-thumb,.add_desc textarea::-webkit-scrollbar-thumb {
+  background-color: #c1bebb;
   border-radius: 10px;
 }
 
-.add_ingredients::-webkit-scrollbar-track{
+.add_ingredients::-webkit-scrollbar-track, .add_procedure::-webkit-scrollbar-track,.add_desc textarea::-webkit-scrollbar-track{
   background: transparent;
 }
 
 
 
+
+
 .add_procedure  {
   border-radius: 5px;
-  width: 32rem;
-  background-color: #f0ede6;
+  width: 38rem;
+  background-color: #f4f4f4;
   margin-left: 30px;
-  max-height: 28rem;
-  min-height: auto;
+  min-height: 16rem;
+  min-height: 16rem;
+  max-height: 16rem;    
+  overflow-y: auto; 
  
 }
 
@@ -82,8 +103,8 @@
   border: none;
   padding: 5px;
   margin: 10px;
-  background-color: rgb(194, 183, 157,0.2);
-  width: 28rem;
+  background-color: rgb(243, 236, 236);
+  width: 34rem;
   height: 4rem;
 }
 
@@ -91,21 +112,9 @@
 .fa-solid {
   color:rgb(114, 104, 104);
   padding: 3px;
+  cursor: pointer;
 }
 
-
-.add_procedure::-webkit-scrollbar{
-  width: 4px;
- }
- 
- .add_procedure::-webkit-scrollbar-thumb{
-   background-color: #c2b79d;
-   border-radius: 10px;
- }
- 
- .add_procedure::-webkit-scrollbar-track{
-   background: transparent;
- }
 
 
 .disabled {
@@ -117,4 +126,90 @@
 .disabled .fa-plus,
 .disabled .fa-minus {
   color: gray
+}
+
+.image_section {
+  margin: 5px 0px 10px 40px
+}
+
+.image_wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image_wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.edit_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  border-radius: 10px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.upload_box:hover .edit_overlay {
+  opacity: 1;
+}
+
+
+.upload_box {
+  width: 15rem;
+  height: 12rem;
+  border: 2px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.upload_box:hover {
+  border-color: #ccc;
+  background-color: #f2ede4;
+}
+
+.upload_box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.upload_text {
+  color: #a49b8f;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.save1{
+  padding: 30px;
+  
+}
+
+.save_recipe{
+  float: right;
+  color: white;
+  border-radius: 4px;
+  background-color:  rgb(115 64 96);
+  outline: none;
+  border: none;
+  padding: 2px;
 }
