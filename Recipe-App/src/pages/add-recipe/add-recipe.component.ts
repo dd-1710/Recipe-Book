@@ -7,6 +7,7 @@ import {
   FormArray,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -22,7 +23,7 @@ export class AddRecipeComponent {
   selectedFile: File | null = null;
 
 
-  constructor(private FormBuidler: FormBuilder) {}
+  constructor(private FormBuidler: FormBuilder,private service:RecipeService) {}
 
   ngOnInit() {
     this.recipeForm = this.FormBuidler.group({
@@ -34,7 +35,8 @@ export class AddRecipeComponent {
       procedure: this.FormBuidler.array(Array.from({length:3},()=>this.createInput())),
       preptime : ['',Validators.required],
       cooktime: ['',Validators.required],
-      serves: ['',Validators.required]
+      serves: ['',Validators.required],
+      image: [null,Validators.required]
     });
     console.log(this.ingredient.length);
   }
@@ -80,12 +82,41 @@ export class AddRecipeComponent {
    const file = e.target.files[0]
    if(file){
     this.selectedFile = file;
+    console.log("THIS",this.selectedFile)
     const reader = new FileReader();
     reader.onload = ()=>{
       this.previewImg = reader.result as string;
     };
     reader.readAsDataURL(file)
    }
+  }
+
+
+  addRecipe(){
+    const formData = new FormData()
+    const ingredient = this.recipeForm.value.ingredients.map((item:any)=>item.input)
+    const procedureSteps = this.recipeForm.value.procedure.map((item:any)=>item.input);
+    console.log("ING",ingredient)
+    console.log("STEPS",procedureSteps);
+    formData.append("recipename",this.recipeForm.value.recipeName);
+    formData.append("recipedesc",this.recipeForm.value.description);
+    formData.append("cookingtime",this.recipeForm.value.cooktime);
+    formData.append("preptime",this.recipeForm.value.preptime);
+    formData.append("serves",this.recipeForm.value.serves);
+    formData.append("procedure",procedureSteps.join(','));
+    formData.append("ingredients",ingredient.join(','));
+    if(this.selectedFile){
+      formData.append("image", this.selectedFile, this.selectedFile.name)
+    }
+    
+
+    this.service.addNewRecipe(formData).subscribe({
+     next:(res)=>
+      console.log("Recipe Added Successfully",res),
+     error:(err)=>
+      console.error('Failed to add recipe:', err),
+    
+    })
   }
   
 }

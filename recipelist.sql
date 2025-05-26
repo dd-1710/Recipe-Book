@@ -31,3 +31,4 @@ insert into `recipe_list` (`id`, `recipe_name`, `recipe_desc`, `img_path`) value
 insert into `recipe_list` (`id`, `recipe_name`, `recipe_desc`, `img_path`) values('18','Brownie','A soft and chewy chocolate brownie, rich and indulgent.','brownie.png');
 insert into `recipe_list` (`id`, `recipe_name`, `recipe_desc`, `img_path`) values('19','Veg Noodles','Stir-fried noodles with colorful vegetables and soy sauce.','noodles.png');
 insert into `recipe_list` (`id`, `recipe_name`, `recipe_desc`, `img_path`) values('20','Green Tea','A light, soothing tea packed with antioxidants','green_tea.png');
+insert into `recipe_list` (`id`, `recipe_name`, `recipe_desc`, `img_path`) values('21','b','b','s');

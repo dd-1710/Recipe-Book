@@ -29,5 +29,12 @@ fetchEachRecipeDetail(id:any):Observable<any>{
   }))
 }
 
+addNewRecipe(formData:FormData):Observable<any>{
+  return this.https.post(environment.apiUrl+'/api/add_recipe',formData).pipe(catchError(err=>{
+    console.error("Error",console.error());
+     return throwError(()=>err);
+  }))
+}
+
 
 }

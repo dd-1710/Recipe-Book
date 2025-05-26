@@ -1,0 +1,216 @@
+<!-- <div class="recipe_form">
+    <form [formGroup]="recipeForm" style="display: flex">
+      <div>
+        
+      </div>
+      <div>
+        <div class="add_recipe_name" style="display: inline-flex">
+          <label for="name" id="name"> Recipe Name </label>
+          <input
+            type="text"
+            formControlName="recipeName"
+            placeholder="Enter Recipe Name"
+          />
+        </div>
+        <div class="add_desc" style="display: inline-flex">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            placeholder="Enter Recipe Description"
+            formControlName="description"
+          />
+        </div>
+        <div class="add_recipe_name" style="display: inline-flex">
+          <label for="name" id="name"> Perparation Time </label>
+          <input
+            type="text"
+            formControlName="recipeName"
+            placeholder="Enter Recipe Name"
+          />
+        </div>
+        <div class="add_desc" style="display: inline-flex">
+          <label for="description">Cooking Time</label>
+          <input
+            type="text"
+            placeholder="Enter Recipe Description"
+            formControlName="description"
+          />
+        </div>
+        <div class="add_desc" style="display: inline-flex">
+          <label for="description">Severs</label>
+          <input
+            type="text"
+            placeholder="Enter Recipe Description"
+            formControlName="description"
+          />
+        </div>
+        <div style="display: inline-flex">
+          <label for="Ingredients">Ingredients</label>
+          <div
+            class="add_ingredients"
+            formArrayName="ingredients"
+            style="overflow: auto"
+          >
+            <div
+              *ngFor="let list of ingredient.controls; let i = index"
+              [formGroupName]="i"
+              class="ingredient_input"
+            >
+              <input
+                type="text"
+                placeholder="Enter Ingredient"
+                formControlName="input"
+              />
+              <span [class.disabled]="!list.get('input')?.value">
+                <i
+                  *ngIf="ingredient?.length && i === ingredient.length - 1"
+                  class="fa-solid fa-plus"
+                  (click)="addInput('ingredient')"
+                ></i>
+                <i
+                  *ngIf="ingredient.length > 1"
+                  class="fa-solid fa-minus"
+                  (click)="deleteInput(i, 'ingredient')"
+                ></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: inline-flex">
+        <div style="display: block">
+          <label for="procedure">Procedure</label>
+          <div
+            style="overflow: auto"
+            class="add_procedure"
+            formArrayName="procedure"
+          >
+            <div
+              *ngFor="let list of procedure.controls; let i = index"
+              [formGroupName]="i"
+              class="procedure_input"
+            >
+              <input
+                type="text"
+                placeholder="Enter Procedure"
+                formControlName="input"
+              />
+              <span
+                [style.cursor]="list.get('input')?.value ? 'pointer' : 'default'"
+                [class.disabled]="!list.get('input')?.value"
+              >
+                <i
+                  *ngIf="procedure?.length && i === procedure.length - 1"
+                  class="fa-solid fa-plus"
+                  (click)="addInput('procedure')"
+                ></i>
+                <i
+                  *ngIf="procedure.length > 1"
+                  class="fa-solid fa-minus"
+                  (click)="deleteInput(i, 'procedure')"
+                ></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="image_section">
+          <label for="imageUpload" class="upload_box">
+            <ng-container *ngIf="previewImg; else placeholder">
+              <div class="image_wrapper">
+                <img [src]="previewImg" alt="Uploaded Image" />
+                <div class="edit_overlay">Click to Change Image</div>
+              </div>
+            </ng-container>
+            <ng-template #placeholder>
+              <div class="upload_text">
+                <p>Click Here To Upload Image</p>
+              </div>
+            </ng-template>
+          </label>
+          <input
+            type="file"
+            id="imageUpload"
+            hidden
+            (change)="onImageSelected($event)"
+          />
+        </div>
+      </div>
+    
+  
+      
+    </form>
+    <div style="float: right;padding-top: 50px;">
+      <button>Save Recipe</button>
+    </div>
+   
+  </div>
+   -->
+
+   const express = require('express');
+const mysql = require('mysql2');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
+// ✅ Replace with your MySQL config
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'your_mysql_username',
+  password: 'your_mysql_password',
+  database: 'your_database_name',
+});
+
+// ✅ Connect to MySQL
+db.connect(err => {
+  if (err) {
+    console.error('DB connection error:', err);
+  } else {
+    console.log('Connected to MySQL');
+  }
+});
+
+// ✅ POST API to save recipe
+app.post('/api/recipes', (req, res) => {
+  const {
+    recipeName,
+    description,
+    prepTime,
+    cookTime,
+    serves,
+    ingredients,
+    procedure,
+  } = req.body;
+
+  const sql = `
+    INSERT INTO recipes 
+    (recipe_name, description, prep_time, cook_time, serves, ingredients, procedure) 
+    VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+  db.query(
+    sql,
+    [
+      recipeName,
+      description,
+      prepTime,
+      cookTime,
+      serves,
+      JSON.stringify(ingredients),
+      JSON.stringify(procedure),
+    ],
+    (err, result) => {
+      if (err) {
+        console.error('Insert error:', err);
+        res.status(500).json({ message: 'Failed to save recipe' });
+      } else {
+        res.status(201).json({ message: 'Recipe saved successfully', id: result.insertId });
+      }
+    }
+  );
+});
+
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});

@@ -8,14 +8,15 @@
 
 #heading {
     font-weight: 400;
-    background-color: rgb(115 64 96);
-    color: white;
+    /* background-color: rgb(115 64 96); */
+    color: black;
     width: 100vw;
     height: 8vh;
     padding: 8px;
     font-style: italic;
     display: block;
     text-align: center;
+    text-decoration: underline;
 }
 
 .recipe_name {
@@ -147,6 +148,7 @@
 
 .recipe_procedure {
     padding-left: 40px;
+    padding-bottom: 30px;
 }
 
 .step {

@@ -68,7 +68,7 @@
               type="file"
               id="imageUpload"
               hidden
-              (change)="onImageSelected($event)"
+              (change)="onImageSelected($event)" formControlName="image"
             />
           </div>
         </div>
@@ -146,7 +146,7 @@
       </div>
     </div>
     <div class="save1">
-      <button class="save_recipe">Save Recipe</button>
+      <button class="save_recipe" (click)="addRecipe()">Save Recipe</button>
     </div>
 
   </form>

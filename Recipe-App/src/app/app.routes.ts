@@ -8,7 +8,7 @@ import { AddRecipeComponent } from '../pages/add-recipe/add-recipe.component';
 export const routes: Routes = [
 
     {
-        path:'',redirectTo:'add-recipe',pathMatch:'full'
+        path:'',redirectTo:'recipe',pathMatch:'full'
     },
     {
         path:'recipe',loadComponent:()=>import('../pages/show-recipes/show-recipes.component').then(m => m.ShowRecipesComponent),
