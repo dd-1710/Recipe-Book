@@ -1,0 +1,92 @@
+:root {
+  --primary-color: rgb(115, 64, 96);
+  --background-color: beige;
+  --error-color: #e74c3c;
+  --input-border: gray;
+  --input-focus-border: var(--primary-color);
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+}
+
+.container {
+  height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  background: white;
+ border-top: 50px solid  rgb(115, 64, 96);
+
+  padding: 40px 40px;       
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 500px;         
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 2px solid gray !important;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--input-focus-border);
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: rgb(115, 64, 96);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #b99cb6;
+  cursor: not-allowed;
+}
+
+.alert-danger {
+  color: var(--error-color);
+  font-size: 13px;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 30px 20px;
+    width: 90%;
+    max-width: 100%;
+  }
+}
