@@ -2,11 +2,11 @@
     <div class="header">
         <span style="display: inline-block;">
             <h2>Tummy-Yummy</h2>
-            <p>Treat Your Taste Buds 🍴</p>
+            <p>Treat Your Taste Buds</p>
         </span>
-      <span class="nav-links">
+      <span class="nav-links" *ngIf="isLoggedIn">
         <nav>
-            <a href="#">Home</a>
+            <a routerLink="/recipe">Home</a>
             <a href="#">My Recipes</a>
             <a routerLink="/add-recipe">Add Recipe</a>
         </nav>

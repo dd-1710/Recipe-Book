@@ -1,35 +1,20 @@
 <div class="container">
-    <div>
-        <h2>Login To Tummy-Yummy</h2>
-        <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-            <div>
-                <div>
-                    <label for="username">UserName
+ <h4>Welcome To</h4><h3>Tummy-Yummy</h3>
+ <div class="login_form">
+    <form [formGroup]="loginForm">
+        <div>
+             <label for="username"> UserName</label>
+             <input type="text" id="username" formControlName="username">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="text" id="password" formControlName="password">
+        </div>
 
-                    </label>
-                    <input id="username" type="text" formControlName="username">
-                    <div *ngIf="userName?.invalid && userName?.touched">
-                        <span class="alert alert-danger" *ngIf="userName?.errors?.['required']">User Name is
-                            Required</span>
+        <div>
+            <button class="button">Login</button>
+        </div>
 
-                    </div>
-                </div>
-                <div>
-                    <label for="password"> Password
-
-                    </label>
-                    <input id="password" type="password" formControlName="password">
-                    <div *ngIf="password?.invalid && password?.touched">
-                        <span class="alert alert-danger" *ngIf="password?.errors?.['required']">Password is
-                            Required</span>
-
-                    </div>
-                </div>
-                <button [disabled]="loginForm.invalid">
-                    Login
-                </button>
-            </div>
-        </form>
-
-    </div>
+    </form>
+ </div>
 </div>

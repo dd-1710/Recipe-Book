@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule,FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,34 +13,48 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  public loginForm! : FormGroup;
+  currentView: 'welcome' | 'login' | 'signup' = 'welcome';
+  loginForm: FormGroup;
+  signupForm: FormGroup;
 
-  constructor(private fb:FormBuilder,private route:Router){
-
-  }
-
-  ngOnInit(){
-
+  constructor(private fb: FormBuilder,private auth:AuthService,private router:Router) {
     this.loginForm = this.fb.group({
-      username: ['',[Validators.required]],
-      password: ['',[Validators.required]]
-    })
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    this.signupForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
   }
 
-  get userName(){
-   return  this.loginForm.get('username')
+  get userName() {
+    return this.loginForm.get('username');
   }
 
-  get password(){
+  get password() {
     return this.loginForm.get('password');
   }
 
-  login(){
-    if(this.loginForm.valid){
-      console.log("logging")
-       this.route.navigate(['/recipe']);
-       sessionStorage.setItem('isLoggedIn','True')
+  switchView(view: 'welcome' | 'login' | 'signup') {
+    this.currentView = view;
+  }
+
+  login() {
+    if (this.loginForm.valid) {
+      this.auth.login();
+      this.router.navigate(['/recipe'])
+      alert('Logged in successfully');
     }
   }
 
+  signup() {
+    if (this.signupForm.valid) {
+      // signup logic here
+      alert('Signed up successfully');
+    }
+  }
 }
+
