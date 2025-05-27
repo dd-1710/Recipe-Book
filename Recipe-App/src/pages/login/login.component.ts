@@ -13,9 +13,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
 
-  currentView: 'welcome' | 'login' | 'signup' = 'welcome';
+ 
   loginForm: FormGroup;
   signupForm: FormGroup;
+  public showSigUp:boolean = false;
+
 
   constructor(private fb: FormBuilder,private auth:AuthService,private router:Router) {
     this.loginForm = this.fb.group({
@@ -24,13 +26,12 @@ export class LoginComponent {
     });
 
     this.signupForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
-    });
+      username: ['',[Validators.required]],
+      password: ['',[Validators.required]]
+    })
   }
 
-  get userName() {
+  get username() {
     return this.loginForm.get('username');
   }
 
@@ -38,23 +39,25 @@ export class LoginComponent {
     return this.loginForm.get('password');
   }
 
-  switchView(view: 'welcome' | 'login' | 'signup') {
-    this.currentView = view;
-  }
+  
 
   login() {
     if (this.loginForm.valid) {
       this.auth.login();
       this.router.navigate(['/recipe'])
-      alert('Logged in successfully');
+    
     }
   }
 
-  signup() {
-    if (this.signupForm.valid) {
-      // signup logic here
-      alert('Signed up successfully');
-    }
+  showSignup(){
+    this.showSigUp = true;
   }
+
+
+  goToLogin(){
+    this.showSigUp = false;
+  }
+
+ 
 }
 

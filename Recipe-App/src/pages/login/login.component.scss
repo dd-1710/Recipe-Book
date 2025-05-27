@@ -17,6 +17,7 @@ body, html {
   border-radius: 15px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   width: 350px;
+ margin-top: 50px;
 }
 
 h2 {
@@ -33,7 +34,7 @@ h1 {
   letter-spacing: 2px;
 }
 
-.login_form form div {
+.login_form,.signup_form form div {
   margin-bottom: 20px;
   text-align: left;
 }
@@ -45,21 +46,23 @@ label {
   margin-bottom: 6px;
 }
 
-input[type="text"] {
+input[type="text"],input[type="password" ] {
   width: 100%;
   padding: 10px 14px;
-  border: 2px solid gray;
+  border: 2px solid rgb(128, 128, 128,0.2);
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
+  outline: none;
 }
 
-input[type="text"]:focus {
-  border-color: var(--input-focus-border);
+input[type="text" ],input[type="password" ]:focus {
+  border-color:  rgb(128, 128, 128,0.2);
   outline: none;
   background-color: #fff;
 }
+
 
 .button {
   width: 100%;
@@ -77,3 +80,14 @@ input[type="text"]:focus {
 .button:hover {
   background-color: rgb(220, 155, 196);
 }
+
+.button:disabled {
+  background-color: rgba(115, 64, 96 ,0.3);
+  cursor: not-allowed;
+}
+
+.switch-link a:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
