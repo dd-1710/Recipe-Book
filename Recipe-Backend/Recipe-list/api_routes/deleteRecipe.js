@@ -21,3 +21,6 @@ router.delete('/recipe/:id', (req, res) => {
     res.status(200).json({ message: "Recipe deleted successfully" });
   });
 });
+
+
+module.exports = router;

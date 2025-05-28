@@ -5,6 +5,8 @@ const path = require("path");
 const getRecipesRoute = require("../Recipe-list/api_routes/getRecipe");
 const viewRecipeRoute = require("../Recipe-list/api_routes/viewRecipe");
 const addRecipeRoute = require("../Recipe-list/api_routes/addRecipe");
+const deleteRecipe = require("../Recipe-list/api_routes/deleteRecipe");
+const registerUser = require("../Recipe-list/api_routes/registerUser");
 
 const app = express();
 const port = 4100;
@@ -17,6 +19,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api", getRecipesRoute);
 app.use("/api", viewRecipeRoute);
 app.use("/api", addRecipeRoute);
+app.use("/api", deleteRecipe);
+app.use("/api", registerUser);
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

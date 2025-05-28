@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule,FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,11 @@ export class LoginComponent {
   loginForm: FormGroup;
   signupForm: FormGroup;
   public showSigUp:boolean = false;
+  public successMg:string = ''
 
 
-  constructor(private fb: FormBuilder,private auth:AuthService,private router:Router) {
+  constructor(private fb: FormBuilder,private auth:AuthService,private router:Router,private recipeService:RecipeService) {
+
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -31,21 +34,22 @@ export class LoginComponent {
     })
   }
 
+  ngOnInit(){
+    this.registerNewUser()
+  }
+
   get username() {
     return this.loginForm.get('username');
   }
 
   get password() {
     return this.loginForm.get('password');
-  }
-
-  
+  }  
 
   login() {
     if (this.loginForm.valid) {
       this.auth.login();
-      this.router.navigate(['/recipe'])
-    
+      this.router.navigate(['/recipe']) 
     }
   }
 
@@ -53,9 +57,25 @@ export class LoginComponent {
     this.showSigUp = true;
   }
 
+  registerNewUser(){
+    let date = new Date();
+    let userData = 
+      {
+      'username':this.signupForm.controls['username'].value,
+      'password':this.signupForm.controls['password'].value,
+      'createdat':date.toISOString().slice(0,19).replace('T',' ')
+      };
+    this.recipeService.registerUser(userData).subscribe(res=>{
+      if(res.Success){
+        this.successMg = res.Success;
+        setTimeout(()=>{
+          //  this.showSigUp = false;
+        },2000)
+      }
 
-  goToLogin(){
-    this.showSigUp = false;
+    
+
+    })
   }
 
  

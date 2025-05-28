@@ -31,10 +31,16 @@ fetchEachRecipeDetail(id:any):Observable<any>{
 
 addNewRecipe(formData:FormData):Observable<any>{
   return this.https.post(environment.apiUrl+'/api/add_recipe',formData).pipe(catchError(err=>{
-    console.error("Error",console.error());
+    console.error("Error",err);
      return throwError(()=>err);
   }))
 }
 
+registerUser(data:object):Observable<any>{
+return  this.https.post(environment.apiUrl + "/api/register_user",data).pipe(catchError(err=>{
+ console.error("Error",err);
+ return throwError(()=>err)
+}))
+}
 
 }

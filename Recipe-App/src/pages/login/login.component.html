@@ -27,7 +27,7 @@
       </div>
 
       <div style="margin-top: 20px;">
-        <button class="button" [disabled]="loginForm.invalid">Login</button>
+        <button class="button" [disabled]="loginForm.invalid">Login</button><br>
         <p class="switch-link">Don't have an account? <a (click)="showSignup()">SignUp Here</a></p>
       </div>
     </form>
@@ -55,7 +55,10 @@
         </div>
       </div>
       <div>
-        <button class="button" [disabled]="signupForm.invalid" (click)=" goToLogin()">Sign Up</button>
+        <button class="button" [disabled]="signupForm.invalid" (click)="registerNewUser()">Sign Up</button>
+      </div>
+      <div>
+        <p>{{successMg}}</p>
       </div>
     </form>
   </div>
