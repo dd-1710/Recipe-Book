@@ -91,3 +91,40 @@ input[type="text" ],input[type="password" ]:focus {
   cursor: pointer;
 }
 
+
+p.success {
+  color: #2e7d32;
+  background-color: #eaffea;
+  border: 1px solid #2e7d32;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+p.error {
+  color: #e74c3c;
+  background-color: #fceaea;
+  border: 1px solid #e74c3c;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.icon {
+  font-size: 16px;
+}
+
+
+

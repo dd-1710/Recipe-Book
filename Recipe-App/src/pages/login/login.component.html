@@ -1,65 +1,67 @@
 <div class="container">
-  <h4>Welcome To</h4>
-  <h3>Tummy-Yummy</h3>
-  <div class="login_form" *ngIf="!showSigUp">
-    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-      <div>
-        <label for="username"> UserName</label>
-        <input id="username" type="text" formControlName="username" />
-        <div *ngIf="username?.invalid && username?.touched">
-          <span
-            *ngIf="username?.errors?.['required']"
-            class="alert alert-danger"
-            >UserName is Required</span
-          >
-        </div>
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" />
-        <div *ngIf="password?.invalid && password?.touched">
-          <span
-            *ngIf="password?.errors?.['required']"
-            class="alert alert-danger"
-            >Password is Required</span
-          >
-        </div>
-      </div>
+    <div *ngIf="!showSigUp">
+        <h3>Login To</h3>
+        <h2>Tummy-Yummy</h2>
+    </div>
+      <div *ngIf="showSigUp">
+        <h3>SignUp To</h3>
+        <h2>Tummy-Yummy</h2>
+    </div>
+    <div class="login_form" *ngIf="!showSigUp">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+            <div>
+                <label for="username"> UserName</label>
+                <input id="username" type="text" formControlName="username" />
+                <div *ngIf="username?.invalid && username?.touched">
+                    <span *ngIf="username?.errors?.['required']" class="alert alert-danger">UserName is Required</span>
+                </div>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" />
+                <div *ngIf="password?.invalid && password?.touched">
+                    <span *ngIf="password?.errors?.['required']" class="alert alert-danger">Password is Required</span>
+                </div>
+            </div>
 
-      <div style="margin-top: 20px;">
-        <button class="button" [disabled]="loginForm.invalid">Login</button><br>
-        <p class="switch-link">Don't have an account? <a (click)="showSignup()">SignUp Here</a></p>
-      </div>
-    </form>
-  </div>
-  <div class="signup_form" *ngIf="showSigUp">
-    <form [formGroup]="signupForm">
-      <div>
-        <label for="username">UserName</label>
-        <input id="username" type="text" formControlName="username" />
-        <div *ngIf="signupForm.controls['username']?.invalid && signupForm.controls['username']?.touched">
-          <span
-            class="alert alert-danger"
-            *ngIf="signupForm.controls['username']?.invalid && signupForm.controls['username']?.touched"
-            >User Name is Required</span
-          >
-        </div>
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" />
-        <div *ngIf="signupForm.controls['password']?.invalid && signupForm.controls['password']?.touched">
-          <span *ngIf="signupForm.controls['password']?.errors?.['required']" class="alert alert-danger"
-            >Password is Required</span
-          >
-        </div>
-      </div>
-      <div>
-        <button class="button" [disabled]="signupForm.invalid" (click)="registerNewUser()">Sign Up</button>
-      </div>
-      <div>
-        <p>{{successMg}}</p>
-      </div>
-    </form>
-  </div>
+            <div style="margin-top: 20px;">
+                <button class="button" [disabled]="loginForm.invalid">Login</button><br>
+                <p class="switch-link">Don't have an account? <a (click)="showSignup()">SignUp Here</a></p>
+            </div>
+        </form>
+    </div>
+    <div class="signup_form" *ngIf="showSigUp">
+        <form [formGroup]="signupForm">
+            <div>
+                <label for="username">UserName</label>
+                <input id="username" type="text" formControlName="username" />
+                <div *ngIf="signupForm.controls['username']?.invalid && signupForm.controls['username']?.touched">
+                    <span class="alert alert-danger"
+                        *ngIf="signupForm.controls['username']?.invalid && signupForm.controls['username']?.touched">User
+                        Name is Required</span>
+                </div>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" />
+                <div *ngIf="signupForm.controls['password']?.invalid && signupForm.controls['password']?.touched">
+                    <span *ngIf="signupForm.controls['password']?.errors?.['required']"
+                        class="alert alert-danger">Password is Required</span>
+                </div>
+            </div>
+            <div>
+                <button class="button" [disabled]="signupForm.invalid" (click)="registerNewUser()">Sign Up</button>
+            </div>
+           <div>
+ <p *ngIf="successMg" class="success">
+  <i class="fa-solid fa-check icon"></i> {{ successMg }}
+</p>
+<p *ngIf="erroMsg" class="error">
+  <i class="fa-solid fa-xmark icon"></i> {{ erroMsg }}
+</p>
+
+</div>
+
+        </form>
+    </div>
 </div>

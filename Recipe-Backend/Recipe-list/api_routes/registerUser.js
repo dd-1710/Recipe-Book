@@ -24,7 +24,7 @@ router.post('/register_user',(req,res)=>{
         const sql = "Insert into users (user_name,user_password,created_at) values (?,?,?)"
         db.query(sql,[username,encryptedPassword,createdat],(err,result)=>{
             if(err){
-                return res.status(500).json({Failed:"Insert Failed",error:err})
+                return res.status(500).json({Error:"Insert Failed",error:err})
             }
             else{
                 return res.status(200).json({Success:"User Created Successfully"})

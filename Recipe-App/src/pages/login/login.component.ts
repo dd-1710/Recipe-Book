@@ -19,6 +19,7 @@ export class LoginComponent {
   signupForm: FormGroup;
   public showSigUp:boolean = false;
   public successMg:string = ''
+  public erroMsg:string = '';
 
 
   constructor(private fb: FormBuilder,private auth:AuthService,private router:Router,private recipeService:RecipeService) {
@@ -35,7 +36,7 @@ export class LoginComponent {
   }
 
   ngOnInit(){
-    this.registerNewUser()
+    
   }
 
   get username() {
@@ -65,16 +66,18 @@ export class LoginComponent {
       'password':this.signupForm.controls['password'].value,
       'createdat':date.toISOString().slice(0,19).replace('T',' ')
       };
-    this.recipeService.registerUser(userData).subscribe(res=>{
-      if(res.Success){
+    this.recipeService.registerUser(userData).subscribe({
+      next: (res)=>{
         this.successMg = res.Success;
+        this.erroMsg = '';
         setTimeout(()=>{
-          //  this.showSigUp = false;
+          this.showSigUp = false;
         },2000)
+      },
+      error: (err)=>{
+        this.erroMsg = err.error?.Error || "Something went wrong";
+         this.successMg = '';
       }
-
-    
-
     })
   }
 
