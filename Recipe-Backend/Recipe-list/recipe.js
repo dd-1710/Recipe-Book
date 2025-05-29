@@ -1,6 +1,9 @@
+
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+
 
 const getRecipesRoute = require("../Recipe-list/api_routes/getRecipe");
 const viewRecipeRoute = require("../Recipe-list/api_routes/viewRecipe");
@@ -22,7 +25,8 @@ app.use("/api", viewRecipeRoute);
 app.use("/api", addRecipeRoute);
 app.use("/api", deleteRecipe);
 app.use("/api", registerUser);
-app.use("/api",loginUser)
+app.use("/api", loginUser)
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

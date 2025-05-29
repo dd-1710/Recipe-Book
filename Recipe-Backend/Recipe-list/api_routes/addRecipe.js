@@ -4,6 +4,8 @@ const path = require("path");
 const db = require("../db"); 
 
 const router = express.Router();
+const token = require('../userAuth');
+const verifyToken = require("../userAuth");
 
 
 const storage = multer.diskStorage({
@@ -13,7 +15,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-router.post("/add_recipe", upload.single("image"), (req, res) => {
+router.post("/add_recipe",verifyToken, upload.single("image"), (req, res) => {
+
+  const user_Id = req.user.userId;
   const {
     recipename,
     recipedesc,
@@ -21,7 +25,7 @@ router.post("/add_recipe", upload.single("image"), (req, res) => {
     cookingtime,
     ingredients,
     procedure,
-    serves,
+    serves
   } = req.body;
 
   const imgname = req.file ? req.file.originalname : null;
@@ -35,16 +39,16 @@ router.post("/add_recipe", upload.single("image"), (req, res) => {
     !cookingtime ||
     !ingredients ||
     !procedure ||
-    !serves
+    !serves 
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
 
   const recipeSql = `
-    INSERT INTO recipe_list (recipe_name, recipe_desc, img_path) 
-    VALUES (?, ?, ?)`;
-  const recipeValues = [recipename, recipedesc, imgname];
+    INSERT INTO recipe_list (recipe_name, recipe_desc, img_path,user_id) 
+    VALUES (?, ?, ?,?)`;
+  const recipeValues = [recipename, recipedesc, imgname,user_Id];
 
   db.query(recipeSql, recipeValues, (err, result) => {
     if (err) {
@@ -57,7 +61,7 @@ router.post("/add_recipe", upload.single("image"), (req, res) => {
     // ✅ Insert into recipe_process table
     const processSql = `
       INSERT INTO recipe_process 
-      (id, preparation_time, cooking_time, ingredients, recipe_procedure, serve) 
+      (recipe_id, preparation_time, cooking_time, ingredients, recipe_procedure, serve) 
       VALUES (?, ?, ?, ?, ?, ?)`;
 
     const processValues = [
@@ -69,6 +73,7 @@ router.post("/add_recipe", upload.single("image"), (req, res) => {
       serves,
     ];
 
+    console.log("REIPEID",recipeId)
     db.query(processSql, processValues, (err2) => {
       if (err2) {
         console.error("Error inserting into recipe_process:", err2);

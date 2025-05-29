@@ -47,11 +47,29 @@ export class LoginComponent {
     return this.loginForm.get('password');
   }  
 
-  login() {
-    if (this.loginForm.valid) {
-      this.auth.login();
-      this.router.navigate(['/recipe']) 
-    }
+
+  login(){
+     const userDetails = {
+      'username':this.loginForm.controls['username'].value,
+      'password':this.loginForm.controls['password'].value
+     }
+     console.log("userdets",userDetails);
+     this.recipeService.login(userDetails).subscribe({
+      next:(res)=>{
+        this.successMg = res.Success;
+        this.erroMsg = ''
+        setTimeout(()=>{
+          this.router.navigate(['/recipe']);
+        },1000);
+        this.auth.login();
+        let token = res.token;
+        localStorage.setItem('jwtToken',token);
+      },
+      error: (err)=>{
+       this.erroMsg = err.error?.Error || "Something went wrong";
+       this.successMg = '';
+      }
+     })
   }
 
   showSignup(){
