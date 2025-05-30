@@ -64,6 +64,11 @@ export class LoginComponent {
         this.auth.login();
         let token = res.token;
         localStorage.setItem('jwtToken',token);
+        const userId = res.userId;
+        console.log("userId",userId);
+        if(userId){
+          sessionStorage.setItem("userId",userId);
+        }
       },
       error: (err)=>{
        this.erroMsg = err.error?.Error || "Something went wrong";

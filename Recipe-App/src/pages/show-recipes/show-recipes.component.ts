@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { CommonModule } from '@angular/common';
 import { Router} from '@angular/router';
@@ -14,6 +14,8 @@ import { environment } from '../../environment';
   styleUrl: './show-recipes.component.scss'
 })
 export class ShowRecipesComponent {
+
+  @Input() showRecipeByUser:boolean = false;
 
 public recipeList:any[] = []
 public imgUrl = environment.imgUrl;
@@ -33,11 +35,20 @@ ngOnInit(){
 }
 
 showRecipes(){
+  const userId = sessionStorage.getItem('userId');
+  const parsedInt = parseInt(userId?? '0')
+  console.log("userID",userId);
   this.recipeservice.getRecipes().subscribe((allRecipeResponse:recipeData[])=>{
     this.allRecipeResponse = allRecipeResponse.map(recipe=>new recipeData(recipe));
     console.log(this.allRecipeResponse,"ALL Recipe")
-    this.recipeList = [...this.allRecipeResponse];
-    this.recipesToShow = [...this.allRecipeResponse];
+    
+    if(this.showRecipeByUser){
+      console.log("in IF")
+      this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.user_Id === parsedInt)
+    }
+    else{
+      this.recipesToShow = [...this.allRecipeResponse];
+    }
   })
 }
 

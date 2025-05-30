@@ -74,3 +74,5 @@ CREATE TABLE recipe_process (
 );
 
 DROP TABLE recipe_process
+
+in my recipe app user can see all th recipes and there is a option where user can add a recipe and once added it will visble to all users so what i did is my routing to add recipe left side form will be there and right side those recipe cards will come which user added by uing the form just like the same recipe cards which users see but the user who created the recipes they can see what they have created so now in my add recipe component i have called selector of show recipe component as the ultimate goal was to show the recipe cards to the user but after calling that selector in add recipe component all the recipe cards are coming .. can I use the show componnet or else i have to write whole code for added recipe card again?

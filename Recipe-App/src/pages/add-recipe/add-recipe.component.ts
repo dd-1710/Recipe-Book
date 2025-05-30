@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -8,15 +8,18 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
+import { ShowRecipesComponent } from '../show-recipes/show-recipes.component';
 
 @Component({
   selector: 'app-add-recipe',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,ShowRecipesComponent],
   templateUrl: './add-recipe.component.html',
   styleUrl: './add-recipe.component.scss',
 })
 export class AddRecipeComponent {
+
+
   public recipeForm!: FormGroup;
   imageUrl: any;
   previewImg: string | null = null;
@@ -113,6 +116,7 @@ userRecipes: any;
 
     this.service.addNewRecipe(formData).subscribe({
      next:(res)=>
+   //   this.
       console.log("Recipe Added Successfully",res),
      error:(err)=>
       console.error('Failed to add recipe:', err),

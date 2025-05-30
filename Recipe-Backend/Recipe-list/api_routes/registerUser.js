@@ -20,7 +20,7 @@ router.post('/register_user',(req,res)=>{
         }
 
         const encryptedPassword = await bcrypt.hash(password,10);
-
+        
         const sql = "Insert into users (user_name,user_password,created_at) values (?,?,?)"
         db.query(sql,[username,encryptedPassword,createdat],(err,result)=>{
             if(err){

@@ -3,6 +3,7 @@ export interface recipeJson{
     recipe_name:string;
     recipe_desc:string ;
     img_path:string;
+    user_Id:number;
 }
 
 
@@ -11,6 +12,7 @@ export class recipeData{
     recipe_name:string = '';
     recipe_desc:string = '';
     img_path:string = '';
+    user_Id = 0;
 
     constructor(json?:recipeJson){
       if(json != null){
@@ -18,6 +20,7 @@ export class recipeData{
         this.recipe_name = json.recipe_name;
         this.recipe_desc = json.recipe_desc;
         this.img_path = json.img_path;
+        this.user_Id = json.user_Id;
       }
     }
 }
