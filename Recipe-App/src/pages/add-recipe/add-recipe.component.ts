@@ -21,6 +21,7 @@ export class AddRecipeComponent {
   imageUrl: any;
   previewImg: string | null = null;
   selectedFile: File | null = null;
+userRecipes: any;
 
 
   constructor(private FormBuidler: FormBuilder,private service:RecipeService) {}

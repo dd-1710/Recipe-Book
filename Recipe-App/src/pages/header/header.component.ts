@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,8 +13,10 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent {
 
 public isLoggedIn:boolean = false;
+  username = 'john'; // You should get this from AuthService or localStorage
+  menuOpen = false;
 
-constructor(private auth:AuthService){
+constructor(private auth:AuthService,private router:Router){
 
 }
 
@@ -22,5 +24,18 @@ ngOnInit(){
   this.auth.isLoggedIn$.subscribe(status=>{
     this.isLoggedIn = status;
   })
+  this.username = localStorage.getItem('username') || '';
+  if(this.isLoggedIn == false){
+   // this.router.navigate(['/login']);
+  } 
 }
+toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  signOut() {
+    // Clear token/localStorage and redirect
+    localStorage.clear();
+    // Route to login or home
+  }
 }

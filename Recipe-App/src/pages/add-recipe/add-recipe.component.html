@@ -1,153 +1,77 @@
-<div style="padding-bottom: 50px;">
-  <form [formGroup]="recipeForm">
-    <div style="width: 1200px; margin-left: 50px" class="recipe_form">
-      <div style="display: inline-flex;padding-left: 30px;">
-        <div style="display: block">
-          <div class="add_recipe_name">
-            <label for="name" id="name"> Recipe Name </label>
-            <input
-              type="text"
-              formControlName="recipeName"
-              placeholder="Enter Recipe Name"
-            />
-          </div>
+<form [formGroup]="recipeForm" class="recipe_form">
 
-          <div class="add_desc" style="display: inline-flex">
-            <label for="description">Description</label>
-            <textarea
-              type="text"
-              placeholder="Enter Recipe Description"
-              formControlName="description"
-            >
-            </textarea>
-          </div>
-        </div>
-        <div style="display: inline-block">
-          <div class="add_recipe_detail">
-            <label for="name" id="name"> Prep Time </label>
-            <input
-              type="number"
-              formControlName="preptime"
-              placeholder="Enter Prep Time"
-            /><small>in mins</small>
-          </div>
-          <div class="add_recipe_detail">
-            <label for="name" id="name"> Cook Time</label>
-            <input
-              type="number"
-              formControlName="cooktime"
-              placeholder="Enter Cook Time"
-            /><small>in mins</small>
-          </div>
-          <div class="add_recipe_detail">
-            <label for="name" id="name"> Serves </label>
-            <input
-              style="margin-left: 50px"
-              type="number"
-              formControlName="serves"
-              placeholder="Serves.."
-            />
-          </div>
-        </div>
-        <div>
-          <div class="image_section">
-            <label for="imageUpload" class="upload_box">
-              <ng-container *ngIf="previewImg; else placeholder">
-                <div class="image_wrapper">
-                  <img [src]="previewImg" alt="Uploaded Image" />
-                  <div class="edit_overlay">Click to Change Image</div>
-                </div>
-              </ng-container>
-              <ng-template #placeholder>
-                <div class="upload_text">
-                  <p>Click Here To Upload Image</p>
-                </div>
-              </ng-template>
-            </label>
-            <input
-              type="file"
-              id="imageUpload"
-              hidden
-              (change)="onImageSelected($event)" formControlName="image"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="ingredient1">
-        <label for="Ingredients">Ingredients</label>
-        <div
-          class="add_ingredients"
-          formArrayName="ingredients"
-          style="overflow: auto"
-        >
-          <div
-            *ngFor="let list of ingredient.controls; let i = index"
-            [formGroupName]="i"
-            class="ingredient_input"
-          >
-            <input
-              type="text"
-              placeholder="Enter Ingredient"
-              formControlName="input"
-            />
-            <span [class.disabled]="!list.get('input')?.value">
-              <i
-                *ngIf="ingredient?.length && i === ingredient.length - 1"
-                class="fa-solid fa-plus"
-                (click)="addInput('ingredient')"
-              ></i>
-              <i
-                *ngIf="ingredient.length > 1"
-                class="fa-solid fa-minus"
-                (click)="deleteInput(i, 'ingredient')"
-              ></i>
-            </span>
-          </div>
-        </div>
-        <div style="display: inline-flex; margin-left: 50px">
-          <label for="procedure">Procedure</label>
-          <div
-            style="overflow: auto"
-            class="add_procedure"
-            formArrayName="procedure"
-          >
-            <div
-              *ngFor="let list of procedure.controls; let i = index"
-              [formGroupName]="i"
-              class="procedure_input"
-            >
-              <input
-                type="text"
-                placeholder="Enter Procedure"
-                formControlName="input"
-              />
-              <span
-                [style.cursor]="
-                  list.get('input')?.value ? 'pointer' : 'default'
-                "
-                [class.disabled]="!list.get('input')?.value"
-              >
-                <i
-                  *ngIf="procedure?.length && i === procedure.length - 1"
-                  class="fa-solid fa-plus"
-                  (click)="addInput('procedure')"
-                ></i>
-                <i
-                  *ngIf="procedure.length > 1"
-                  class="fa-solid fa-minus"
-                  (click)="deleteInput(i, 'procedure')"
-                ></i>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="save1">
-      <button class="save_recipe" (click)="addRecipe()">Save Recipe</button>
+  <div class="form-row">
+    <div class="add_recipe_name">
+      <label for="recipeName">Recipe Name</label>
+      <input type="text" formControlName="recipeName" placeholder="Enter Recipe Name" />
     </div>
 
-  </form>
-</div>
+    <div class="recipe_details">
+      <label for="preptime">Prep Time <small>(mins)</small></label>
+      <input type="number" formControlName="preptime" placeholder="Prep Time" />
+    </div>
+
+    <div class="recipe_details">
+      <label for="cooktime">Cook Time <small>(mins)</small></label>
+      <input type="number" formControlName="cooktime" placeholder="Cook Time" />
+    </div>
+
+    <div class="recipe_details">
+      <label for="serves">Serves</label>
+      <input type="number" formControlName="serves" placeholder="Serves" />
+    </div>
+
+    <div class="image_section">
+      <label for="imageUpload" class="upload_box">
+        <ng-container *ngIf="previewImg; else placeholder">
+          <div class="image_wrapper">
+            <img [src]="previewImg" alt="Uploaded Image" />
+            <div class="edit_overlay">Click to Change Image</div>
+          </div>
+        </ng-container>
+        <ng-template #placeholder>
+          <div class="upload_text">
+            <p>Click Here To Upload Image</p>
+          </div>
+        </ng-template>
+      </label>
+      <input type="file" id="imageUpload" hidden (change)="onImageSelected($event)" formControlName="image" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="add_desc" style="flex: 1 1 100%;">
+      <label for="description">Description</label>
+      <textarea formControlName="description" placeholder="Enter Recipe Description"></textarea>
+    </div>
+  </div>
+
+  <div class="ingredient1">
+    <div class="add_ingredients" formArrayName="ingredients" >
+      <label>Ingredients</label>
+      <div *ngFor="let list of ingredient.controls; let i = index" [formGroupName]="i" class="ingredient_input">
+        <input type="text" placeholder="Enter Ingredient" formControlName="input" />
+        <span [class.disabled]="!list.get('input')?.value">
+          <i *ngIf="ingredient?.length && i === ingredient.length - 1" class="fa-solid fa-plus" (click)="addInput('ingredient')"></i>
+          <i *ngIf="ingredient.length > 1" class="fa-solid fa-minus" (click)="deleteInput(i, 'ingredient')"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="add_procedure" formArrayName="procedure">
+      <label>Procedure</label>
+      <div *ngFor="let list of procedure.controls; let i = index" [formGroupName]="i" class="procedure_input">
+        <input type="text" placeholder="Enter Procedure" formControlName="input" />
+        <span [class.disabled]="!list.get('input')?.value">
+          <i *ngIf="procedure?.length && i === procedure.length - 1" class="fa-solid fa-plus" (click)="addInput('procedure')"></i>
+          <i *ngIf="procedure.length > 1" class="fa-solid fa-minus" (click)="deleteInput(i, 'procedure')"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="save1">
+    <button type="button" class="save_recipe" (click)="addRecipe()">Save Recipe</button>
+  </div>
+
+</form>
