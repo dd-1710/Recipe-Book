@@ -1,23 +1,19 @@
-<div class="recipe-app">
-    <div class="header">
-        <span style="display: inline-block;">
-            <h2>Tummy-Yummy</h2>
-            <p>Treat Your Taste Buds</p>
-        </span>
-      <span class="nav-links" *ngIf="isLoggedIn">
-        <nav>
-            <a routerLink="/recipe">Home</a>
-            <a href="#">Favourite Recipes</a>
-            <a routerLink="/add-recipe">Add Recipe</a>
-        </nav>
-       
-      </span>
+<div class="header">
+  <div class="logo">
+    <h2>Tummy-Yummy</h2>
+    <p>Treat Your Taste Buds</p>
+  </div>
+
+
+  <div class="header-right" *ngIf="isLoggedIn">
+    <div class="user-avatar" (click)="toggleMenu()">
+      {{ username?.charAt(0) | uppercase }}
     </div>
-  
-   
-  
-    <div class="footer">
-      <p>Copyright &copy; 2025 Tummy-Yummy. All rights reserved.</p>
+
+    <div class="user-menu" *ngIf="menuOpen">
+      <a routerLink="/my-recipes">My Favourite Recipes</a>
+       <a routerLink="/add-recipe">Add Recipe</a>
+      <a (click)="signOut()">Sign Out</a>
     </div>
   </div>
-  
+</div>
