@@ -24,7 +24,7 @@ export class AddRecipeComponent {
   imageUrl: any;
   previewImg: string | null = null;
   selectedFile: File | null = null;
-userRecipes: any;
+  userRecipes: any;
 
 
   constructor(private FormBuidler: FormBuilder,private service:RecipeService) {}
@@ -96,6 +96,7 @@ userRecipes: any;
   }
 
 
+
   addRecipe(){
     const formData = new FormData()
     const ingredient = this.recipeForm.value.ingredients.map((item:any)=>item.input)
@@ -106,7 +107,7 @@ userRecipes: any;
     formData.append("recipedesc",this.recipeForm.value.description);
     formData.append("cookingtime",this.recipeForm.value.cooktime);
     formData.append("preptime",this.recipeForm.value.preptime);
-    formData.append("serves",this.recipeForm.value.serves);
+    formData.append("serves",this.recipeForm.value.serves)+' '+'servings';
     formData.append("procedure",procedureSteps.join(','));
     formData.append("ingredients",ingredient.join(','));
     if(this.selectedFile){
@@ -115,9 +116,10 @@ userRecipes: any;
     
 
     this.service.addNewRecipe(formData).subscribe({
-     next:(res)=>
-   //   this.
-      console.log("Recipe Added Successfully",res),
+     next:(res)=>{
+       this.service.getRecipes();
+      console.log("Recipe Added Successfully",res)
+     },
      error:(err)=>
       console.error('Failed to add recipe:', err),
     

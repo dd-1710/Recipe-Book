@@ -271,3 +271,27 @@
   }
 }
 
+.new_recipe
+{
+  flex: 1;
+  margin-top: 100px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  border-top: 40px solid #a0668c;
+  position: relative;
+
+  &::before {
+    content: "Recipes Added By You";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: -40px; 
+    left: 10px; 
+    color: #fff;
+    padding: 8px 28px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+}
+

@@ -1,14 +1,9 @@
 import { Routes } from '@angular/router';
 
-import { showRecipesRoutes } from '../pages/show-recipes/show-recipes-routing';
-import { AddRecipeComponent } from '../pages/add-recipe/add-recipe.component';
-
-
-
 export const routes: Routes = [
 
     {
-        path:'',redirectTo:'login',pathMatch:'full'
+        path:'',redirectTo:'add-recipe',pathMatch:'full'
     },
     {
       path:'login',loadComponent:()=>import('../pages/login/login.component').then(m=>m.LoginComponent)
@@ -24,5 +19,8 @@ export const routes: Routes = [
 
     {
         path:'add-recipe',loadComponent:()=>import('../pages/add-recipe/add-recipe.component').then(m=>m.AddRecipeComponent),
+    },
+    {
+        path:'favourite',loadComponent:()=>import('../pages/favourite-recipes/favourite-recipes.component').then(m=>m.FavouriteRecipesComponent)
     }
 ];

@@ -3,7 +3,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { CommonModule } from '@angular/common';
 import { Router} from '@angular/router';
 import {FormsModule} from '@angular/forms'
-import { recipeData } from './showrecipeData';
+import { BookmarkResponse, recipeData } from './showrecipeData';
 import { environment } from '../../environment';
 
 @Component({
@@ -15,14 +15,20 @@ import { environment } from '../../environment';
 })
 export class ShowRecipesComponent {
 
-  @Input() showRecipeByUser:boolean = false;
+@Input() showRecipeByUser:boolean = false;
+@Input() showFavRecipes:boolean = false;
 
+public rating = 3;
 public recipeList:any[] = []
 public imgUrl = environment.imgUrl;
 public searchRecipeName:string='';
 public filteredRecipe:any[] = [];
 public recipesToShow: any[]=[];
 public allRecipeResponse:recipeData[] = []
+isBookmarked = false;
+
+
+
 
 
 constructor(private recipeservice:RecipeService,private router:Router){
@@ -34,17 +40,21 @@ ngOnInit(){
   this.showRecipes();
 }
 
+
 showRecipes(){
   const userId = sessionStorage.getItem('userId');
   const parsedInt = parseInt(userId?? '0')
   console.log("userID",userId);
-  this.recipeservice.getRecipes().subscribe((allRecipeResponse:recipeData[])=>{
+  this.recipeservice.recipe$.subscribe((allRecipeResponse:recipeData[])=>{
     this.allRecipeResponse = allRecipeResponse.map(recipe=>new recipeData(recipe));
     console.log(this.allRecipeResponse,"ALL Recipe")
     
     if(this.showRecipeByUser){
-      console.log("in IF")
+      console.log("recipes created by user")
       this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.user_Id === parsedInt)
+    }else if(this.showFavRecipes){
+      console.log("user fav recipes");
+      this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked)
     }
     else{
       this.recipesToShow = [...this.allRecipeResponse];
@@ -67,4 +77,33 @@ if(!this.searchRecipeName.trim()){
 viewRecipe(id:number){
   this.router.navigate([`recipe/view/${id}`]);
 }
+
+deleteRecipe(id:number){
+  this.recipeservice.delete(id).subscribe((res)=>{
+    let data;
+    data = res;
+    this.recipeservice.getRecipes();
+  })
+}
+
+addToFav(recipeId:number){
+ const userId = Number(sessionStorage.getItem('userId'));
+
+
+  this.recipeservice.favRecipe(userId,recipeId).subscribe({
+    next:(res:BookmarkResponse)=>{
+    const recipe = this.recipesToShow.find((item)=>item.id == recipeId);
+    if(recipe){
+      recipe.is_bookmarked = res.bookmarked;
+      this.recipeservice.getRecipes();
+    }
+
+    console.log(res)
+    },
+    error:(err)=>{
+      console.log(err)
+    }
+  })
+}
+
 }

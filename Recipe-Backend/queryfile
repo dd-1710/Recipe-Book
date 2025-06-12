@@ -76,3 +76,22 @@ CREATE TABLE recipe_process (
 DROP TABLE recipe_process
 
 in my recipe app user can see all th recipes and there is a option where user can add a recipe and once added it will visble to all users so what i did is my routing to add recipe left side form will be there and right side those recipe cards will come which user added by uing the form just like the same recipe cards which users see but the user who created the recipes they can see what they have created so now in my add recipe component i have called selector of show recipe component as the ultimate goal was to show the recipe cards to the user but after calling that selector in add recipe component all the recipe cards are coming .. can I use the show componnet or else i have to write whole code for added recipe card again?
+
+
+
+ALTER TABLE recipe_list
+ADD CONSTRAINT fk_created_by
+FOREIGN KEY (created_by) REFERENCES users(id)
+ON DELETE CASCADE;
+
+-- 1. Drop foreign key constraint on recipe_list that references users.id
+ALTER TABLE recipe_list DROP FOREIGN KEY fk_created_by;
+
+-- 2. Modify users.id to AUTO_INCREMENT
+ALTER TABLE users MODIFY COLUMN id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+-- 3. Add foreign key constraint back
+ALTER TABLE recipe_list
+ADD CONSTRAINT fk_created_by
+FOREIGN KEY (user_Id) REFERENCES users(id)
+ON DELETE CASCADE;

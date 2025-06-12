@@ -1,7 +1,6 @@
 <div class="recipe-app">
-  
   <div class="search-bar">
-     <!-- <input
+    <!-- <input
         type="text" 
         placeholder="Search for recipes"
         [(ngModel)]="searchRecipeName"
@@ -10,32 +9,66 @@
       />
       <button class="search-button"><i class="fa fa-search"></i></button> -->
   </div>
- 
-  <div class="recipe-cards-container">  
-    <div class="recipe-card" *ngFor="let recipe of recipesToShow">
-      <span>
-        <img [src]="imgUrl + recipe.img_path" />
-      </span>
-      <span class="dish_container">
-        <span class="dish_name">
-          {{ recipe.recipe_name }}
-        </span>
-        <i class="fa-solid fa-bookmark"></i>
-      </span>
 
-      <span class="dish_description">
-        {{ recipe.recipe_desc }}
-      </span>
-      <span>
-        <div class="recipe_details">
-          <div class="rating">
-            <i class="fa fa-star"  *ngFor="let star of [1,2,3,4,5]"></i>
+  <div
+    [ngClass]="
+      showRecipeByUser
+        ? 'recipe-cards-container_user'
+        : 'recipe-cards-container'
+    "
+  >
+    <ng-container
+      *ngIf="recipesToShow && recipesToShow.length > 0; else noRecipes"
+    >
+      <div class="recipe-card" *ngFor="let recipe of recipesToShow">
+        <span>
+          <img [src]="imgUrl + recipe.img_path" />
+        </span>
+        <span class="dish_container">
+          <span class="dish_name">
+            {{ recipe.recipe_name }}
+          </span>
+          <div *ngIf="!showRecipeByUser">
+            <i
+              class="fa-solid fa-bookmark"
+              [class.bookmarked]="recipe.is_bookmarked"
+              (click)="addToFav(recipe.id)"
+            ></i>
           </div>
-          <button class="recipe-button" (click)="viewRecipe(recipe.id)">
-            View Recipe
-          </button>
-        </div>
+          <div *ngIf="showRecipeByUser">
+            <button
+              class="fa fa-trash"
+              (click)="deleteRecipe(recipe.id)"
+            ></button>
+          </div>
+        </span>
+
+        <span class="dish_description" [title]="recipe.recipe_desc">
+          {{ recipe.recipe_desc }}
+        </span>
+        <span>
+          <div class="recipe_details">
+            <div class="rating" *ngIf="!showRecipeByUser">
+              <i class="fa fa-star" *ngFor="let star of [1, 2, 3, 4, 5]"></i>
+            </div>
+            <button class="recipe-button" (click)="viewRecipe(recipe.id)">
+              View Recipe
+            </button>
+          </div>
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-template #noRecipes>
+      <span *ngIf="!showRecipeByUser">
+        <h1 class="no-recipes-message">No Recipes Available</h1>
       </span>
-    </div>
+      <span *ngIf="showRecipeByUser">
+        <h3 class="no-recipes-message_user">
+          It looks like you haven’t added any recipes yet. Start by creating
+          your first recipe and share your culinary creations with the world.
+        </h3>
+      </span>
+    </ng-template>
   </div>
 </div>

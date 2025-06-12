@@ -4,8 +4,13 @@ export interface recipeJson{
     recipe_desc:string ;
     img_path:string;
     user_Id:number;
+    is_bookmarked:string;
+  
 }
 
+export interface BookmarkResponse {
+  bookmarked: boolean;
+}
 
 export class recipeData{
     id:number = 0;
@@ -13,6 +18,7 @@ export class recipeData{
     recipe_desc:string = '';
     img_path:string = '';
     user_Id = 0;
+    is_bookmarked = '';
 
     constructor(json?:recipeJson){
       if(json != null){
@@ -21,6 +27,7 @@ export class recipeData{
         this.recipe_desc = json.recipe_desc;
         this.img_path = json.img_path;
         this.user_Id = json.user_Id;
+        this.is_bookmarked = json.is_bookmarked;
       }
     }
 }
