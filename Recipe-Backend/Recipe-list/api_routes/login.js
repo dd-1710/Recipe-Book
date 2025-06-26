@@ -5,7 +5,7 @@ const router = exp.Router();
 const jwt = require('jsonwebtoken');
 
 const secret = process.env.JWT_SECRET
-console.log("SECRET",secret)
+
 
 router.post('/login',(req,res)=>{
     const {username,password} = req.body;

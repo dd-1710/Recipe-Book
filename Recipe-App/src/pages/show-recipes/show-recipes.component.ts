@@ -50,7 +50,7 @@ showRecipes(){
     
     if(this.showRecipeByUser){
       console.log("recipes created by user")
-      this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.user_Id === parsedInt)
+      this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.user_id === parsedInt)
     }else if(this.showFavRecipes){
       console.log("user fav recipes");
       this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked)

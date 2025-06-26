@@ -3,7 +3,7 @@ export interface recipeJson{
     recipe_name:string;
     recipe_desc:string ;
     img_path:string;
-    user_Id:number;
+    user_id:number;
     is_bookmarked:string;
     rating:number;
   
@@ -18,7 +18,7 @@ export class recipeData{
     recipe_name:string = '';
     recipe_desc:string = '';
     img_path:string = '';
-    user_Id = 0;
+    user_id = 0;
     is_bookmarked = '';
     rating = 1;
 
@@ -28,7 +28,7 @@ export class recipeData{
         this.recipe_name = json.recipe_name;
         this.recipe_desc = json.recipe_desc;
         this.img_path = json.img_path;
-        this.user_Id = json.user_Id;
+        this.user_id = json.user_id;
         this.is_bookmarked = json.is_bookmarked;
         this.rating = json.rating;
       }
