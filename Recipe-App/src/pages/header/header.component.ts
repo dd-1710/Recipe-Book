@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -26,16 +26,19 @@ ngOnInit(){
   })
   this.username = localStorage.getItem('username') || '';
   if(this.isLoggedIn == false){
-   // this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   } 
 }
+
+
+
 toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
 
   signOut() {
-    // Clear token/localStorage and redirect
-    localStorage.clear();
-    // Route to login or home
+    sessionStorage.clear();
+    this.menuOpen = false;
+    this.router.navigate(['/login']);
   }
 }

@@ -60,7 +60,7 @@ export class LoginComponent {
         this.erroMsg = ''
         setTimeout(()=>{
           this.router.navigate(['/recipe']);
-        },1000);
+        },500);
         this.auth.login();
         let token = res.token;
         localStorage.setItem('jwtToken',token);
@@ -95,7 +95,7 @@ export class LoginComponent {
         this.erroMsg = '';
         setTimeout(()=>{
           this.showSigUp = false;
-        },2000)
+        },500)
       },
       error: (err)=>{
         this.erroMsg = err.error?.Error || "Something went wrong";

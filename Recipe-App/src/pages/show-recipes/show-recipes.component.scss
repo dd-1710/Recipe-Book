@@ -11,7 +11,7 @@
   padding-top: 8vh;
   padding-left: 16px;
   padding-right: 16px;
-  background-color: #f4f4f4;
+  // background-color: #f4f4f4;
   box-sizing: border-box;
 }
 
@@ -197,8 +197,15 @@
   gap: 35px;
 }
 
-.rating {
+.rated {
   color: goldenrod;
+  padding: 2px;
+  position: relative;
+  top: 1px;
+}
+
+.not_rated {
+  color:rgb(150, 138, 138);
   padding: 2px;
   position: relative;
   top: 1px;
@@ -206,4 +213,13 @@
 
 .fa-star {
   cursor: pointer;
+}
+
+.empty_list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 40vh;
+  width: 100%;
+  justify-content: center;
 }

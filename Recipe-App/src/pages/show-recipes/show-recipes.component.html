@@ -10,16 +10,12 @@
       <button class="search-button"><i class="fa fa-search"></i></button> -->
   </div>
 
-  <div
-    [ngClass]="
+  <div *ngIf="recipesToShow && recipesToShow.length > 0; else noRecipes" [ngClass]="
       showRecipeByUser
         ? 'recipe-cards-container_user'
         : 'recipe-cards-container'
-    "
-  >
-    <ng-container
-      *ngIf="recipesToShow && recipesToShow.length > 0; else noRecipes"
-    >
+    ">
+    <ng-container>
       <div class="recipe-card" *ngFor="let recipe of recipesToShow">
         <span>
           <img [src]="imgUrl + recipe.img_path" />
@@ -29,17 +25,10 @@
             {{ recipe.recipe_name }}
           </span>
           <div *ngIf="!showRecipeByUser">
-            <i
-              class="fa-solid fa-bookmark"
-              [class.bookmarked]="recipe.is_bookmarked"
-              (click)="addToFav(recipe.id)"
-            ></i>
+            <i class="fa-solid fa-bookmark" [class.bookmarked]="recipe.is_bookmarked" (click)="addToFav(recipe.id)"></i>
           </div>
           <div *ngIf="showRecipeByUser">
-            <button
-              class="fa fa-trash"
-              (click)="deleteRecipe(recipe.id)"
-            ></button>
+            <button class="fa fa-trash" (click)="deleteRecipe(recipe.id)"></button>
           </div>
         </span>
 
@@ -48,8 +37,11 @@
         </span>
         <span>
           <div class="recipe_details">
-            <div class="rating" *ngIf="!showRecipeByUser">
-              <i class="fa fa-star" *ngFor="let star of [1, 2, 3, 4, 5]"></i>
+            <div *ngIf="!showRecipeByUser">
+              <i class="fa fa-star" *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{
+                'rated': star <= recipe.rating,
+               'not_rated': star > recipe.rating 
+              }"(click) = "rateRecipe(recipe, star)" ></i>
             </div>
             <button class="recipe-button" (click)="viewRecipe(recipe.id)">
               View Recipe
@@ -58,17 +50,17 @@
         </span>
       </div>
     </ng-container>
-
-    <ng-template #noRecipes>
-      <span *ngIf="!showRecipeByUser">
-        <h1 class="no-recipes-message">No Recipes Available</h1>
-      </span>
-      <span *ngIf="showRecipeByUser">
-        <h3 class="no-recipes-message_user">
-          It looks like you haven’t added any recipes yet. Start by creating
-          your first recipe and share your culinary creations with the world.
-        </h3>
-      </span>
-    </ng-template>
   </div>
+  <ng-template #noRecipes>
+    <div *ngIf="!showRecipeByUser" class="empty_list">
+      <h1 class="no-recipes-message">No Recipes Available</h1>
+    </div>
+    <span *ngIf="showRecipeByUser">
+      <h3 class="no-recipes-message_user">
+        It looks like you haven’t added any recipes yet. Start by creating
+        your first recipe and share your culinary creations with the world.
+      </h3>
+    </span>
+  </ng-template>
+
 </div>

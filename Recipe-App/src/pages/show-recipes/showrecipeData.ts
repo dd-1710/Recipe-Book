@@ -5,6 +5,7 @@ export interface recipeJson{
     img_path:string;
     user_Id:number;
     is_bookmarked:string;
+    rating:number;
   
 }
 
@@ -19,6 +20,7 @@ export class recipeData{
     img_path:string = '';
     user_Id = 0;
     is_bookmarked = '';
+    rating = 1;
 
     constructor(json?:recipeJson){
       if(json != null){
@@ -28,6 +30,7 @@ export class recipeData{
         this.img_path = json.img_path;
         this.user_Id = json.user_Id;
         this.is_bookmarked = json.is_bookmarked;
+        this.rating = json.rating;
       }
     }
 }

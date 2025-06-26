@@ -18,7 +18,6 @@ export class ShowRecipesComponent {
 @Input() showRecipeByUser:boolean = false;
 @Input() showFavRecipes:boolean = false;
 
-public rating = 3;
 public recipeList:any[] = []
 public imgUrl = environment.imgUrl;
 public searchRecipeName:string='';
@@ -105,5 +104,15 @@ addToFav(recipeId:number){
     }
   })
 }
+
+rateRecipe(recipe:any,rating:number){
+  if(recipe.rating == rating){
+     recipe.rating = rating-1;
+  }
+  else{
+    recipe.rating = rating;
+  }
+}
+
 
 }
