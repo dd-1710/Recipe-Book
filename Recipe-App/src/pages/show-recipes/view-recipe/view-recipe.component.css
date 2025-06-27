@@ -26,8 +26,10 @@
 
 .show_recipe {
 
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     border-radius: 10px;
+    margin: 0 auto;
 }
 
 .recipe_main {
@@ -48,11 +50,12 @@
 }
 
 .ingredients_section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; 
     display: flex;
     box-shadow: 0 2px 8px 8px rgb(0, 0, 0, 0.2);
     border-radius: 10px;
-    width: 1200px;
-    z-index: 1;
     padding: 20px;
     background-color: white;
     gap: 30px;
@@ -170,4 +173,38 @@
 
 .step_number {
     color: rgb(115 64 96);
+}
+@media (max-width: 768px) {
+
+  .ingredients_section {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .ingredients_list {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .recipe_img {
+    margin-left: 0;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .recipe_data {
+    width: 100%;
+  }
+
+  .show_recipe {
+    padding: 0 12px;
+  }
+
+  .recipe_main_data {
+    align-items: center;
+  }
 }

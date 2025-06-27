@@ -105,10 +105,10 @@ export class AddRecipeComponent {
     console.log("STEPS",procedureSteps);
     formData.append("recipename",this.recipeForm.value.recipeName);
     formData.append("recipedesc",this.recipeForm.value.description);
-    formData.append("cookingtime",this.recipeForm.value.cooktime);
-    formData.append("preptime",this.recipeForm.value.preptime);
-    formData.append("serves",this.recipeForm.value.serves)+' '+'servings';
-    formData.append("procedure",procedureSteps.join(','));
+    formData.append("cookingtime",this.recipeForm.value.cooktime+' '+'mins');
+    formData.append("preptime",this.recipeForm.value.preptime+' '+'mins');
+    formData.append("serves",this.recipeForm.value.serves+' '+'servings');
+    formData.append("procedure",procedureSteps.join('\n'));
     formData.append("ingredients",ingredient.join(','));
     if(this.selectedFile){
       formData.append("image", this.selectedFile, this.selectedFile.name)

@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent {
 
 public isLoggedIn:boolean = false;
-  username = 'john'; // You should get this from AuthService or localStorage
+  username = ''; 
   menuOpen = false;
 
 constructor(private auth:AuthService,private router:Router){
@@ -24,10 +24,11 @@ ngOnInit(){
   this.auth.isLoggedIn$.subscribe(status=>{
     this.isLoggedIn = status;
   })
-  this.username = localStorage.getItem('username') || '';
+  this.username = sessionStorage.getItem('userName') || '';
   if(this.isLoggedIn == false){
     this.router.navigate(['/login']);
   } 
+
 }
 
 

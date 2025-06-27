@@ -106,3 +106,9 @@ CREATE TABLE user_bookmarks (
   FOREIGN KEY (recipe_id) REFERENCES recipe_list(id)
 );
 
+
+ALTER TABLE recipe_list
+ADD CONSTRAINT fk_user
+FOREIGN KEY (user_id)
+REFERENCES users(id)
+ON DELETE CASCADE;

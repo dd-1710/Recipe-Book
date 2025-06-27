@@ -6,7 +6,7 @@
 
 
   <div class="header-right" *ngIf="isLoggedIn">
-    <div class="user=wrapper" (mouseleave)="menuOpen=false">
+    <div class="user_wrapper" (mouseleave)="menuOpen=false">
        <div class="user-avatar" (click)="toggleMenu()">
       {{ username?.charAt(0) | uppercase }}
     </div>

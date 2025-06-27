@@ -53,7 +53,6 @@ export class LoginComponent {
       'username':this.loginForm.controls['username'].value,
       'password':this.loginForm.controls['password'].value
      }
-     console.log("userdets",userDetails);
      this.recipeService.login(userDetails).subscribe({
       next:(res)=>{
         this.successMg = res.Success;
@@ -65,9 +64,11 @@ export class LoginComponent {
         let token = res.token;
         localStorage.setItem('jwtToken',token);
         const userId = res.userId;
+        const userName = res.username;
         console.log("userId",userId);
-        if(userId){
+        if(userId || userName){
           sessionStorage.setItem("userId",userId);
+          sessionStorage.setItem("userName",userName)
         }
       },
       error: (err)=>{

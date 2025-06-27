@@ -52,7 +52,6 @@ login(data:any): Observable<any> {
   const body = { 
     username:data.username, 
     password : data.password };
-    console.log("BODY",body);
   return this.https.post(environment.apiUrl + `login`, body).pipe(
     catchError(err => {
       console.error("Error", err);

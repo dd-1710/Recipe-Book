@@ -24,11 +24,11 @@
             />
           </div>
           <div>
-            <label for="serves">Serves</label>
+            <label for="serves">Serves <small>(No.of servings)</small></label>
             <input
               type="number"
               formControlName="serves"
-              placeholder="Serves"
+              placeholder="Serves" min="1"
             />
           </div>
           <div>
@@ -36,7 +36,7 @@
             <input
               type="number"
               formControlName="preptime"
-              placeholder="Prep Time"
+              placeholder="Prep Time" min="1"
             />
           </div>
           <div>
@@ -44,7 +44,7 @@
             <input
               type="number"
               formControlName="cooktime"
-              placeholder="Cook Time"
+              placeholder="Cook Time" min="1"
             />
           </div>
         </div>
@@ -164,7 +164,7 @@
       </div>
 
       <div class="save1">
-        <button type="button" class="save_recipe" (click)="addRecipe()">
+        <button type="button" class="save_recipe" (click)="addRecipe()" [disabled]="recipeForm.invalid" [ngClass]="recipeForm.invalid?'disabled':'not_disabled'">
           Save Recipe
         </button>
       </div>

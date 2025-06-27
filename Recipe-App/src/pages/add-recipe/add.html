@@ -168,7 +168,7 @@ db.connect(err => {
   if (err) {
     console.error('DB connection error:', err);
   } else {
-    console.log('Connected to MySQL');
+    //console.log('Connected to MySQL');
   }
 });
 
@@ -212,5 +212,5 @@ app.post('/api/recipes', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+  //console.log('Server running on http://localhost:3000');
 });
