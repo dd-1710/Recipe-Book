@@ -43,8 +43,8 @@
     </ng-container>
   </div>
   <ng-template #noRecipes>
-    <div *ngIf="!showRecipeByUser" class="empty_list">
-      <h1 class="no-recipes-message">No Recipes Available</h1>
+     <div *ngIf="recipesToShow.length==0 && recipesToShow" class="empty_list">
+      <h1 class="no-recipes-message">&nbsp;<span style="font-size: 20px;">Please Wait Fetching Recipes....</span>&nbsp;<i class="fa-solid fa-spinner fa-spin"></i></h1>
     </div>
     <span *ngIf="showRecipeByUser">
       <h3 class="no-recipes-message_user">

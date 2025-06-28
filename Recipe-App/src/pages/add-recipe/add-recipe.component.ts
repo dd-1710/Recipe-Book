@@ -119,10 +119,13 @@ export class AddRecipeComponent {
      next:(res)=>{
        this.service.getRecipes();
       console.log("Recipe Added Successfully",res)
+      this.service.showSuccessToast(`Recipe ${this.recipeForm.value.recipeName} Added Successfully`)
      },
-     error:(err)=>
-      console.error('Failed to add recipe:', err),
-    
+     error:(err)=>{
+     console.error('Failed to add recipe:', err);
+     this.service.showErrorToast(`${err.error.message}`);
+     }
+     
     })
   }
   

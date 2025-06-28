@@ -6,6 +6,8 @@ import {FormsModule} from '@angular/forms'
 import { BookmarkResponse, recipeData } from './showrecipeData';
 import { environment } from '../../environment';
 import { ToastrService } from 'ngx-toastr';
+import { AfterViewInit } from '@angular/core';
+import { catchError, of, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-show-recipes',
@@ -30,6 +32,7 @@ isBookmarked = false;
 phrases:string[] = ["Searh For Dosa","Search For Breakfast","Search For Paneer","Search For Lunch","Search For Cake","Search For Snack","Search For Dinner"]
 currentPhraseIndex: number = 0;
 letterIndex: number = 0;
+suppressToast = false;
 
 
 
@@ -41,11 +44,15 @@ constructor(private recipeservice:RecipeService,private router:Router,private to
 
 ngOnInit(){
   console.log("Show recipe Comp Initialized");
-  this.showRecipes(); 
   this.typeEffect();
    this.recipeservice.searchTerm$.subscribe(term => {
     this.applySearchFilter(term);
   });
+}
+
+ngAfterViewInit(){
+   this.showRecipes();
+ 
 }
 
 typeEffect(){
@@ -79,38 +86,35 @@ showRecipes(){
   const parsedInt = parseInt(userId?? '0');
   const username = sessionStorage.getItem('userName')
   console.log("userID",userId);
-  this.recipeservice.recipe$.subscribe((allRecipeResponse:recipeData[])=>{
+  this.recipeservice.recipe$.pipe(catchError(err=>{
+  this.recipeservice.showErrorToast('Failed to load recipes.');
+    return throwError(() => err);
+
+  })).subscribe((allRecipeResponse:recipeData[])=>{
     this.allRecipeResponse = allRecipeResponse.map(recipe=>new recipeData(recipe));
     console.log(this.allRecipeResponse,"ALL Recipe")
-    
+  if (!this.suppressToast) {  
     if(this.showRecipeByUser){
       console.log("recipes created by user")
       this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.user_id === parsedInt)
-    this.toast.success(
-  `Showing Recipes Added By ${username}`,
-  '',
-  {
-    positionClass: 'toast-top-center', // move to top center
-    timeOut: 3000,
-    closeButton: true,
-    progressBar: true,
-    toastClass: 'ngx-toastr toast-success',
-  }
-);
-
+      if(this.recipesToShow.length > 0){
+           this.recipeservice.showSuccessToast(`Showing your uploaded recipes!!`);
+      }else{
+        this.recipeservice.showInfoToast(`You haven't added any recipes yet`)
+      }
     }else if(this.showFavRecipes){
       console.log("user fav recipes");
       this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked)
+      console.log("FAVVVVVVV",this.recipesToShow)
+       this.recipeservice.showSuccessToast(`Here are your favorite recipes!!`);
+      
     }
     else{
       this.recipesToShow = [...this.allRecipeResponse];
-      this.toast.success('All recipes loaded successfully!');
+      this.recipeservice.showInfoToast('All recipes loaded successfully!');
     }
-  })
- 
+  }})
 }
-
-
 
 applySearchFilter(term: string) {
   if (!term.trim()) {
@@ -141,13 +145,28 @@ viewRecipe(id:number){
   this.router.navigate([`recipe/view/${id}`]);
 }
 
-deleteRecipe(id:number){
-  this.recipeservice.delete(id).subscribe((res)=>{
-    let data;
-    data = res;
-    this.recipeservice.getRecipes();
-  })
+public isLoading = false;
+
+deleteRecipe(id: number) {
+  this.isLoading = true;
+  this.suppressToast = true;
+
+  this.recipeservice.delete(id).subscribe({
+    next: () => {
+      this.recipeservice.getRecipes(); // emits updated data
+      setTimeout(() => {
+        this.showRecipes(); // wait for observable to emit
+        this.isLoading = false;
+      }, 100); // small delay lets subject emit updated value
+    },
+    error: (err) => {
+      this.recipeservice.showErrorToast('Failed to delete recipe.');
+      this.isLoading = false;
+    }
+  });
 }
+
+
 
 addToFav(recipeId:number){
  const userId = Number(sessionStorage.getItem('userId'));

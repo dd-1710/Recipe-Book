@@ -4,6 +4,7 @@ import { environment } from '../environment';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { query } from '@angular/animations';
 import { recipeData } from '../pages/show-recipes/showrecipeData';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class RecipeService {
   private searchTermSubject = new BehaviorSubject<string>('');
   searchTerm$ = this.searchTermSubject.asObservable();
 
-  constructor(private https:HttpClient) 
+  constructor(private https:HttpClient,private toast:ToastrService) 
   {  
     this.getRecipes()
 
@@ -85,5 +86,42 @@ favRecipe(user_id:number,recipe_id:number):Observable<any>{
  setSearchTerm(term: string) {
     this.searchTermSubject.next(term);
   }
+
+  
+showSuccessToast(message: string) {
+  this.toast.success(message, '', this.toastOptions());
+}
+
+showInfoToast(message: string) {
+  this.toast.info(message, '', this.toastOptions());
+}
+
+toastOptions() {
+  return {
+    positionClass: 'toast-top-center',
+    timeOut: 2500,
+    closeButton: true,
+    progressBar: true,
+    toastClass: 'ngx-toastr toast-success custom-toast'
+  };
+}
+showErrorToast(message: string) {
+  this.toast.error(message, 'Error', this.toastErrorOptions());
+}
+
+toastErrorOptions() {
+  return {
+    positionClass: 'toast-top-center',
+    timeOut: 3000,
+    closeButton: true,
+    progressBar: true,
+    toastClass: 'ngx-toastr toast-error custom-toast'
+  };
+}
+
+
+
+
+
 
 }
