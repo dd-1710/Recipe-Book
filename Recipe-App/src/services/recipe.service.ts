@@ -12,6 +12,9 @@ export class RecipeService {
   private recipeSubject = new BehaviorSubject<recipeData[]>([]);
   recipe$ = this.recipeSubject.asObservable();
 
+  private searchTermSubject = new BehaviorSubject<string>('');
+  searchTerm$ = this.searchTermSubject.asObservable();
+
   constructor(private https:HttpClient) 
   {  
     this.getRecipes()
@@ -78,5 +81,9 @@ favRecipe(user_id:number,recipe_id:number):Observable<any>{
     return throwError(()=>err)
   }))
 }
+
+ setSearchTerm(term: string) {
+    this.searchTermSubject.next(term);
+  }
 
 }

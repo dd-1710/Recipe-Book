@@ -16,7 +16,7 @@ router.post('/register_user',(req,res)=>{
             return res.status(500).json({Error:"Database Error",error:err})
         }
         if(result.length > 0){
-            return res.status(409).json({Error:"Username already taken"})
+            return res.status(409).json({Error:"Username already Taken"})
         }
 
         const encryptedPassword = await bcrypt.hash(password,10);

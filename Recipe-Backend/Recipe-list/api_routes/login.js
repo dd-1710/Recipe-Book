@@ -39,7 +39,7 @@ router.post('/login',(req,res)=>{
           secret,
           {expiresIn:'1h'}
      )
-         return res.status(200).json({Success:`User  ${username} Found!!`,token,userId:user.id,username:username})
+         return res.status(200).json({Success:`Logged-In Successfully !!`,token,userId:user.id,username:username})
     })
 })
 

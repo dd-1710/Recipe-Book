@@ -5,6 +5,7 @@ import { Router} from '@angular/router';
 import {FormsModule} from '@angular/forms'
 import { BookmarkResponse, recipeData } from './showrecipeData';
 import { environment } from '../../environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-show-recipes',
@@ -34,7 +35,7 @@ letterIndex: number = 0;
 
 
 
-constructor(private recipeservice:RecipeService,private router:Router){
+constructor(private recipeservice:RecipeService,private router:Router,private toast:ToastrService){
 
 }
 
@@ -42,36 +43,41 @@ ngOnInit(){
   console.log("Show recipe Comp Initialized");
   this.showRecipes(); 
   this.typeEffect();
+   this.recipeservice.searchTerm$.subscribe(term => {
+    this.applySearchFilter(term);
+  });
 }
 
 typeEffect(){
-  const currentPhrase = this.phrases[this.currentPhraseIndex];
-  if(this.letterIndex < currentPhrase.length){
-    this.placeholder += currentPhrase[this.letterIndex];
+  const phraseItem = this.phrases[this.currentPhraseIndex];
+  if(this.letterIndex < phraseItem.length){
+    this.placeholder += phraseItem[this.letterIndex];
     this.letterIndex++;
-    setTimeout(()=>this.typeEffect,100)
+    setTimeout(()=>this.typeEffect(),100)
   }else{
     setTimeout(()=>this.eraseEffect(),2000)
   }
 
 }
 
-eraseEffect() {
-  if (this.letterIndex > 0) {
-    this.placeholder = this.placeholder.slice(0, -1);
+
+eraseEffect(){
+  if(this.letterIndex>0){
+    this.placeholder = this.placeholder.slice(0,-1);
     this.letterIndex--;
-    setTimeout(() => this.eraseEffect(), 50); // Speed of erasing
-  } else {
-    // Move to next phrase
-    this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
-    setTimeout(() => this.typeEffect(), 500); // Small delay before typing next
+    setTimeout(()=>this.eraseEffect(),50)
+  }else{
+    this.currentPhraseIndex = (this.currentPhraseIndex+1)%this.phrases.length;
+    setTimeout(() => this.typeEffect(), 500);
   }
+  
 }
 
 
 showRecipes(){
   const userId = sessionStorage.getItem('userId');
-  const parsedInt = parseInt(userId?? '0')
+  const parsedInt = parseInt(userId?? '0');
+  const username = sessionStorage.getItem('userName')
   console.log("userID",userId);
   this.recipeservice.recipe$.subscribe((allRecipeResponse:recipeData[])=>{
     this.allRecipeResponse = allRecipeResponse.map(recipe=>new recipeData(recipe));
@@ -80,15 +86,43 @@ showRecipes(){
     if(this.showRecipeByUser){
       console.log("recipes created by user")
       this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.user_id === parsedInt)
+    this.toast.success(
+  `Showing Recipes Added By ${username}`,
+  '',
+  {
+    positionClass: 'toast-top-center', // move to top center
+    timeOut: 3000,
+    closeButton: true,
+    progressBar: true,
+    toastClass: 'ngx-toastr toast-success',
+  }
+);
+
     }else if(this.showFavRecipes){
       console.log("user fav recipes");
       this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked)
     }
     else{
       this.recipesToShow = [...this.allRecipeResponse];
+      this.toast.success('All recipes loaded successfully!');
     }
   })
+ 
 }
+
+
+
+applySearchFilter(term: string) {
+  if (!term.trim()) {
+    this.recipesToShow = [...this.allRecipeResponse];
+  } else {
+    const lowerTerm = term.toLowerCase();
+    this.recipesToShow = this.allRecipeResponse.filter(recipe =>
+      recipe.recipe_name.toLowerCase().includes(lowerTerm)
+    );
+  }
+}
+
 
 
 searchRecipe(e:Event){
@@ -101,6 +135,7 @@ if(!this.searchRecipeName.trim()){
  console.log("filteredRecipe",this.recipesToShow);
 }
 }
+
 
 viewRecipe(id:number){
   this.router.navigate([`recipe/view/${id}`]);
