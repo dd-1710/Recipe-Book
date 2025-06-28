@@ -24,7 +24,11 @@ public searchRecipeName:string='';
 public filteredRecipe:any[] = [];
 public recipesToShow: any[]=[];
 public allRecipeResponse:recipeData[] = []
+public placeholder:string = '';
 isBookmarked = false;
+phrases:string[] = ["Searh For Dosa","Search For Breakfast","Search For Paneer","Search For Lunch","Search For Cake","Search For Snack","Search For Dinner"]
+currentPhraseIndex: number = 0;
+letterIndex: number = 0;
 
 
 
@@ -36,7 +40,32 @@ constructor(private recipeservice:RecipeService,private router:Router){
 
 ngOnInit(){
   console.log("Show recipe Comp Initialized");
-  this.showRecipes();
+  this.showRecipes(); 
+  this.typeEffect();
+}
+
+typeEffect(){
+  const currentPhrase = this.phrases[this.currentPhraseIndex];
+  if(this.letterIndex < currentPhrase.length){
+    this.placeholder += currentPhrase[this.letterIndex];
+    this.letterIndex++;
+    setTimeout(()=>this.typeEffect,100)
+  }else{
+    setTimeout(()=>this.eraseEffect(),2000)
+  }
+
+}
+
+eraseEffect() {
+  if (this.letterIndex > 0) {
+    this.placeholder = this.placeholder.slice(0, -1);
+    this.letterIndex--;
+    setTimeout(() => this.eraseEffect(), 50); // Speed of erasing
+  } else {
+    // Move to next phrase
+    this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
+    setTimeout(() => this.typeEffect(), 500); // Small delay before typing next
+  }
 }
 
 

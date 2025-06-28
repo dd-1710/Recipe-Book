@@ -1,13 +1,12 @@
 <div class="recipe-app">
   <div class="search-bar">
-    <!-- <input
+    <input
         type="text" 
-        placeholder="Search for recipes"
+        [placeholder]="placeholder"
         [(ngModel)]="searchRecipeName"
-        [value]="searchRecipeName"
         (input)="searchRecipe($event)" 
       />
-      <button class="search-button"><i class="fa fa-search"></i></button> -->
+      <button class="search-button"><i class="fa fa-search"></i></button>
   </div>
 
   <div *ngIf="recipesToShow && recipesToShow.length > 0; else noRecipes" [ngClass]="

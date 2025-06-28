@@ -25,9 +25,9 @@ ngOnInit(){
     this.isLoggedIn = status;
   })
   this.username = sessionStorage.getItem('userName') || '';
-  if(this.isLoggedIn == false){
-    this.router.navigate(['/login']);
-  } 
+  // if(this.isLoggedIn == false){
+  //   this.router.navigate(['/login']);
+  // } 
 
 }
 
