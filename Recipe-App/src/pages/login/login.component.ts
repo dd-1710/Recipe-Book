@@ -65,7 +65,7 @@ export class LoginComponent {
         localStorage.setItem('jwtToken',token);
         const userId = res.userId;
         const userName = res.username;
-        console.log("userId",userId);
+        console.log("userId",userId,userName);
         if(userId || userName){
           sessionStorage.setItem("userId",userId);
           sessionStorage.setItem("userName",userName)

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { CommonModule } from '@angular/common';
 import { Router} from '@angular/router';
@@ -42,18 +42,22 @@ constructor(private recipeservice:RecipeService,private router:Router,private to
 
 }
 
-ngOnInit(){
-  console.log("Show recipe Comp Initialized");
+ngOnInit() {
   this.typeEffect();
-   this.recipeservice.searchTerm$.subscribe(term => {
+
+  this.recipeservice.recipe$.subscribe((allRecipeResponse: recipeData[]) => {
+    this.allRecipeResponse = allRecipeResponse.map(recipe => new recipeData(recipe));
+    this.applyRecipeFilters();
+  });
+
+  this.recipeservice.getRecipes().subscribe();
+
+  this.recipeservice.searchTerm$.subscribe(term => {
     this.applySearchFilter(term);
   });
 }
 
-ngAfterViewInit(){
-   this.showRecipes();
- 
-}
+
 
 typeEffect(){
   const phraseItem = this.phrases[this.currentPhraseIndex];
@@ -80,41 +84,7 @@ eraseEffect(){
   
 }
 
-
-showRecipes(){
-  const userId = sessionStorage.getItem('userId');
-  const parsedInt = parseInt(userId?? '0');
-  const username = sessionStorage.getItem('userName')
-  console.log("userID",userId);
-  this.recipeservice.recipe$.pipe(catchError(err=>{
-  this.recipeservice.showErrorToast('Failed to load recipes.');
-    return throwError(() => err);
-
-  })).subscribe((allRecipeResponse:recipeData[])=>{
-    this.allRecipeResponse = allRecipeResponse.map(recipe=>new recipeData(recipe));
-    console.log(this.allRecipeResponse,"ALL Recipe")
-  if (!this.suppressToast) {  
-    if(this.showRecipeByUser){
-      console.log("recipes created by user")
-      this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.user_id === parsedInt)
-      if(this.recipesToShow.length > 0){
-           this.recipeservice.showSuccessToast(`Showing your uploaded recipes!!`);
-      }else{
-        this.recipeservice.showInfoToast(`You haven't added any recipes yet`)
-      }
-    }else if(this.showFavRecipes){
-      console.log("user fav recipes");
-      this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked)
-      console.log("FAVVVVVVV",this.recipesToShow)
-       this.recipeservice.showSuccessToast(`Here are your favorite recipes!!`);
-      
-    }
-    else{
-      this.recipesToShow = [...this.allRecipeResponse];
-      this.recipeservice.showInfoToast('All recipes loaded successfully!');
-    }
-  }})
-}
+ 
 
 applySearchFilter(term: string) {
   if (!term.trim()) {
@@ -126,6 +96,23 @@ applySearchFilter(term: string) {
     );
   }
 }
+
+applyRecipeFilters() {
+  const userId = parseInt(sessionStorage.getItem('userId') ?? '0');
+
+  if (this.showRecipeByUser) {
+    this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.user_id === userId);
+   
+  } else if (this.showFavRecipes) {
+    console.log("FAV RECIPES");
+    this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked);
+    this.recipeservice.showSuccessToast(`Here are your favourite recipes!!`);
+  } else {
+    this.recipesToShow = [...this.allRecipeResponse];
+     this.recipeservice.showInfoToast('All recipes loaded successfully!');
+  }
+}
+
 
 
 
@@ -149,22 +136,21 @@ public isLoading = false;
 
 deleteRecipe(id: number) {
   this.isLoading = true;
-  this.suppressToast = true;
-
   this.recipeservice.delete(id).subscribe({
     next: () => {
-      this.recipeservice.getRecipes(); // emits updated data
-      setTimeout(() => {
-        this.showRecipes(); // wait for observable to emit
+      this.recipeservice.getRecipes().subscribe(() => {
         this.isLoading = false;
-      }, 100); // small delay lets subject emit updated value
+        this.recipeservice.showSuccessToast("Recipe Deleted Successfully!!")
+      });
     },
-    error: (err) => {
+    error: () => {
+      this.toast.clear();
       this.recipeservice.showErrorToast('Failed to delete recipe.');
       this.isLoading = false;
     }
   });
 }
+
 
 
 

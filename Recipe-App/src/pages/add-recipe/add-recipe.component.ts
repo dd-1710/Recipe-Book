@@ -9,6 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
 import { ShowRecipesComponent } from '../show-recipes/show-recipes.component';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-add-recipe',
@@ -117,7 +118,7 @@ export class AddRecipeComponent {
 
     this.service.addNewRecipe(formData).subscribe({
      next:(res)=>{
-       this.service.getRecipes();
+       this.service.getRecipes().subscribe();
       console.log("Recipe Added Successfully",res)
       this.service.showSuccessToast(`Recipe ${this.recipeForm.value.recipeName} Added Successfully`)
      },

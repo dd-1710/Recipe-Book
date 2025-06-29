@@ -20,9 +20,13 @@ export const appConfig: ApplicationConfig = {
     
     // 👇 Toast provider
     provideToastr({
-      positionClass: 'toast-bottom-right',
-      timeOut: 3000,
-      preventDuplicates: true
+      positionClass: 'toast-top-center',
+      timeOut: 2500,
+      preventDuplicates: true,
+      maxOpened: 1,           // Only one toast visible at a time
+      autoDismiss: true,      // Automatically dismiss previous toast
+      closeButton: true,
+      progressBar: true
     }),
   ],
 };

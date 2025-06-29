@@ -1,5 +1,5 @@
 <div class="recipe-app">
- 
+
 
   <div *ngIf="recipesToShow && recipesToShow.length > 0; else noRecipes" [ngClass]="
       showRecipeByUser
@@ -19,7 +19,7 @@
             <i class="fa-solid fa-bookmark" [class.bookmarked]="recipe.is_bookmarked" (click)="addToFav(recipe.id)"></i>
           </div>
           <div *ngIf="showRecipeByUser">
-            <button class="fa fa-trash" (click)="deleteRecipe(recipe.id)"></button>
+            <button class="fa fa-trash" (click)="deleteRecipe(recipe.id)" title="Delete Recipe"></button>
           </div>
         </span>
 
@@ -43,15 +43,15 @@
     </ng-container>
   </div>
   <ng-template #noRecipes>
-     <div *ngIf="recipesToShow.length==0 && recipesToShow" class="empty_list">
+     <div *ngIf="recipesToShow.length==0 && recipesToShow && !showRecipeByUser" class="empty_list">
       <h1 class="no-recipes-message">&nbsp;<span style="font-size: 20px;">Please Wait Fetching Recipes....</span>&nbsp;<i class="fa-solid fa-spinner fa-spin"></i></h1>
     </div>
     <span *ngIf="showRecipeByUser">
-      <h3 class="no-recipes-message_user">
-        It looks like you haven’t added any recipes yet. Start by creating
-        your first recipe and share your culinary creations with the world.
-      </h3>
-    </span>
+  <h3 class="no-recipes-message_user">
+    You haven’t added any recipes yet. Start by sharing your favorite dishes and build your personal recipe collection.
+  </h3>
+</span>
+
   </ng-template>
 
 </div>

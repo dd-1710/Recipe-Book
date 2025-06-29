@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environment';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { query } from '@angular/animations';
 import { recipeData } from '../pages/show-recipes/showrecipeData';
 import { ToastrService } from 'ngx-toastr';
@@ -18,18 +18,23 @@ export class RecipeService {
 
   constructor(private https:HttpClient,private toast:ToastrService) 
   {  
-    this.getRecipes()
+    this.getRecipes().subscribe();
 
   }
  
-  
-getRecipes(){
-  let userId = sessionStorage.getItem('userId')
-  this.https.get<recipeData[]>(environment.apiUrl+`get_recipe/${userId}`).pipe(catchError(err=>{
-    console.error("Error Occurred",err);
-    return throwError(()=>err)
-  })).subscribe((data)=>this.recipeSubject.next(data))
+getRecipes(): Observable<recipeData[]> {
+  const userId = sessionStorage.getItem('userId');
+  return this.https.get<recipeData[]>(`${environment.apiUrl}get_recipe/${userId}`).pipe(
+    catchError(err => {
+      console.error("Error Occurred", err);
+      return throwError(() => err);
+    }),
+    // update the BehaviorSubject once we get data
+    tap(data => this.recipeSubject.next(data))
+  );
 }
+
+
 
 fetchEachRecipeDetail(id:any):Observable<any>{
   return this.https.get(environment.apiUrl+`viewRecipe/${id}`).pipe(catchError(err=>{
