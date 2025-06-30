@@ -1,66 +1,51 @@
 <div style="display: flex;gap:40px">
   <div style="flex: 1;">
     <form [formGroup]="recipeForm" class="recipe_form">
-      <div
-        class="form-row"
-        style="display: flex; align-items: center; gap: 20px"
-      >
-        <div
-          class="inputs-grid"
-          style="
+      <div class="form-row" style="display: flex; align-items: center; gap: 20px">
+        <div class="inputs-grid" style="
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             flex: 1;
             max-width: 600px;
-          "
-        >
+          ">
           <div>
             <label for="recipeName">Recipe Name</label>
-            <input
-              type="text"
-              formControlName="recipeName"
-              placeholder="Enter Recipe Name"
-            />
+            <input type="text" formControlName="recipeName" placeholder="Enter Recipe Name" />
           </div>
           <div>
             <label for="serves">Serves <small>(No.of servings)</small></label>
-            <input
-              type="number"
-              formControlName="serves"
-              placeholder="Serves" min="1"
-            />
+            <input type="number" formControlName="serves" placeholder="Serves" min="1" />
           </div>
           <div>
             <label for="preptime">Prep Time <small>(mins)</small></label>
-            <input
-              type="number"
-              formControlName="preptime"
-              placeholder="Prep Time" min="1"
-            />
+            <input type="number" formControlName="preptime" placeholder="Prep Time" min="1" />
           </div>
           <div>
             <label for="cooktime">Cook Time <small>(mins)</small></label>
-            <input
-              type="number"
-              formControlName="cooktime"
-              placeholder="Cook Time" min="1"
-            />
+            <input type="number" formControlName="cooktime" placeholder="Cook Time" min="1" />
           </div>
+
+          <mat-form-field appearance="fill" class="custom-theme">
+            <mat-label>Select Category</mat-label>
+            <mat-select formControlName="category" [panelClass]="'custom-select-panel'">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+
         </div>
 
         <div class="image_section" style="width: 200px; cursor: pointer">
           <label for="imageUpload" class="upload_box" style="display: block">
             <ng-container *ngIf="previewImg; else placeholder">
               <div class="image_wrapper" style="position: relative">
-                <img
-                  [src]="previewImg"
-                  alt="Uploaded Image"
-                  
-                />
-                <div
-                  class="edit_overlay"
-                  style="
+                <img [src]="previewImg" alt="Uploaded Image" />
+                <div class="edit_overlay" style="
                     position: absolute;
                     bottom: 0;
                     background: rgba(0, 0, 0, 0.5);
@@ -68,96 +53,53 @@
                     width: 100%;
                     text-align: center;
                     padding: 5px 0;
-                  "
-                >
+                  ">
                   Click to Change Image
                 </div>
               </div>
             </ng-container>
             <ng-template #placeholder>
-              <div
-                class="upload_text"
-                style="
+              <div class="upload_text" style="
                   margin: 50px 0px 50px 0px;
                   padding: 40px 10px;
                   text-align: center;
                   border-radius: 8px;
-                "
-              >
+                ">
                 Click Here To Upload Image
               </div>
             </ng-template>
           </label>
-          <input
-            type="file"
-            id="imageUpload"
-            hidden
-            (change)="onImageSelected($event)"
-            formControlName="image"
-          />
+          <input type="file" id="imageUpload" hidden (change)="onImageSelected($event)" formControlName="image" />
         </div>
       </div>
       <div class="form-row">
         <div class="add_desc" style="flex: 1 1 100%">
           <label for="description">Description</label>
-          <textarea
-            formControlName="description"
-            placeholder="Enter Recipe Description"
-          ></textarea>
+          <textarea formControlName="description" placeholder="Enter Recipe Description"></textarea>
         </div>
       </div>
 
       <div class="ingredient1">
         <div class="add_ingredients" formArrayName="ingredients">
           <label>Ingredients</label>
-          <div
-            *ngFor="let list of ingredient.controls; let i = index"
-            [formGroupName]="i"
-            class="ingredient_input"
-          >
-            <input
-              type="text"
-              placeholder="Enter Ingredient"
-              formControlName="input"
-            />
+          <div *ngFor="let list of ingredient.controls; let i = index" [formGroupName]="i" class="ingredient_input">
+            <input type="text" placeholder="Enter Ingredient" formControlName="input" />
             <span [class.disabled]="!list.get('input')?.value">
-              <i
-                *ngIf="ingredient?.length && i === ingredient.length - 1"
-                class="fa-solid fa-plus"
-                (click)="addInput('ingredient')"
-              ></i>
-              <i
-                *ngIf="ingredient.length > 1"
-                class="fa-solid fa-minus"
-                (click)="deleteInput(i, 'ingredient')"
-              ></i>
+              <i *ngIf="ingredient?.length && i === ingredient.length - 1" class="fa-solid fa-plus"
+                (click)="addInput('ingredient')"></i>
+              <i *ngIf="ingredient.length > 1" class="fa-solid fa-minus" (click)="deleteInput(i, 'ingredient')"></i>
             </span>
           </div>
         </div>
 
         <div class="add_procedure" formArrayName="procedure">
           <label>Procedure</label>
-          <div
-            *ngFor="let list of procedure.controls; let i = index"
-            [formGroupName]="i"
-            class="procedure_input"
-          >
-            <input
-              type="text"
-              placeholder="Enter Procedure"
-              formControlName="input"
-            />
+          <div *ngFor="let list of procedure.controls; let i = index" [formGroupName]="i" class="procedure_input">
+            <input type="text" placeholder="Enter Procedure" formControlName="input" />
             <span [class.disabled]="!list.get('input')?.value">
-              <i
-                *ngIf="procedure?.length && i === procedure.length - 1"
-                class="fa-solid fa-plus"
-                (click)="addInput('procedure')"
-              ></i>
-              <i
-                *ngIf="procedure.length > 1"
-                class="fa-solid fa-minus"
-                (click)="deleteInput(i, 'procedure')"
-              ></i>
+              <i *ngIf="procedure?.length && i === procedure.length - 1" class="fa-solid fa-plus"
+                (click)="addInput('procedure')"></i>
+              <i *ngIf="procedure.length > 1" class="fa-solid fa-minus" (click)="deleteInput(i, 'procedure')"></i>
             </span>
           </div>
         </div>
@@ -170,14 +112,14 @@
       </div>
     </form>
   </div>
-  <div  class="new_recipe">
-  <!-- <div class="added_recipes">
+  <div class="new_recipe">
+    <!-- <div class="added_recipes">
     <p id="msg">Your Added Recipes Will be Shown Here!!</p>
   </div> -->
-  <div style="overflow: auto;">
-    
-    <app-show-recipes [showRecipeByUser] = "true"></app-show-recipes>
+    <div style="overflow: auto;">
+
+      <app-show-recipes [showRecipeByUser]="true"></app-show-recipes>
+    </div>
   </div>
-</div>
 
 </div>

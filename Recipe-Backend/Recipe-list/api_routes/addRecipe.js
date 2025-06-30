@@ -21,7 +21,8 @@ router.post("/add_recipe", verifyToken, upload.single("image"), (req, res) => {
     cookingtime,
     ingredients,
     procedure,
-    serves
+    serves,
+    category
   } = req.body;
 
   const imgname = req.file ? req.file.originalname : null;
@@ -34,7 +35,8 @@ router.post("/add_recipe", verifyToken, upload.single("image"), (req, res) => {
     !cookingtime ||
     !ingredients ||
     !procedure ||
-    !serves
+    !serves ||
+    !category
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -51,9 +53,9 @@ router.post("/add_recipe", verifyToken, upload.single("image"), (req, res) => {
       return res.status(409).json({ message: "Recipe name already exists, please try with another name!" });
     } else {
       const recipeSql = `
-        INSERT INTO recipe_list (recipe_name, recipe_desc, img_path, user_id)
-        VALUES (?, ?, ?, ?)`;
-      const recipeValues = [recipename, recipedesc, imgname, user_Id];
+        INSERT INTO recipe_list (recipe_name, recipe_desc, img_path, user_id,category)
+        VALUES (?, ?, ?, ?,?)`;
+      const recipeValues = [recipename, recipedesc, imgname, user_Id,category];
 
       db.query(recipeSql, recipeValues, (err, result) => {
         if (err) {

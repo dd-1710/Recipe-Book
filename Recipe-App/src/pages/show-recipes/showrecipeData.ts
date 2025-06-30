@@ -6,6 +6,7 @@ export interface recipeJson{
     user_id:number;
     is_bookmarked:string;
     rating:number;
+    category:string;
   
 }
 
@@ -21,6 +22,7 @@ export class recipeData{
     user_id = 0;
     is_bookmarked = '';
     rating = 1;
+    category:string = '';
 
     constructor(json?:recipeJson){
       if(json != null){
@@ -31,6 +33,7 @@ export class recipeData{
         this.user_id = json.user_id;
         this.is_bookmarked = json.is_bookmarked;
         this.rating = json.rating;
+        this.category = json.category;
       }
     }
 }

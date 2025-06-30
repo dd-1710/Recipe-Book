@@ -10,11 +10,15 @@ import { CommonModule } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
 import { ShowRecipesComponent } from '../show-recipes/show-recipes.component';
 import { timeout } from 'rxjs';
+import { MatFormField } from '@angular/material/form-field';
+import { MatLabel } from '@angular/material/form-field';
+import{MatSelectModule} from '@angular/material/select'
+
 
 @Component({
   selector: 'app-add-recipe',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,ShowRecipesComponent],
+  imports: [CommonModule, ReactiveFormsModule,ShowRecipesComponent,MatFormField,MatLabel,MatSelectModule],
   templateUrl: './add-recipe.component.html',
   styleUrl: './add-recipe.component.scss',
 })
@@ -26,6 +30,8 @@ export class AddRecipeComponent {
   previewImg: string | null = null;
   selectedFile: File | null = null;
   userRecipes: any;
+  public categories:any[] = ["Breakfast","Lunch","Snacks","Beverages","Juices","Smoothies","Dinner"]
+  public selectCategoryChip:string='';
 
 
   constructor(private FormBuidler: FormBuilder,private service:RecipeService) {}
@@ -35,13 +41,14 @@ export class AddRecipeComponent {
       recipeName: ['', Validators.required],
       description: ['', Validators.required],
       ingredients: this.FormBuidler.array(
-        Array.from({ length: 3 }, () => this.createInput())
+        Array.from({ length: 1 }, () => this.createInput())
       ),
-      procedure: this.FormBuidler.array(Array.from({length:3},()=>this.createInput())),
+      procedure: this.FormBuidler.array(Array.from({length:1},()=>this.createInput())),
       preptime : ['',Validators.required],
       cooktime: ['',Validators.required],
       serves: ['',Validators.required],
-      image: [null,Validators.required]
+      image: [null,Validators.required],
+      category:['',Validators.required]
     });
     console.log(this.ingredient.length);
   }
@@ -97,37 +104,48 @@ export class AddRecipeComponent {
   }
 
 
-
-  addRecipe(){
-    const formData = new FormData()
-    const ingredient = this.recipeForm.value.ingredients.map((item:any)=>item.input)
-    const procedureSteps = this.recipeForm.value.procedure.map((item:any)=>item.input);
-    console.log("ING",ingredient)
-    console.log("STEPS",procedureSteps);
-    formData.append("recipename",this.recipeForm.value.recipeName);
-    formData.append("recipedesc",this.recipeForm.value.description);
-    formData.append("cookingtime",this.recipeForm.value.cooktime+' '+'mins');
-    formData.append("preptime",this.recipeForm.value.preptime+' '+'mins');
-    formData.append("serves",this.recipeForm.value.serves+' '+'servings');
-    formData.append("procedure",procedureSteps.join('\n'));
-    formData.append("ingredients",ingredient.join(','));
-    if(this.selectedFile){
-      formData.append("image", this.selectedFile, this.selectedFile.name)
-    }
-    
-
-    this.service.addNewRecipe(formData).subscribe({
-     next:(res)=>{
-       this.service.getRecipes().subscribe();
-      console.log("Recipe Added Successfully",res)
-      this.service.showSuccessToast(`Recipe ${this.recipeForm.value.recipeName} Added Successfully`)
-     },
-     error:(err)=>{
-     console.error('Failed to add recipe:', err);
-     this.service.showErrorToast(`${err.error.message}`);
-     }
-     
-    })
+addRecipe() {
+ 
+  if (!this.recipeForm.valid) {
+    this.service.showErrorToast('Please fill all the required fields.');
+    return; 
   }
+
+  const formData = new FormData();
+  const ingredient = this.recipeForm.value.ingredients?.map((item: any) => item.input) || [];
+  const procedureSteps = this.recipeForm.value.procedure?.map((item: any) => item.input) || [];
+
+  console.log("INGREDIENTS:", ingredient);
+  console.log("STEPS:", procedureSteps);
+
+  formData.append("recipename", this.recipeForm.value.recipeName);
+  formData.append("category", this.recipeForm.value.category);
+  formData.append("recipedesc", this.recipeForm.value.description);
+  formData.append("cookingtime", this.recipeForm.value.cooktime + ' mins');
+  formData.append("preptime", this.recipeForm.value.preptime + ' mins');
+  formData.append("serves", this.recipeForm.value.serves + ' servings');
+  formData.append("procedure", procedureSteps.join('\n'));
+  formData.append("ingredients", ingredient.join(','));
+
+  if (this.selectedFile) {
+    formData.append("image", this.selectedFile, this.selectedFile.name); 
+  }
+
+  this.service.addNewRecipe(formData).subscribe({
+    next: (res) => {
+      this.service.getRecipes().subscribe();
+      console.log("Recipe Added Successfully", res);
+      this.service.showSuccessToast(`Recipe ${this.recipeForm.value.recipeName} Added Successfully`);
+      
+     
+      this.recipeForm.reset(); 
+    },
+    error: (err) => {
+      console.error('Failed to add recipe:', err);
+      this.service.showErrorToast(`${err.error.message}`);
+    }
+  });
+}
+
   
 }

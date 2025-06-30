@@ -1,6 +1,11 @@
 <div class="recipe-app">
 
-
+  <div class="recipe_categories">
+    <mat-chip-listbox aria-label="Category Selection"  class="custom-chip" [multiple]="false">
+      <mat-chip-option *ngFor="let chip of category" [selected]="selectedCategory === chip" (selectionChange)="onCategorySelect(chip,$event)" >{{chip}}</mat-chip-option>
+    </mat-chip-listbox>
+ 
+  </div>
   <div *ngIf="recipesToShow && recipesToShow.length > 0; else noRecipes" [ngClass]="
       showRecipeByUser
         ? 'recipe-cards-container_user'
@@ -32,7 +37,7 @@
               <i class="fa fa-star" *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{
                 'rated': star <= recipe.rating,
                'not_rated': star > recipe.rating 
-              }"(click) = "rateRecipe(recipe, star)" ></i>
+              }" (click)="rateRecipe(recipe, star)"></i>
             </div>
             <button class="recipe-button" (click)="viewRecipe(recipe.id)">
               View Recipe
@@ -43,14 +48,20 @@
     </ng-container>
   </div>
   <ng-template #noRecipes>
-     <div *ngIf="recipesToShow.length==0 && recipesToShow && !showRecipeByUser" class="empty_list">
-      <h1 class="no-recipes-message">&nbsp;<span style="font-size: 20px;">Please Wait Fetching Recipes....</span>&nbsp;<i class="fa-solid fa-spinner fa-spin"></i></h1>
+    <div *ngIf="recipesToShow.length==0 && recipesToShow && !showRecipeByUser && !selectedCategory" class="empty_list">
+      <h1 class="no-recipes-message">&nbsp;<span style="font-size: 20px;">Please Wait Fetching
+          Recipes....</span>&nbsp;<i class="fa-solid fa-spinner fa-spin"></i></h1>
     </div>
+    <div *ngIf="recipesToShow.length === 0 && selectedCategory" class="empty_list">
+       <h1 class="no-recipes-message">No recipes found for category {{selectedCategory}}.</h1>
+    </div>
+
     <span *ngIf="showRecipeByUser">
-  <h3 class="no-recipes-message_user">
-    You haven’t added any recipes yet. Start by sharing your favorite dishes and build your personal recipe collection.
-  </h3>
-</span>
+      <h3 class="no-recipes-message_user">
+        You haven’t added any recipes yet. Start by sharing your favorite dishes and build your personal recipe
+        collection.
+      </h3>
+    </span>
 
   </ng-template>
 

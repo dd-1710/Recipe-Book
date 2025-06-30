@@ -209,8 +209,11 @@
   text-align: center;
 }
 
-
-
+.recipe_categories{
+  display: inline-flex;
+  gap:20px;
+  padding: 10px;
+}
 
 .recipe-button {
   background-color: black;

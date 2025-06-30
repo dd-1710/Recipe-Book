@@ -7,12 +7,14 @@ import { BookmarkResponse, recipeData } from './showrecipeData';
 import { environment } from '../../environment';
 import { ToastrService } from 'ngx-toastr';
 import { AfterViewInit } from '@angular/core';
-import { catchError, of, throwError } from 'rxjs';
+import { catchError, of, Subscription, throwError } from 'rxjs';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @Component({
   selector: 'app-show-recipes',
   standalone: true,
-  imports: [CommonModule,FormsModule ],
+  imports: [CommonModule,FormsModule,MatChipsModule],
   templateUrl: './show-recipes.component.html',
   styleUrl: './show-recipes.component.scss'
 })
@@ -33,6 +35,9 @@ phrases:string[] = ["Searh For Dosa","Search For Breakfast","Search For Paneer",
 currentPhraseIndex: number = 0;
 letterIndex: number = 0;
 suppressToast = false;
+public category:string[] = ["Breakfast","Lunch","Snacks","Juices","Smoothies","Beverages","Dinner"];
+public selectedCategory:string='';
+public recipeSubscription :  Subscription | null = null;
 
 
 
@@ -57,6 +62,21 @@ ngOnInit() {
   });
 }
 
+ngOnDestroy(){
+  if(this.recipeSubscription){
+    this.recipeSubscription.unsubscribe();
+  }
+}
+
+onCategorySelect(category:string,event:any){
+  if(event.selected){
+    this.selectedCategory = category;
+    this.applyRecipeFilters(category)
+  }else{
+    this.selectedCategory = '';
+    this.applyRecipeFilters();
+  }
+}
 
 
 typeEffect(){
@@ -97,9 +117,11 @@ applySearchFilter(term: string) {
   }
 }
 
-applyRecipeFilters() {
+applyRecipeFilters(category?:string) {
   const userId = parseInt(sessionStorage.getItem('userId') ?? '0');
-
+   if(this.recipeSubscription){
+    this.recipeSubscription.unsubscribe();
+  }
   if (this.showRecipeByUser) {
     this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.user_id === userId);
    
@@ -107,7 +129,13 @@ applyRecipeFilters() {
     console.log("FAV RECIPES");
     this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked);
     this.recipeservice.showSuccessToast(`Here are your favourite recipes!!`);
-  } else {
+  }else if(this.selectedCategory){
+   this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.category === this.selectedCategory);
+   if(this.recipesToShow.length == 0){
+    this.recipeservice.showInfoToast('No recipes found for selected category')
+   }
+  }
+   else {
     this.recipesToShow = [...this.allRecipeResponse];
      this.recipeservice.showInfoToast('All recipes loaded successfully!');
   }
