@@ -7,6 +7,12 @@ export interface recipeJson{
     is_bookmarked:string;
     rating:number;
     category:string;
+    preparation_time:string;
+    cooking_time:string;
+    serve:string;
+    ingredients:string;
+    recipe_procedure:string;
+
   
 }
 
@@ -23,6 +29,12 @@ export class recipeData{
     is_bookmarked = '';
     rating = 1;
     category:string = '';
+    preparation_time:string = '' ;
+    cooking_time:string= '';
+    serve:string = '';
+    ingredients:string = '';
+    recipe_procedure:string = ''
+
 
     constructor(json?:recipeJson){
       if(json != null){
@@ -34,6 +46,11 @@ export class recipeData{
         this.is_bookmarked = json.is_bookmarked;
         this.rating = json.rating;
         this.category = json.category;
+        this.preparation_time = json.preparation_time;
+        this.cooking_time = json.cooking_time;
+        this.serve = json.serve;
+        this.recipe_procedure = json.recipe_procedure;
+        this.ingredients = json.ingredients;
       }
     }
 }

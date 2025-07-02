@@ -1,5 +1,5 @@
 <div class="recipe-app">
-
+<h1>PENDING: EDIT ADDED RECIPE,FIX MATERIAL STYLING WRITE EDIT API</h1>
   <div class="recipe_categories">
     <mat-chip-listbox aria-label="Category Selection"  class="custom-chip" [multiple]="false">
       <mat-chip-option *ngFor="let chip of category" [selected]="selectedCategory === chip" (selectionChange)="onCategorySelect(chip,$event)" >{{chip}}</mat-chip-option>
@@ -25,6 +25,7 @@
           </div>
           <div *ngIf="showRecipeByUser">
             <button class="fa fa-trash" (click)="deleteRecipe(recipe.id)" title="Delete Recipe"></button>
+            <button class="fa fa-edit" (click)="editRecipe(recipe)" title="Edit Recipe"></button>
           </div>
         </span>
 
@@ -52,9 +53,15 @@
       <h1 class="no-recipes-message">&nbsp;<span style="font-size: 20px;">Please Wait Fetching
           Recipes....</span>&nbsp;<i class="fa-solid fa-spinner fa-spin"></i></h1>
     </div>
-    <div *ngIf="recipesToShow.length === 0 && selectedCategory" class="empty_list">
-       <h1 class="no-recipes-message">No recipes found for category {{selectedCategory}}.</h1>
-    </div>
+    <ng-container *ngIf="selectedCategory">
+  <div *ngIf="recipesToShow.length > 0" class="empty_list">
+    <h1 class="no-recipes-message">Here is the list for {{selectedCategory}}:</h1>
+  </div>
+  <div *ngIf="recipesToShow.length === 0" class="empty_list">
+    <h1 class="no-recipes-message">No recipes found for category {{selectedCategory}}.</h1>
+  </div>
+</ng-container>
+
 
     <span *ngIf="showRecipeByUser">
       <h3 class="no-recipes-message_user">

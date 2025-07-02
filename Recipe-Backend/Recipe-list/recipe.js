@@ -12,6 +12,7 @@ const deleteRecipe = require("../Recipe-list/api_routes/deleteRecipe");
 const registerUser = require("../Recipe-list/api_routes/registerUser");
 const loginUser = require('../Recipe-list/api_routes/login');
 const favRecipe = require('../Recipe-list/api_routes/favRecipe');
+const editRecipe = require('../Recipe-list/api_routes/updateRecipe');
 
 const app = express();
 const port = 4100;
@@ -27,7 +28,8 @@ app.use("/api", addRecipeRoute);
 app.use("/api", deleteRecipe);
 app.use("/api", registerUser);
 app.use("/api", loginUser);
-app.use("/api",favRecipe)
+app.use("/api",favRecipe);
+app.use("/api",editRecipe)
 
 
 app.listen(port, () => {

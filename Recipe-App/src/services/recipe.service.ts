@@ -16,11 +16,19 @@ export class RecipeService {
   private searchTermSubject = new BehaviorSubject<string>('');
   searchTerm$ = this.searchTermSubject.asObservable();
 
+  private editRecipeSubject = new BehaviorSubject<recipeData | null>(null);
+  editRecipe$ = this.editRecipeSubject.asObservable();
+
   constructor(private https:HttpClient,private toast:ToastrService) 
   {  
     this.getRecipes().subscribe();
 
   }
+
+  setRecipeToEdit(recipe: recipeData) {
+    this.editRecipeSubject.next(recipe);
+  }
+
  
 getRecipes(): Observable<recipeData[]> {
   const userId = sessionStorage.getItem('userId');
@@ -125,6 +133,9 @@ toastErrorOptions() {
 }
 
 
+updateRecipe(recipeId: number, formData: FormData) {
+  return this.https.put(`${environment.apiUrl}edit_recipe/${recipeId}`, formData);
+}
 
 
 

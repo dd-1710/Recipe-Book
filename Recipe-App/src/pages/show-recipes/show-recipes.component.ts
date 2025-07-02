@@ -38,6 +38,7 @@ suppressToast = false;
 public category:string[] = ["Breakfast","Lunch","Snacks","Juices","Smoothies","Beverages","Dinner"];
 public selectedCategory:string='';
 public recipeSubscription :  Subscription | null = null;
+  editingRecipeId: number = 0;
 
 
 
@@ -137,6 +138,7 @@ applyRecipeFilters(category?:string) {
   }
    else {
     this.recipesToShow = [...this.allRecipeResponse];
+    console.log("SHOW",this.recipesToShow)
      this.recipeservice.showInfoToast('All recipes loaded successfully!');
   }
 }
@@ -179,6 +181,11 @@ deleteRecipe(id: number) {
   });
 }
 
+
+editRecipe(recipe:recipeData){
+ this.recipeservice.setRecipeToEdit(recipe);
+ this.editingRecipeId = recipe.id
+}
 
 
 

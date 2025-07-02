@@ -106,9 +106,13 @@
       </div>
 
       <div class="save1">
-        <button type="button" class="save_recipe" (click)="addRecipe()" [disabled]="recipeForm.invalid" [ngClass]="recipeForm.invalid?'disabled':'not_disabled'">
+        <!-- <button type="button" class="save_recipe" (click)="addRecipe()" [disabled]="recipeForm.invalid" [ngClass]="recipeForm.invalid?'disabled':'not_disabled'">
           Save Recipe
-        </button>
+        </button> -->
+        <button type="button" class="save_recipe" (click)="editRecipe ? updateRecipe() : addRecipe()">
+  {{ editRecipe ? 'Update Recipe' : 'Save Recipe' }}
+</button>
+
       </div>
     </form>
   </div>

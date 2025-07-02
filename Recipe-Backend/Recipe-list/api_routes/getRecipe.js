@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db"); 
-
+const db = require("../db");
 
 router.get("/get_recipe/:userId", (req, res) => {
   const userId = req.params.userId;
+
   const sql = `
     SELECT 
       r.*, 
+      rw.preparation_time,
+      rw.cooking_time,
+      rw.recipe_procedure,
+      rw.ingredients,
+      rw.serve,
       CASE 
         WHEN ub.user_id IS NOT NULL THEN 1 
         ELSE 0 
@@ -15,9 +20,11 @@ router.get("/get_recipe/:userId", (req, res) => {
     FROM recipe_list r
     LEFT JOIN user_bookmarks ub 
       ON r.id = ub.recipe_id AND ub.user_id = ?
+    LEFT JOIN recipe_process rw
+      ON r.id = rw.recipe_id
   `;
 
-  db.query(sql,[userId],(err, result) => {
+  db.query(sql, [userId], (err, result) => {
     if (err) {
       console.error("Error fetching recipes:", err);
       return res.status(500).send("Error while fetching recipe data");
@@ -27,4 +34,4 @@ router.get("/get_recipe/:userId", (req, res) => {
   });
 });
 
-module.exports = router;      
+module.exports = router;
