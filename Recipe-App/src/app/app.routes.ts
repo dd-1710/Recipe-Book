@@ -4,7 +4,7 @@ import { authGuard } from '../guard/auth.guard';
 export const routes: Routes = [
 
     {
-        path:'',redirectTo:'recipe',pathMatch:'full'
+        path:'',redirectTo:'login',pathMatch:'full'
     },
     {
       path:'login',loadComponent:()=>import('../pages/login/login.component').then(m=>m.LoginComponent)

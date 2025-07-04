@@ -1,4 +1,4 @@
 export const environment: any = {
-    apiUrl : 'http://localhost:4100/api/',
-    imgUrl : "http://localhost:4200/assets/images/",
-}
+  apiUrl: 'https://dd-production-5ad4.up.railway.app/api/',
+  imgUrl: window.location.origin + '/assets/images/'
+};
