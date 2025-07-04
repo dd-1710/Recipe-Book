@@ -15,7 +15,7 @@ const favRecipe = require('../Recipe-list/api_routes/favRecipe');
 const editRecipe = require('../Recipe-list/api_routes/updateRecipe');
 
 const app = express();
-const port = 4100;
+const port = process.env.Port || 4100;
 
 app.use(express.json());
 app.use(cors());

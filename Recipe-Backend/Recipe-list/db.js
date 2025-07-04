@@ -1,11 +1,22 @@
+require('dotenv').config
 const mysql = require("mysql2");
+const url = require('url');
+
+const dbUrl = process.env.DATABASE_URL;
+const params = url.parse(dbUrl);
+const [user,password] = params.auth.split(':');
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "recipe_book",
-});
+  host: params.hostname,
+  port: params.port,
+  user: user,
+  password: password,
+  database: params.pathname.replace('/', ''),
+
+})
+
+console.log("DB",db)
+
 
 db.connect((err) => {
   if (err) {
