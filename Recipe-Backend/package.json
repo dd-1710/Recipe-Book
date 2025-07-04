@@ -2,9 +2,9 @@
   "name": "recipe-backend",
   "version": "1.0.0",
   "description": "",
-  "start": "node Recipe-list/recipe.js",
   "main": "Recipe-list/recipe.js",
   "scripts": {
+    "start": "node Recipe-list/recipe.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
