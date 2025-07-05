@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build --configuration production",
-    "start": "serve -s dist/my-app/browser -l 0.0.0.0:$PORT",
+    "start": "serve -s dist/my-app/browser -l $PORT",
     "start:dev": "ng serve",
     "test": "ng test"
   },
