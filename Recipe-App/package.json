@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build --configuration production",
-    "build:watch": "ng build --watch --configuration development",
+    "start": "serve -s dist/recipe-app -l $PORT",
+    "start:dev": "ng serve",
     "test": "ng test"
   },
   "private": true,
