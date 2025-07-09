@@ -112,7 +112,7 @@ showInfoToast(message: string) {
 toastOptions() {
   return {
     positionClass: 'toast-top-center',
-    timeOut: 2500,
+    timeOut: 1000,
     closeButton: true,
     progressBar: true,
     toastClass: 'ngx-toastr toast-success custom-toast'
@@ -125,7 +125,7 @@ showErrorToast(message: string) {
 toastErrorOptions() {
   return {
     positionClass: 'toast-top-center',
-    timeOut: 3000,
+    timeOut: 1000,
     closeButton: true,
     progressBar: true,
     toastClass: 'ngx-toastr toast-error custom-toast'

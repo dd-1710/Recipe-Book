@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     // 👇 Toast provider
     provideToastr({
       positionClass: 'toast-top-center',
-      timeOut: 2500,
+      timeOut: 200,
       preventDuplicates: true,
       maxOpened: 1,           // Only one toast visible at a time
       autoDismiss: true,      // Automatically dismiss previous toast

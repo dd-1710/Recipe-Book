@@ -6,6 +6,7 @@ const dbUrl = process.env.DATABASE_URL;
 const params = url.parse(dbUrl);
 const [user,password] = params.auth.split(':');
 
+
 const db = mysql.createConnection({
   host: params.hostname,
   port: params.port,

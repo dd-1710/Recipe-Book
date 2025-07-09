@@ -19,7 +19,7 @@ public isLoggedIn:boolean = false;
   menuOpen = false;
 
 public placeholder:string = '';
-phrases:string[] = ["Searh For Dosa","Search For Breakfast","Search For Paneer","Search For Lunch","Search For Cake","Search For Snack","Search For Dinner"]
+phrases:string[] = ["Searh For Dosa","Search For Cake","Search For Paneer","Search For Soup","Search For Noodles"]
 currentPhraseIndex: number = 0;
 letterIndex: number = 0;
 public filteredRecipe:any[] = [];

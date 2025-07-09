@@ -40,8 +40,8 @@
 
         </div>
 
-        <div class="image_section" style="width: 200px; cursor: pointer">
-          <label for="imageUpload" class="upload_box" style="display: block">
+        <div class="image_section" style="cursor: pointer;margin-left:160px">
+          <label for="imageUpload" class="upload_box" style="display: block;min-height: 400px;">
             <ng-container *ngIf="previewImg; else placeholder">
               <div class="image_wrapper" style="position: relative">
                 <img [src]="previewImg" alt="Uploaded Image" />
@@ -60,7 +60,7 @@
             </ng-container>
             <ng-template #placeholder>
               <div class="upload_text" style="
-                  margin: 50px 0px 50px 0px;
+                  margin: 100px 0px 100px 0px;
                   padding: 40px 10px;
                   text-align: center;
                   border-radius: 8px;

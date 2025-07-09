@@ -57,9 +57,9 @@ export class LoginComponent {
       next:(res)=>{
         this.successMg = res.Success;
         this.erroMsg = ''
-        setTimeout(()=>{
+        if(res.Success){
           this.router.navigate(['/recipe']);
-        },500);
+        }
         this.auth.login();
         let token = res.token;
         localStorage.setItem('jwtToken',token);

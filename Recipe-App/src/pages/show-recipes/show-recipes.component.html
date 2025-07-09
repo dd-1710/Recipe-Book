@@ -1,5 +1,9 @@
-<div class="recipe-app">
-<!-- <h1>PENDING: EDIT ADDED RECIPE,FIX MATERIAL STYLING WRITE EDIT API</h1> -->
+<div [ngClass]="
+      showRecipeByUser
+        ? 'recipe-app-user'
+        : 'recipe-app'
+    ">
+<h1>SHOW CHIPS FOR FAV AND ADD RECIPE AND ADD ROUTES ON THE HEADERS, RECIPE,FAV,ADD RECIPE</h1>
   <div class="recipe_categories">
     <mat-chip-listbox aria-label="Category Selection"  class="custom-chip" [multiple]="false">
       <mat-chip-option *ngFor="let chip of category" [selected]="selectedCategory === chip" (selectionChange)="onCategorySelect(chip,$event)" >{{chip}}</mat-chip-option>
@@ -53,7 +57,7 @@
       <h1 class="no-recipes-message">&nbsp;<span style="font-size: 20px;">Please Wait Fetching
           Recipes....</span>&nbsp;<i class="fa-solid fa-spinner fa-spin"></i></h1>
     </div>
-    <ng-container *ngIf="selectedCategory">
+    <ng-container *ngIf="selectedCategory || showRecipeByUser">
   <div *ngIf="recipesToShow.length > 0" class="empty_list">
     <h1 class="no-recipes-message">Here is the list for {{selectedCategory}}:</h1>
   </div>

@@ -31,7 +31,7 @@ public recipesToShow: any[]=[];
 public allRecipeResponse:recipeData[] = []
 public placeholder:string = '';
 isBookmarked = false;
-phrases:string[] = ["Searh For Dosa","Search For Breakfast","Search For Paneer","Search For Lunch","Search For Cake","Search For Snack","Search For Dinner"]
+//phrases:string[] = ["Searh For Dosa","Search For Breakfast","Search For Paneer","Search For Lunch","Search For Cake","Search For Snack","Search For Dinner"]
 currentPhraseIndex: number = 0;
 letterIndex: number = 0;
 suppressToast = false;
@@ -49,7 +49,7 @@ constructor(private recipeservice:RecipeService,private router:Router,private to
 }
 
 ngOnInit() {
-  this.typeEffect();
+  //this.typeEffect();
 
   this.recipeservice.recipe$.subscribe((allRecipeResponse: recipeData[]) => {
     this.allRecipeResponse = allRecipeResponse.map(recipe => new recipeData(recipe));
@@ -70,6 +70,7 @@ ngOnDestroy(){
 }
 
 onCategorySelect(category:string,event:any){
+  console.log("clicked on chip")
   if(event.selected){
     this.selectedCategory = category;
     this.applyRecipeFilters(category)
@@ -80,30 +81,30 @@ onCategorySelect(category:string,event:any){
 }
 
 
-typeEffect(){
-  const phraseItem = this.phrases[this.currentPhraseIndex];
-  if(this.letterIndex < phraseItem.length){
-    this.placeholder += phraseItem[this.letterIndex];
-    this.letterIndex++;
-    setTimeout(()=>this.typeEffect(),100)
-  }else{
-    setTimeout(()=>this.eraseEffect(),2000)
-  }
+// typeEffect(){
+//   const phraseItem = this.phrases[this.currentPhraseIndex];
+//   if(this.letterIndex < phraseItem.length){
+//     this.placeholder += phraseItem[this.letterIndex];
+//     this.letterIndex++;
+//     setTimeout(()=>this.typeEffect(),100)
+//   }else{
+//     setTimeout(()=>this.eraseEffect(),2000)
+//   }
 
-}
+// }
 
 
-eraseEffect(){
-  if(this.letterIndex>0){
-    this.placeholder = this.placeholder.slice(0,-1);
-    this.letterIndex--;
-    setTimeout(()=>this.eraseEffect(),50)
-  }else{
-    this.currentPhraseIndex = (this.currentPhraseIndex+1)%this.phrases.length;
-    setTimeout(() => this.typeEffect(), 500);
-  }
+// eraseEffect(){
+//   if(this.letterIndex>0){
+//     this.placeholder = this.placeholder.slice(0,-1);
+//     this.letterIndex--;
+//     setTimeout(()=>this.eraseEffect(),50)
+//   }else{
+//     this.currentPhraseIndex = (this.currentPhraseIndex+1)%this.phrases.length;
+//     setTimeout(() => this.typeEffect(), 500);
+//   }
   
-}
+// }
 
  
 
