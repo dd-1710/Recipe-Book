@@ -3,7 +3,7 @@
         ? 'recipe-app-user'
         : 'recipe-app'
     ">
-<h1>SHOW CHIPS FOR FAV AND ADD RECIPE AND ADD ROUTES ON THE HEADERS, RECIPE,FAV,ADD RECIPE</h1>
+<h1>IMLEMENT CUSTOM THEME FOR MATERIAL</h1>
   <div class="recipe_categories">
     <mat-chip-listbox aria-label="Category Selection"  class="custom-chip" [multiple]="false">
       <mat-chip-option *ngFor="let chip of category" [selected]="selectedCategory === chip" (selectionChange)="onCategorySelect(chip,$event)" >{{chip}}</mat-chip-option>
@@ -61,13 +61,13 @@
   <div *ngIf="recipesToShow.length > 0" class="empty_list">
     <h1 class="no-recipes-message">Here is the list for {{selectedCategory}}:</h1>
   </div>
-  <div *ngIf="recipesToShow.length === 0" class="empty_list">
+  <div *ngIf="recipesToShow.length === 0 && !showRecipeByUser" class="empty_list">
     <h1 class="no-recipes-message">No recipes found for category {{selectedCategory}}.</h1>
   </div>
 </ng-container>
 
 
-    <span *ngIf="showRecipeByUser">
+    <span *ngIf="showRecipeByUser" style="padding: 30px;">
       <h3 class="no-recipes-message_user">
         You haven’t added any recipes yet. Start by sharing your favorite dishes and build your personal recipe
         collection.

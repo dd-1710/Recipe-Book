@@ -14,6 +14,11 @@
 </div>
 
   <div class="header-right" *ngIf="isLoggedIn">
+     <a routerLink="/recipe">SHOW RECIPES</a>
+  <span>|</span>
+  <a routerLink="/favourite">MY FAV</a>
+  <span>|</span>
+  <a routerLink="/add-recipe">ADD RECIPE</a>
     <div class="user_wrapper" (mouseleave)="menuOpen=false">
       <div class="user-avatar" (click)="toggleMenu()">
         {{ username.charAt(0) | uppercase }}

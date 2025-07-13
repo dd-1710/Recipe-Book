@@ -102,7 +102,7 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background-color: white;
+  background-color: black;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -119,9 +119,31 @@
 .user-menu a {
   padding: 10px 16px;
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .user-menu a:hover {
-  background-color: #f0f0f0;
+  background-color: black
+}
+
+
+.header-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font:italic;
+}
+
+.header-right a {
+  text-decoration:none;
+  color:white;
+  cursor: pointer;
+}
+
+.header-right a:hover {
+  text-decoration: underline;
+  color:white;
+}
+.header-right span {
+  color: #aaa;
 }

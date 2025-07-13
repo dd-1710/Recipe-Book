@@ -71,42 +71,19 @@ ngOnDestroy(){
 
 onCategorySelect(category:string,event:any){
   console.log("clicked on chip")
+  const url = this.router.url;
+  this.showFavRecipes = url.includes('favourite');
+  this.showRecipeByUser = url.includes('add-recipe');
   if(event.selected){
     this.selectedCategory = category;
-    this.applyRecipeFilters(category)
+    
+    this.applyRecipeFilters(category);
   }else{
     this.selectedCategory = '';
     this.applyRecipeFilters();
   }
 }
 
-
-// typeEffect(){
-//   const phraseItem = this.phrases[this.currentPhraseIndex];
-//   if(this.letterIndex < phraseItem.length){
-//     this.placeholder += phraseItem[this.letterIndex];
-//     this.letterIndex++;
-//     setTimeout(()=>this.typeEffect(),100)
-//   }else{
-//     setTimeout(()=>this.eraseEffect(),2000)
-//   }
-
-// }
-
-
-// eraseEffect(){
-//   if(this.letterIndex>0){
-//     this.placeholder = this.placeholder.slice(0,-1);
-//     this.letterIndex--;
-//     setTimeout(()=>this.eraseEffect(),50)
-//   }else{
-//     this.currentPhraseIndex = (this.currentPhraseIndex+1)%this.phrases.length;
-//     setTimeout(() => this.typeEffect(), 500);
-//   }
-  
-// }
-
- 
 
 applySearchFilter(term: string) {
   if (!term.trim()) {
@@ -125,14 +102,17 @@ applyRecipeFilters(category?:string) {
     this.recipeSubscription.unsubscribe();
   }
   if (this.showRecipeByUser) {
-    this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.user_id === userId);
+    this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.user_id === userId && (category ? recipe.category == category:true));
    
   } else if (this.showFavRecipes) {
     console.log("FAV RECIPES");
-    this.recipesToShow = this.allRecipeResponse.filter(recipe => recipe.is_bookmarked);
+   this.recipesToShow = this.allRecipeResponse.filter(recipe => 
+      recipe.is_bookmarked && 
+      (category ? recipe.category === category : true)
+    );
     this.recipeservice.showSuccessToast(`Here are your favourite recipes!!`);
-  }else if(this.selectedCategory){
-   this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.category === this.selectedCategory);
+  }else if(category){
+   this.recipesToShow = this.allRecipeResponse.filter(recipe=>recipe.category === category);
    if(this.recipesToShow.length == 0){
     this.recipeservice.showInfoToast('No recipes found for selected category')
    }

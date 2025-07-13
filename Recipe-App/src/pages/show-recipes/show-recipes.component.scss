@@ -270,3 +270,15 @@ background: transparent;
   width: 100%;
   justify-content: center;
 }
+
+
+// ::ng-deep .mdc-evolution-chip--selected {
+//   --mdc-chip-elevated-selected-container-color: violet !important;
+//   --mdc-chip-elevated-selected-label-color: white !important;
+// }
+
+.mdc-evolution-chip--selected {
+  --mdc-chip-elevated-selected-container-color: #7b3fbf; // violet
+  --mdc-chip-elevated-selected-label-color: white;
+}
+
