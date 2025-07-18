@@ -1,70 +1,77 @@
-<---------------------------Date: 8-may-2025------------------------>
+# 🍽️ Full Stack Recipe App
 
-1) created angular project 
+A full-featured recipe management application built with **Angular**, **Node.js**, and **MySQL**. This app allows users to explore, create, and manage a variety of recipes, while also offering user authentication, search filters, and the ability to mark favorite dishes.
 
-2)created show-recipe component and added data in db
+---
 
-3)Wriiten a get API (get_recipe) by connection to the db
+## 🚀 Features
 
-4) Created a service to call get api and while calling api faced CORS issues 
-Soltn: import provideHttpClient() and provide it in providers in app.config.ts
+### 🔐 User Authentication
+- Login with credentials
+- Signup for new users
+- Sign out securely
+- JWT-based session handling
 
+### 🧾 Recipe Management
+- View a list of ~30 categorized recipe cards
+- Categories: **Breakfast, Juices, Smoothies, Lunch, Dinner, Snacks**
+- Search recipes by name or category
+- View recipe details:
+  - Dish name
+  - Preparation time & Cooking time
+  - Ingredients
+  - Step-by-step procedure
+  - Dish image
+- Authenticated users can:
+  - ➕ Create a recipe
+  - ✏️ Edit their own recipes
+  - ❌ Delete their own recipes
+  - ❤️ Mark/unmark any recipe as favorite
 
-<----------------------------Date 09-MAY-2025-------------------------->
+---
 
-[CREATION OF NEW COMPONENT VIEW-RECIPE AND ROUTING OF IT]
+## 🛠️ Tech Stack
 
-5) created another component (view-recipe) inside show-recipe-component & and provided the path in app.route.ts & wrote a small method in show-comp.ts and called it in show-comp.html
-and added few more images
+| Layer         | Technology            |
+|---------------|------------------------|
+| **Frontend**  | Angular (v18), Angular Material, TypeScript, HTML5, SCSS |
+| **Backend**   | Node.js, Express.js    |
+| **Database**  | MySQL                  |
+| **Auth**      | JWT, bcrypt            |
+| **Tools**     | Postman, Git, GitHub   |
 
-<---------------------------Date 10-MAY-2025----------------------------->
+---
 
-[SEARCHING RECIPE FROM SEARCH BAR]
+#project structure
 
-6) Implemented search operation to search recipe
-
---> in html input element i have used input key and also assigned variable declared in ts file in showrecipe to ngModel and value attribute 
-
---> while filtering original array should not be disturbed so created a new array variable and assigned all recipe to it
-
---> for searching use event DOM where event.target is converted into htmlinputelement and from it fetched the value
-
---> written a if condition to return all recipe if there is no search 
-
---> to the many array applied filter method in which checked condition useing includes property where the recipe element includes recipe which user is searching 
-
---> finally looped the duplicate array in html without disturbing the orginal array.
-
-
-<------------------------------- DATE 12-MAY-2025-------------------->
-
---> Created an get API which fetches the data based on individual recipe id 
-
---> added separate file uniqedata.ts for getting single recipe detail
-
---> Created a sample UI to show this data
-
-
---------------------------------DATE 13-MAY-2025--------------------------
-
-Just made css and html changes to view recipe
-
-
-
---------------------------------DATE 14-MAY-2025--------------------------
-
-
-ADDED CSS FOR VIEW RECIPE AND ADDED RECIPE DATA IN DB
+📦 Recipe-Book
+ ┣ 📂 Recipe-App/         # Angular UI frontend   
+ ┣ 📂 Recipe-Backend/       # Node.js + Express backend
+ ┣ 📄 package.json           # Project metadata and dependencies
+ ┣ 📄 package-lock.json      # Locked versions of dependencies
+ ┣ 📄 README.md              # Project documentation
+ ┗ 📄 .env                   # Environment variables
 
 
-----------------------DATE 15-MAY-2025---------------------------------
+bash 
+#Frontend
+git clone -b main https://github.com/dd-1710/DD.git
+cd Recipe-app
+npm i
+ng serve
 
-create a separate pages folder and placed all compts inside it
+#Backend
 
-created a header component and moved header & footer code from show-recipe component
+To connect to DB create a .env file 
 
-Fixed header before data was flowing above the header added z-index 
+JWT_SECRET="your_secret_key_here"
+DATABASE_URL=mysql://user:password@host:port/recipe_book
+(For Ex : DATABASE_URL=mysql://root:root@localhost:3306/recipe_book) #this is just for understanding 
+PORT=2000
 
-added nav bar and used routerLink in <a> anchor tag and imported routermodule from @angular/router
+cd Recipe-Backend/Recipe-list
+npm i
+node recipe.js
 
-implementing form for add recipe STILL IN PROGRESSs......................
+
+
