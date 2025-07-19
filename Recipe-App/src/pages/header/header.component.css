@@ -102,7 +102,8 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background-color: black;
+  background-color:rgb(115 64 96);
+  color: black !important;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -119,12 +120,12 @@
 .user-menu a {
   padding: 10px 16px;
   text-decoration: none;
-  color: white;
+  color:black;
 }
 
-.user-menu a:hover {
+/* .user-menu a:hover {
   background-color: black
-}
+} */
 
 
 .header-right {
@@ -146,4 +147,113 @@
 }
 .header-right span {
   color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    min-height: 70px;
+    padding: 8px 8px 4px 8px;
+    align-items: stretch;
+    box-shadow: 0px 1px 8px 4px rgba(0,0,0,0.10);
+    background-color: rgb(115, 64, 96);
+  }
+  .logo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 4px;
+    padding: 0;
+  }
+  .logo h2 {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .logo i {
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .header-search {
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 6px;
+  }
+  .header-search input {
+    width: 95vw;
+    font-size: 15px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+  }
+  .header-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 13px;
+    width: 100%;
+    margin-top: 4px;
+    justify-content: flex-start;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .header-right a {
+    font-size: 13px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    background: none;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .header-right a:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+  }
+  .header-right span {
+    font-size: 13px;
+    margin: 0 2px;
+    color: #aaa;
+  }
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    padding: 6px;
+    margin: 4px 4px 4px 0;
+    background: rgb(188, 145, 172);
+    color: beige;
+    border: none;
+    box-shadow: none;
+  }
+  .user-menu {
+    top: 36px;
+    right: 0;
+    width: 120px;
+    font-size: 13px;
+    margin-top: 6px;
+    margin-right: 0;
+    padding: 2px 0;
+    background: #222;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  }
+  .user-menu a {
+    padding: 6px 8px;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .user-menu a:hover {
+    background: #734060;
+    color: #fff;
+  }
 }

@@ -4,21 +4,25 @@
     <i>Treat Your Taste Buds &nbsp;<i class="fa-solid fa-utensils"></i></i>
   </div>
 
- <div class="header-search" *ngIf="isLoggedIn">
-  <input
-    type="text"
-    [placeholder]="placeholder"
-        [(ngModel)]="searchRecipeName"
-        (input)="applyFilter()"
-  />
-</div>
+  <div class="header-search" *ngIf="isLoggedIn">
+    <input type="text" [placeholder]="placeholder" [(ngModel)]="searchRecipeName" (input)="applyFilter()" />
+  </div>
 
   <div class="header-right" *ngIf="isLoggedIn">
-     <a routerLink="/recipe">SHOW RECIPES</a>
-  <span>|</span>
-  <a routerLink="/favourite">MY FAV</a>
-  <span>|</span>
-  <a routerLink="/add-recipe">ADD RECIPE</a>
+    <span *ngIf="currentRoute != '/recipe'">
+      <a routerLink="/recipe">SHOW RECIPES</a> &nbsp;
+      <span>|</span>
+    </span>
+    <span *ngIf="currentRoute != '/favourite'">
+      <a routerLink="/favourite">MY FAV</a> &nbsp;
+      <span>|</span>
+
+    </span>
+    <span *ngIf="currentRoute != '/add-recipe'">
+      <a routerLink="/add-recipe">ADD RECIPE</a>
+    </span>
+
+
     <div class="user_wrapper" (mouseleave)="menuOpen=false">
       <div class="user-avatar" (click)="toggleMenu()">
         {{ username.charAt(0) | uppercase }}

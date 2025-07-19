@@ -1,4 +1,4 @@
-@import 'font-awesome/scss/font-awesome.scss';
+@import 'font-awesome/css/font-awesome.css';
 
 .toast-success {
   background: #fff !important;
@@ -52,5 +52,37 @@
 mat-chip-set mat-chip {
   font-size: 35px !important;
   background-color: #dab6cd !important;
+}
+
+@media (max-width: 600px) {
+  .toast-success {
+    min-width: 90vw;
+    max-width: 98vw;
+    font-size: 16px;
+    padding: 14px 10px !important;
+  }
+  .toast-success .toast-message {
+    margin-left: 22px;
+    font-size: 15px;
+  }
+  .toast-success .toast-close-button {
+    font-size: 20px;
+  }
+  .toast-success::before {
+    font-size: 16px;
+    left: 10px;
+  }
+  .toast-top-center {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95vw;
+    min-width: unset;
+    max-width: unset;
+  }
+  mat-chip-set mat-chip {
+    font-size: 20px !important;
+    padding: 4px 10px !important;
+  }
 }
 
