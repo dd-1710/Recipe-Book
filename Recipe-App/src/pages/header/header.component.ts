@@ -1,4 +1,4 @@
-import { Component,EventEmitter,HostListener, Output } from '@angular/core';
+import { Component,EventEmitter,HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -10,9 +10,9 @@ import { RecipeService } from '../../services/recipe.service';
   standalone: true,
   imports: [RouterModule,CommonModule,FormsModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
 public isLoggedIn:boolean = false;
   username = ''; 
@@ -25,10 +25,13 @@ letterIndex: number = 0;
 public filteredRecipe:any[] = [];
 public searchRecipeName: string = '';
 public recipeList:any[] = []
+currentRoute:string = '';
 
 
 constructor(private auth:AuthService,private router:Router,private service:RecipeService){
-
+ this.router.events.subscribe(()=>{
+  this.currentRoute = this.router.url;
+ })
 }
 
 ngOnInit(){
@@ -84,4 +87,5 @@ toggleMenu() {
     this.menuOpen = false;
     this.router.navigate(['/login']);
   }
+
 }

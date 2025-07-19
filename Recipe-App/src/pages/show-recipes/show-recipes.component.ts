@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { CommonModule } from '@angular/common';
 import { Router} from '@angular/router';
@@ -16,9 +16,9 @@ import {MatChipsModule} from '@angular/material/chips';
   standalone: true,
   imports: [CommonModule,FormsModule,MatChipsModule],
   templateUrl: './show-recipes.component.html',
-  styleUrl: './show-recipes.component.scss'
+  styleUrl: './show-recipes.component.css'
 })
-export class ShowRecipesComponent {
+export class ShowRecipesComponent implements OnInit {
 
 @Input() showRecipeByUser:boolean = false;
 @Input() showFavRecipes:boolean = false;

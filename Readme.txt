@@ -34,7 +34,7 @@ A full-featured recipe management application built with **Angular**, **Node.js*
 
 | Layer         | Technology            |
 |---------------|------------------------|
-| **Frontend**  | Angular (v18), Angular Material, TypeScript, HTML5, SCSS |
+| **Frontend**  | Angular (v18), Angular Material, TypeScript, HTML5,CSS |
 | **Backend**   | Node.js, Express.js    |
 | **Database**  | MySQL                  |
 | **Auth**      | JWT, bcrypt            |

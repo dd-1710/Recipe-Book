@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -22,9 +22,9 @@ import { recipeData } from '../show-recipes/showrecipeData';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule,ShowRecipesComponent,MatFormField,MatLabel,MatSelectModule],
   templateUrl: './add-recipe.component.html',
-  styleUrl: './add-recipe.component.scss',
+  styleUrl: './add-recipe.component.css',
 })
-export class AddRecipeComponent {
+export class AddRecipeComponent implements OnInit {
 
 
   public recipeForm!: FormGroup;

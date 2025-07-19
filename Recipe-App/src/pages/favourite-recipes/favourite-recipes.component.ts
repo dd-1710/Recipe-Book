@@ -6,7 +6,7 @@ import { ShowRecipesComponent } from '../show-recipes/show-recipes.component';
   standalone: true,
   imports: [ShowRecipesComponent],
   templateUrl: './favourite-recipes.component.html',
-  styleUrl: './favourite-recipes.component.scss'
+  styleUrl: './favourite-recipes.component.css'
 })
 export class FavouriteRecipesComponent {
 
