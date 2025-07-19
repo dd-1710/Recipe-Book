@@ -1,151 +1,149 @@
+.recipe-app {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  padding-top: 70px;
+  padding-bottom: 10px;
+}
+
 .header {
+  z-index: 1000;
+  color: white;
+  margin: 0;
+  box-shadow: 0px 1px 8px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 8vh;
+  min-height: 60px;
   position: fixed;
   top: 0;
-  width: 100%;
   background-color: rgb(115 64 96);
-  color: white;
-  box-shadow: 0px 1px 8px 10px rgba(0, 0, 0, 0.2);
-  padding: 0.75em 1.5em;
-  z-index: 1000;
-  font-family: Arial, sans-serif;
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
-
-/* Logo (title + subtitle) */
-.logo h2 {
-  margin: 0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: bold;
-}
-
-.logo p {
-  margin: 0;
-  font-family: "Dancing Script", cursive;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-}
-
-/* Bottom row with search + nav + profile */
-.header-bottom-row {
-  display: flex;
+  padding-left: 24px;
+  display:flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1em;
-  flex-wrap: nowrap;
 }
 
-/* Search bar */
 .header-search {
-  flex: 1 1 50%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .header-search input {
-  width: 100%;
-  padding: 0.5em 1em;
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  width: 300px;
+  padding: 6px 12px;
   border-radius: 6px;
   border: none;
   outline: none;
-  box-sizing: border-box;
 }
 
-/* Nav + profile container */
+
+.header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.header p {
+  font-family: "Dancing Script", cursive;
+  margin: 0;
+  font-size: 20px;
+  margin-left: 30px;
+}
+
+.nav-links nav {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-links a {
+  color: white;
+}
+
+.nav-links a:hover {
+  color: goldenrod;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 5vh;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 6px;
+  box-shadow: 0px -2px 8px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
 .header-right {
-  flex: 1 1 50%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 0.75em;
-  font-style: italic;
-  white-space: nowrap;
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  position: relative;
 }
 
-.header-right a {
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 0.25em 0.5em;
-}
-
-.header-right a:hover {
-  color: goldenrod;
-  text-decoration: underline;
-}
-
-.header-right span {
-  color: #aaa;
-  user-select: none;
-}
-
-/* User avatar */
 .user-avatar {
-  width: 36px;
-  height: 36px;
-  background-color: rgb(188, 145, 172);
+  width: 40px;
+  height: 40px;
+  background-color: rgb(188, 145, 172); /* your theme */
   color: beige;
   border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  cursor: pointer;
-  padding: 0;
-  margin-left: 0.75em;
-  font-size: 1.1rem;
+  padding: 20px;
+  margin:30px;
 }
 
-/* User menu */
 .user-menu {
   position: absolute;
-  top: 3.5em;
-  right: 1.5em;
+  top: 50px;
+  right: 0;
   background-color: black;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 0.5em 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  z-index: 2000;
+  margin-top:20px;
+  margin-right:16px;
+  width:200px;
+
 }
 
 .user-menu a {
-  padding: 0.5em 1em;
-  color: white;
+  padding: 10px 16px;
   text-decoration: none;
-  font-size: 1rem;
+  color: white;
 }
 
 .user-menu a:hover {
-  background-color: black;
+  background-color: black
 }
 
-/* Responsive - MOBILE */
-@media (max-width: 600px) {
-  .header-bottom-row {
-    flex-wrap: wrap;
-    gap: 0.5em;
-  }
 
-  .header-search {
-    flex: 1 1 100%;
-  }
+.header-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font:italic;
+}
 
-  .header-right {
-    flex: 1 1 100%;
-    justify-content: flex-start;
-    gap: 0.5em;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-  }
+.header-right a {
+  text-decoration:none;
+  color:white;
+  cursor: pointer;
+}
 
-  .user-avatar {
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-    margin-left: 0.5em;
-  }
+.header-right a:hover {
+  text-decoration: underline;
+  color:white;
+}
+.header-right span {
+  color: #aaa;
 }
