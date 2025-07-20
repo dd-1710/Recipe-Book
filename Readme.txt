@@ -74,4 +74,7 @@ npm i
 node recipe.js
 
 
+Please Refer UI-Images folder for quick view of UI
+
+
 

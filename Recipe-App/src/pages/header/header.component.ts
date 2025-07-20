@@ -85,6 +85,7 @@ toggleMenu() {
   signOut() {
     sessionStorage.clear();
     this.menuOpen = false;
+    this.isLoggedIn = false;
     this.router.navigate(['/login']);
   }
 
