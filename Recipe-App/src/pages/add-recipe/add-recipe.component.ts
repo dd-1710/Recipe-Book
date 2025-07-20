@@ -220,7 +220,7 @@ console.log(this.recipeForm.controls); // to see individual controls
   if (this.selectedFile) {
     formData.append("image", this.selectedFile, this.selectedFile.name);
   } else {
-    // If image not updated, still send the existing image name
+
     formData.append("oldImg", this.previewImg?.split('/').pop() || '');
   }
 
