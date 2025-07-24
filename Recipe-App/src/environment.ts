@@ -1,6 +1,6 @@
 export const environment: any = {
   
-  apiUrl: 'http://localhost:2000/api/',
+  apiUrl: window.location.origin+'/api/',
   imgUrl: window.location.origin + '/assets/images/'
 
 };
